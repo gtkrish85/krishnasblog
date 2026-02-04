@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Models Token Limits Comparison - Krishna</title>
-    <meta name="description" content="Comparing token limits and usage across OpenAI, Gemini, Claude, and Grok.">
+    <title>AI Models Token Limits Comparison (2026 Update) - Krishna</title>
+    <meta name="description" content="Comparing the latest token limits of GPT-5, Gemini 3, Claude 4.5, and Grok 4.">
     <link rel="stylesheet" href="../style.css">
 </head>
 
@@ -29,18 +29,16 @@
                     <p>February 3, 2026 &bull; AI Research</p>
                 </div>
 
-                <h1>The Great Token Comparison: OpenAI vs Gemini vs Claude vs Grok</h1>
+                <h1>The Great Token Comparison: 2026 Edition</h1>
 
                 <div class="article-content">
-                    <p>As we build more complex applications, "context window" (token limit) has become the new
-                        battleground for LLMs. Understanding these limits is crucial for choosing the right model for
-                        your task—whether it's analyzing massive codebases or writing simple emails.</p>
+                    <p>The AI landscape has shifted dramatically in the last year. We've moved from the "128k standard"
+                        of 2024 to massive multi-million token context windows. Here is the definitive breakdown of the
+                        latest frontier models from OpenAI, Google, Anthropic, and xAI as of February 2026.</p>
 
-                    <p>Here is a breakdown of the current state of token limits across the major frontier models.</p>
-
-                    <h2>Comparison Table</h2>
-                    <p><em>Note: "Context" refers to how much information the model can hold in memory at once. 1k
-                            tokens is roughly 750 words.</em></p>
+                    <h2>The New Hierarchy</h2>
+                    <p>Context windows are no longer just about reading a book; they're about loading entire operating
+                        systems, hours of video, or massive datasets into memory.</p>
 
                     <table>
                         <thead>
@@ -48,86 +46,80 @@
                                 <th>Model</th>
                                 <th>Provider</th>
                                 <th>Context Window</th>
-                                <th>Max Output</th>
+                                <th>Notes</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Gemini 1.5 Pro</strong></td>
+                                <td><strong>Gemini 3 Pro</strong></td>
                                 <td>Google DeepMind</td>
                                 <td>2,000,000</td>
-                                <td>8,192</td>
+                                <td>The current king of retrieval.</td>
                             </tr>
                             <tr>
-                                <td><strong>Flash 1.5</strong></td>
+                                <td><strong>Grok 4.1 Fast</strong></td>
+                                <td>xAI</td>
+                                <td>2,000,000</td>
+                                <td>Massive leap from Grok 3.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GPT-4.1 (API)</strong></td>
+                                <td>OpenAI</td>
+                                <td>1,000,000</td>
+                                <td>Enterprise/API only level.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Claude Sonnet 4.5</strong></td>
+                                <td>Anthropic</td>
+                                <td>200,000 - 500k</td>
+                                <td>500k available for Enterprise.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GPT-5</strong></td>
+                                <td>OpenAI</td>
+                                <td>400,000</td>
+                                <td>Balanced for high reasoning.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Grok 4</strong></td>
+                                <td>xAI</td>
+                                <td>256,000</td>
+                                <td>Standard usage model.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gemini 2.5 Flash</strong></td>
                                 <td>Google DeepMind</td>
                                 <td>1,000,000</td>
-                                <td>8,192</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Claude 3.5 Sonnet</strong></td>
-                                <td>Anthropic</td>
-                                <td>200,000</td>
-                                <td>8,192</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Claude 3 Opus</strong></td>
-                                <td>Anthropic</td>
-                                <td>200,000</td>
-                                <td>4,096</td>
-                            </tr>
-                            <tr>
-                                <td><strong>GPT-4o</strong></td>
-                                <td>OpenAI</td>
-                                <td>128,000</td>
-                                <td>4,096</td>
-                            </tr>
-                            <tr>
-                                <td><strong>o1 (Preview)</strong></td>
-                                <td>OpenAI</td>
-                                <td>128,000</td>
-                                <td>32,768*</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Llama 3.1 405B</strong></td>
-                                <td>Meta</td>
-                                <td>128,000</td>
-                                <td>4,096</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Grok-2</strong></td>
-                                <td>xAI</td>
-                                <td>128,000</td>
-                                <td>4,096</td>
+                                <td>High speed, high volume.</td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <h2>Key Takeaways</h2>
+                    <h2>Deep Dive Analysis</h2>
 
-                    <h3>1. Gemini is the king of context</h3>
-                    <p>Google's Gemini 1.5 Pro is in a league of its own with a <strong>2 million token context
-                            window</strong>. This allows you to feed it entire books, hour-long videos, or massive code
-                        repositories in a single prompt. If your use case involves "needle in a haystack" retrieval from
-                        massive documents, Gemini is the clear winner.</p>
+                    <h3>1. The 2 Million Club: Gemini & Grok</h3>
+                    <p>Google has maintained its lead in context size with <strong>Gemini 3 Pro</strong>, sticking to
+                        the massive 2 million token window established by its predecessors. However, xAI has entered the
+                        chat with <strong>Grok 4.1 Fast</strong>, matching this capacity. These models are ideal for
+                        analyzing entire repositories or massive legal discovery documents.</p>
 
-                    <h3>2. Anthropic strikes a balance</h3>
-                    <p>Claude 3.5 Sonnet offers a respectable 200k context window, which is sufficient for most business
-                        documents and medium-sized codebases. Where Claude shines is in its reasoning capabilities and
-                        lower refusal rates compared to earlier models.</p>
+                    <h3>2. OpenAI's Strategic Split</h3>
+                    <p>OpenAI has taken an interesting approach with <strong>GPT-5</strong>. Instead of fighting for the
+                        largest raw number, they've optimized for a <strong>400,000 token</strong> window that maintains
+                        incredibly high reasoning accuracy (needle-in-a-haystack performance). For users needing more,
+                        the <strong>GPT-4.1 API</strong> offers a 1 million token option.</p>
 
-                    <h3>3. The 128k Standard</h3>
-                    <p>OpenAI (GPT-4o), Meta (Llama 3.1), and xAI (Grok) have all settled around the 128k mark. This
-                        seems to be the current industry standard for high-performance reasoning models. While smaller
-                        than Gemini, 128k is still roughly 300 pages of text, which is more than enough for 99% of chat
-                        interactions.</p>
+                    <h3>3. Anthropic's Reasoning Focus</h3>
+                    <p><strong>Claude Sonnet 4.5</strong> continues Anthropic's tradition of quality over quantity.
+                        While 200k (or 500k for enterprise) isn't the largest number on the chart, Claude remains the
+                        favorite for coding tasks where following complex instructions matters more than raw data
+                        ingestion.</p>
 
-                    <h2>Which one should you use?</h2>
+                    <h2>Verdict</h2>
                     <ul>
-                        <li><strong>For analyzing entire codebases:</strong> Gemini 1.5 Pro</li>
-                        <li><strong>For coding assistance & logic:</strong> Claude 3.5 Sonnet or GPT-4o</li>
-                        <li><strong>For creative freedom & uncensored views:</strong> Grok-2</li>
-                        <li><strong>For open source deployment:</strong> Llama 3.1</li>
+                        <li><strong>For maximum data ingestion:</strong> Gemini 3 Pro or Grok 4.1 Fast.</li>
+                        <li><strong>For complex reasoning & coding:</strong> Claude Sonnet 4.5 or GPT-5.</li>
+                        <li><strong>For speed/cost efficiency:</strong> Gemini 2.5 Flash.</li>
                     </ul>
                 </div>
             </article>
