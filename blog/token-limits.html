@@ -29,24 +29,22 @@
                     <p>February 3, 2026 &bull; AI Research</p>
                 </div>
 
-                <h1>The Great Token Comparison: 2026 Edition</h1>
+                <h1>AI Model Context Windows: 2026 Comparison</h1>
 
                 <div class="article-content">
-                    <p>The AI landscape has shifted dramatically in the last year. We've moved from the "128k standard"
-                        of 2024 to massive multi-million token context windows. Here is the definitive breakdown of the
-                        latest frontier models from OpenAI, Google, Anthropic, and xAI as of February 2026.</p>
+                    <p>Context window size—the total number of tokens a model can process in a single request—has become
+                        a key differentiator among frontier AI models. This comparison provides an objective overview of
+                        token limits across major providers as of February 2026.</p>
 
-                    <h2>The New Hierarchy</h2>
-                    <p>Context windows are no longer just about reading a book; they're about loading entire operating
-                        systems, hours of video, or massive datasets into memory.</p>
+                    <h2>Current Context Windows by Model</h2>
 
                     <table>
                         <thead>
                             <tr>
                                 <th>Model</th>
                                 <th>Provider</th>
-                                <th>Context Window</th>
-                                <th>Notes</th>
+                                <th>Context Window (Input)</th>
+                                <th>Max Output Tokens</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,73 +52,100 @@
                                 <td><strong>Gemini 3 Pro</strong></td>
                                 <td>Google DeepMind</td>
                                 <td>2,000,000</td>
-                                <td>The current king of retrieval.</td>
+                                <td>8,192</td>
                             </tr>
                             <tr>
                                 <td><strong>Grok 4.1 Fast</strong></td>
                                 <td>xAI</td>
                                 <td>2,000,000</td>
-                                <td>Massive leap from Grok 3.</td>
+                                <td>~16,000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gemini 2.5 Flash</strong></td>
+                                <td>Google DeepMind</td>
+                                <td>1,048,576</td>
+                                <td>65,535</td>
                             </tr>
                             <tr>
                                 <td><strong>GPT-4.1 (API)</strong></td>
                                 <td>OpenAI</td>
                                 <td>1,000,000</td>
-                                <td>Enterprise/API only level.</td>
+                                <td>~32,000</td>
                             </tr>
                             <tr>
-                                <td><strong>Claude Sonnet 4.5</strong></td>
+                                <td><strong>Claude Sonnet 4.5 (Enterprise)</strong></td>
                                 <td>Anthropic</td>
-                                <td>200,000 - 500k</td>
-                                <td>500k available for Enterprise.</td>
+                                <td>500,000</td>
+                                <td>8,192</td>
                             </tr>
                             <tr>
                                 <td><strong>GPT-5</strong></td>
                                 <td>OpenAI</td>
                                 <td>400,000</td>
-                                <td>Balanced for high reasoning.</td>
+                                <td>128,000</td>
                             </tr>
                             <tr>
                                 <td><strong>Grok 4</strong></td>
                                 <td>xAI</td>
                                 <td>256,000</td>
-                                <td>Standard usage model.</td>
+                                <td>~16,000</td>
                             </tr>
                             <tr>
-                                <td><strong>Gemini 2.5 Flash</strong></td>
-                                <td>Google DeepMind</td>
-                                <td>1,000,000</td>
-                                <td>High speed, high volume.</td>
+                                <td><strong>Claude Sonnet 4.5 (Standard)</strong></td>
+                                <td>Anthropic</td>
+                                <td>200,000</td>
+                                <td>8,192</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GPT-4o</strong></td>
+                                <td>OpenAI</td>
+                                <td>128,000</td>
+                                <td>4,096</td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <h2>Deep Dive Analysis</h2>
+                    <h2>Key Observations</h2>
 
-                    <h3>1. The 2 Million Club: Gemini & Grok</h3>
-                    <p>Google has maintained its lead in context size with <strong>Gemini 3 Pro</strong>, sticking to
-                        the massive 2 million token window established by its predecessors. However, xAI has entered the
-                        chat with <strong>Grok 4.1 Fast</strong>, matching this capacity. These models are ideal for
-                        analyzing entire repositories or massive legal discovery documents.</p>
-
-                    <h3>2. OpenAI's Strategic Split</h3>
-                    <p>OpenAI has taken an interesting approach with <strong>GPT-5</strong>. Instead of fighting for the
-                        largest raw number, they've optimized for a <strong>400,000 token</strong> window that maintains
-                        incredibly high reasoning accuracy (needle-in-a-haystack performance). For users needing more,
-                        the <strong>GPT-4.1 API</strong> offers a 1 million token option.</p>
-
-                    <h3>3. Anthropic's Reasoning Focus</h3>
-                    <p><strong>Claude Sonnet 4.5</strong> continues Anthropic's tradition of quality over quantity.
-                        While 200k (or 500k for enterprise) isn't the largest number on the chart, Claude remains the
-                        favorite for coding tasks where following complex instructions matters more than raw data
-                        ingestion.</p>
-
-                    <h2>Verdict</h2>
+                    <h3>Context Window Distribution</h3>
+                    <p>Current models fall into several distinct tiers based on input capacity:</p>
                     <ul>
-                        <li><strong>For maximum data ingestion:</strong> Gemini 3 Pro or Grok 4.1 Fast.</li>
-                        <li><strong>For complex reasoning & coding:</strong> Claude Sonnet 4.5 or GPT-5.</li>
-                        <li><strong>For speed/cost efficiency:</strong> Gemini 2.5 Flash.</li>
+                        <li><strong>2M+ tokens:</strong> Gemini 3 Pro, Grok 4.1 Fast</li>
+                        <li><strong>1M tokens:</strong> Gemini 2.5 Flash, GPT-4.1 (API)</li>
+                        <li><strong>200k-500k tokens:</strong> Claude Sonnet 4.5, GPT-5</li>
+                        <li><strong>128k-256k tokens:</strong> Grok 4, GPT-4o</li>
                     </ul>
+
+                    <h3>Output Token Limits</h3>
+                    <p>While input capacity has grown significantly, output limits remain more constrained. GPT-5 offers
+                        the highest output capacity at 128,000 tokens, while most other models cap output between 4,096
+                        and 16,000 tokens.</p>
+
+                    <h3>Access Tiers</h3>
+                    <p>Several providers offer different context windows based on subscription level:</p>
+                    <ul>
+                        <li><strong>OpenAI:</strong> Free tier offers 8,192 tokens; Plus/Team gets 32,000;
+                            Enterprise/API reaches 1,000,000</li>
+                        <li><strong>Anthropic:</strong> Standard plans provide 200,000 tokens; Enterprise increases to
+                            500,000</li>
+                        <li><strong>Google:</strong> Free tier around 32,000 tokens; Gemini Advanced unlocks full
+                            capacity</li>
+                    </ul>
+
+                    <h2>Use Case Considerations</h2>
+
+                    <p>Token limits directly impact practical applications:</p>
+                    <ul>
+                        <li><strong>Document analysis:</strong> Models with 1M+ tokens can process entire books or large
+                            codebases in a single request</li>
+                        <li><strong>Conversational AI:</strong> Models with 128k-200k tokens handle extended multi-turn
+                            conversations effectively</li>
+                        <li><strong>Content generation:</strong> Higher output limits (GPT-5, Gemini 2.5 Flash) enable
+                            generation of longer-form content without pagination</li>
+                    </ul>
+
+                    <p><em>Note: Token counts are approximate and represent maximum advertised limits. Actual usable
+                            context may vary based on API tier, model version, and specific implementation.</em></p>
                 </div>
             </article>
         </main>
