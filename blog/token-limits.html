@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Models Token Limits Comparison - Krishna</title>
+    <meta name="description" content="Comparing token limits and usage across OpenAI, Gemini, Claude, and Grok.">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="logo">Krishna.</a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../projects.html">Projects</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <div class="article-meta">
+                    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+                    <p>February 3, 2026 &bull; AI Research</p>
+                </div>
+
+                <h1>The Great Token Comparison: OpenAI vs Gemini vs Claude vs Grok</h1>
+
+                <div class="article-content">
+                    <p>As we build more complex applications, "context window" (token limit) has become the new
+                        battleground for LLMs. Understanding these limits is crucial for choosing the right model for
+                        your task—whether it's analyzing massive codebases or writing simple emails.</p>
+
+                    <p>Here is a breakdown of the current state of token limits across the major frontier models.</p>
+
+                    <h2>Comparison Table</h2>
+                    <p><em>Note: "Context" refers to how much information the model can hold in memory at once. 1k
+                            tokens is roughly 750 words.</em></p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Provider</th>
+                                <th>Context Window</th>
+                                <th>Max Output</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Gemini 1.5 Pro</strong></td>
+                                <td>Google DeepMind</td>
+                                <td>2,000,000</td>
+                                <td>8,192</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Flash 1.5</strong></td>
+                                <td>Google DeepMind</td>
+                                <td>1,000,000</td>
+                                <td>8,192</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Claude 3.5 Sonnet</strong></td>
+                                <td>Anthropic</td>
+                                <td>200,000</td>
+                                <td>8,192</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Claude 3 Opus</strong></td>
+                                <td>Anthropic</td>
+                                <td>200,000</td>
+                                <td>4,096</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GPT-4o</strong></td>
+                                <td>OpenAI</td>
+                                <td>128,000</td>
+                                <td>4,096</td>
+                            </tr>
+                            <tr>
+                                <td><strong>o1 (Preview)</strong></td>
+                                <td>OpenAI</td>
+                                <td>128,000</td>
+                                <td>32,768*</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Llama 3.1 405B</strong></td>
+                                <td>Meta</td>
+                                <td>128,000</td>
+                                <td>4,096</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Grok-2</strong></td>
+                                <td>xAI</td>
+                                <td>128,000</td>
+                                <td>4,096</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Key Takeaways</h2>
+
+                    <h3>1. Gemini is the king of context</h3>
+                    <p>Google's Gemini 1.5 Pro is in a league of its own with a <strong>2 million token context
+                            window</strong>. This allows you to feed it entire books, hour-long videos, or massive code
+                        repositories in a single prompt. If your use case involves "needle in a haystack" retrieval from
+                        massive documents, Gemini is the clear winner.</p>
+
+                    <h3>2. Anthropic strikes a balance</h3>
+                    <p>Claude 3.5 Sonnet offers a respectable 200k context window, which is sufficient for most business
+                        documents and medium-sized codebases. Where Claude shines is in its reasoning capabilities and
+                        lower refusal rates compared to earlier models.</p>
+
+                    <h3>3. The 128k Standard</h3>
+                    <p>OpenAI (GPT-4o), Meta (Llama 3.1), and xAI (Grok) have all settled around the 128k mark. This
+                        seems to be the current industry standard for high-performance reasoning models. While smaller
+                        than Gemini, 128k is still roughly 300 pages of text, which is more than enough for 99% of chat
+                        interactions.</p>
+
+                    <h2>Which one should you use?</h2>
+                    <ul>
+                        <li><strong>For analyzing entire codebases:</strong> Gemini 1.5 Pro</li>
+                        <li><strong>For coding assistance & logic:</strong> Claude 3.5 Sonnet or GPT-4o</li>
+                        <li><strong>For creative freedom & uncensored views:</strong> Grok-2</li>
+                        <li><strong>For open source deployment:</strong> Llama 3.1</li>
+                    </ul>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Krishna. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
