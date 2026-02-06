@@ -63,14 +63,14 @@
                             <tr>
                                 <td><strong>Claude Opus 4.6</strong></td>
                                 <td>Anthropic</td>
-                                <td>1,000,000</td>
+                                <td>200,000 (1M beta)</td>
                                 <td>128,000</td>
                             </tr>
                             <tr>
-                                <td><strong>Claude Sonnet 5</strong></td>
+                                <td><strong>Claude Sonnet 4.5</strong></td>
                                 <td>Anthropic</td>
-                                <td>1,000,000</td>
-                                <td>8,192</td>
+                                <td>200,000</td>
+                                <td>64,000</td>
                             </tr>
                             <tr>
                                 <td><strong>Gemini 2.5 Flash</strong></td>
@@ -88,7 +88,7 @@
                                 <td><strong>Claude Sonnet 4.5 (Enterprise)</strong></td>
                                 <td>Anthropic</td>
                                 <td>500,000</td>
-                                <td>8,192</td>
+                                <td>64,000</td>
                             </tr>
                             <tr>
                                 <td><strong>GPT-5</strong></td>
@@ -106,7 +106,7 @@
                                 <td><strong>Claude Sonnet 4.5 (Standard)</strong></td>
                                 <td>Anthropic</td>
                                 <td>200,000</td>
-                                <td>8,192</td>
+                                <td>64,000</td>
                             </tr>
                             <tr>
                                 <td><strong>GPT-4o</strong></td>
@@ -123,17 +123,16 @@
                     <p>Current models fall into several distinct tiers based on input capacity:</p>
                     <ul>
                         <li><strong>2M+ tokens:</strong> Gemini 3 Pro, Grok 4.1 Fast</li>
-                        <li><strong>1M tokens:</strong> Claude Opus 4.6, Claude Sonnet 5, Gemini 2.5 Flash, GPT-4.1
-                            (API)</li>
-                        <li><strong>200k-500k tokens:</strong> Claude Sonnet 4.5, GPT-5</li>
+                        <li><strong>1M tokens:</strong> Gemini 2.5 Flash, GPT-4.1 (API), Claude Opus 4.6 (beta)</li>
+                        <li><strong>200k-500k tokens:</strong> Claude Opus 4.6 (standard), Claude Sonnet 4.5, GPT-5</li>
                         <li><strong>128k-256k tokens:</strong> Grok 4, GPT-4o</li>
                     </ul>
 
                     <h3>Output Token Limits</h3>
                     <p>While input capacity has grown significantly, output limits remain more constrained. Claude Opus
-                        4.6 and GPT-5 both offer the highest output capacity at 128,000 tokens, while most other models
-                        cap output between 4,096 and 16,000 tokens. Gemini 2.5 Flash stands out with 65,535 output
-                        tokens.</p>
+                        4.6 and GPT-5 both offer the highest output capacity at 128,000 tokens. Claude Sonnet 4.5 now
+                        supports up to 64,000 output tokens, while Gemini 2.5 Flash stands out with 65,535 output
+                        tokens. Most other models cap output between 4,096 and 16,000 tokens.</p>
 
                     <h3>Access Tiers</h3>
                     <p>Several providers offer different context windows based on subscription level:</p>
@@ -141,7 +140,7 @@
                         <li><strong>OpenAI:</strong> Free tier offers 8,192 tokens; Plus/Team gets 32,000;
                             Enterprise/API reaches 1,000,000</li>
                         <li><strong>Anthropic:</strong> Standard plans provide 200,000 tokens; Enterprise increases to
-                            500,000</li>
+                            500,000; 1M token context available in beta for high-tier organizations</li>
                         <li><strong>Google:</strong> Free tier around 32,000 tokens; Gemini Advanced unlocks full
                             capacity</li>
                     </ul>
