@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Explained: A 2026 Guide - Krishna</title>
+    <meta name="description"
+        content="A comprehensive guide to Machine Learning types: Supervised, Unsupervised, Reinforcement, and Semi-supervised learning with examples and diagrams.">
+    <link rel="stylesheet" href="../style.css">
+    <!-- Mermaid.js for Diagrams -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="logo">Krishna.</a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../projects.html">Projects</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <div class="article-meta">
+                    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+                    <p>February 7, 2026 &bull; AI Fundamentals</p>
+                </div>
+
+                <h1>Machine Learning Explained: A 2026 Guide</h1>
+
+                <div class="article-content">
+                    <p>Machine Learning (ML) is the engine driving the AI revolution. From the recommendations on your
+                        streaming apps to the self-driving capabilities of modern cars, ML is everywhere. But how
+                        exactly does it work?</p>
+
+                    <p>In this guide, we break down the four core types of machine learning, illustrated with diagrams
+                        and real-world examples from industry leaders like Google, IBM, and AWS.</p>
+
+                    <h2>The Four Pillars of Machine Learning</h2>
+
+                    <p>Machine learning algorithms are typically categorized by how they learn—specifically, the nature
+                        of the data they train on and the feedback they receive.</p>
+
+                    <div class="mermaid">
+                        graph TD
+                        ML[Machine Learning] --> SL[Supervised Learning]
+                        ML --> UL[Unsupervised Learning]
+                        ML --> RL[Reinforcement Learning]
+                        ML --> SSL[Semi-Supervised Learning]
+
+                        SL --> SL_Ex[Labeled Data<br />"Teacher-Student"]
+                        UL --> UL_Ex[Unlabeled Data<br />"Pattern Discovery"]
+                        RL --> RL_Ex[Environment/Rewards<br />"Trial and Error"]
+                        SSL --> SSL_Ex[Hybrid Data<br />"Efficiency"]
+
+                        style ML fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                        style SL fill:#f3e5f5,stroke:#4a148c
+                        style UL fill:#e8f5e9,stroke:#1b5e20
+                        style RL fill:#fff3e0,stroke:#e65100
+                        style SSL fill:#fbe9e7,stroke:#bf360c
+                    </div>
+
+                    <h2>1. Supervised Learning</h2>
+                    <p><strong>The "Teacher-Student" Model</strong></p>
+                    <p>Supervised learning is the most common form of ML. Here, the model is trained on a "labeled"
+                        dataset, meaning every input comes with the correct output. The model learns to map inputs to
+                        outputs, much like a student learning from an answer key.</p>
+
+                    <h3>Key Examples</h3>
+                    <ul>
+                        <li><strong>Spam Filtering:</strong> Teaching an AI to recognize junk email by showing it
+                            millions
+                            of examples of "spam" vs. "not spam" emails.</li>
+                        <li><strong>Image Recognition:</strong> IBM uses supervised learning to classify vehicle types
+                            and power visual recognition systems.</li>
+                        <li><strong>Risk Assessment:</strong> Banks use historical data to predict the likelihood of
+                            loan defaults.</li>
+                    </ul>
+
+                    <h2>2. Unsupervised Learning</h2>
+                    <p><strong>The "Pattern Discovery" Model</strong></p>
+                    <p>In unsupervised learning, the data has no labels. The AI is given a massive dataset and asked
+                        to "find structure" on its own. It groups similar items together without knowing what they
+                        actually are.</p>
+
+                    <h3>Key Examples</h3>
+                    <ul>
+                        <li><strong>Customer Segmentation:</strong> E-commerce giants like Amazon use this to group
+                            shoppers with similar buying habits for targeted marketing.</li>
+                        <li><strong>Anomaly Detection:</strong> Google Cloud employs unsupervised learning to spot
+                            unexpected patterns in network traffic that could indicate a security breach.</li>
+                        <li><strong>Genomic Research:</strong> Identifying patterns in DNA sequences without predefined
+                            categories.</li>
+                    </ul>
+
+                    <h2>3. Reinforcement Learning (RL)</h2>
+                    <p><strong>The "Trial and Error" Model</strong></p>
+                    <p>Reinforcement learning is about learning to make decisions. An "agent" interacts with an
+                        environment and receives a "reward" for good actions or a "penalty" for bad ones. Its goal
+                        is to maximize the total reward over time.</p>
+
+                    <h3>Key Examples</h3>
+                    <ul>
+                        <li><strong>Game Playing:</strong> DeepMind's AlphaGo mastered the complex game of Go by
+                            playing millions of matches against itself.</li>
+                        <li><strong>Robotics:</strong> AWS RoboMaker uses RL to train robots to walk, grasp objects,
+                            and navigate obstacles in simulated environments before the real world.</li>
+                        <li><strong>Energy Optimization:</strong> Google uses RL to optimize cooling systems in their
+                            massive data centers, reducing energy consumption by up to 40%.</li>
+                    </ul>
+
+                    <h2>4. Semi-Supervised Learning</h2>
+                    <p><strong>The "Hybrid" Model</strong></p>
+                    <p>This approach sits between supervised and unsupervised learning. It uses a small amount of
+                        labeled data combined with a large amount of unlabeled data. It is crucial when labeling data
+                        is expensive or time-consuming (like having doctors label MRI scans).</p>
+
+                    <h3>Key Examples</h3>
+                    <ul>
+                        <li><strong>Medical Imaging:</strong> Improving diagnostic accuracy with initially limited
+                            doctor-labeled scans.</li>
+                        <li><strong>Speech Recognition:</strong> Analyzing thousands of hours of audio where only a
+                            fraction has provided text transcripts.</li>
+                    </ul>
+
+                    <hr>
+
+                    <h2>References & Further Reading</h2>
+                    <p>To avoid hallucinations and ensure accuracy, this guide references the following official
+                        documentation:</p>
+
+                    <ul class="references">
+                        <li>
+                            <strong>IBM:</strong>
+                            <a href="https://www.ibm.com/topics/machine-learning" target="_blank">
+                                What is Machine Learning? (IBM Topics)
+                            </a>
+                        </li>
+                        <li>
+                            <strong>Google Cloud:</strong>
+                            <a href="https://cloud.google.com/learn/what-is-machine-learning" target="_blank">
+                                AI & Machine Learning Fundamentals
+                            </a>
+                        </li>
+                        <li>
+                            <strong>AWS:</strong>
+                            <a href="https://aws.amazon.com/what-is/machine-learning/" target="_blank">
+                                What is Machine Learning? (AWS)
+                            </a>
+                        </li>
+                        <li>
+                            <strong>DeepMind:</strong>
+                            <a href="https://deepmind.google/technologies/alphago/" target="_blank">
+                                AlphaGo and Reinforcement Learning
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p><em>Last updated: February 7, 2026.</em></p>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Krishna. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
