@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building with Free AI Models: A Practical Guide (2026) - Krishna</title>
+    <meta name="description"
+        content="Learn how to build real-world applications with free AI models like LLaMA, DeepSeek, and Mistral. Includes architecture diagrams, tech stacks, and example prompts.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+    <!-- Mermaid.js for Diagrams -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="logo">Krishna.</a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../projects.html">Projects</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <div class="article-meta">
+                    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+                    <p>February 7, 2026 &bull; AI Development</p>
+                </div>
+
+                <h1>Building with Free AI Models: A Practical Guide</h1>
+
+                <div class="article-content">
+                    <p>Free and open-source AI models have matured to the point where you can build production-grade
+                        applications without relying on expensive API calls. This guide shows you how to get started,
+                        covers real-world use cases, and provides a complete architecture for building an AI-powered
+                        code review assistant.</p>
+
+                    <h2>Quick Setup: Running Your First Local AI Model</h2>
+
+                    <h3>Step 1: Install Ollama</h3>
+                    <p><a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> is the easiest way to
+                        run AI models locally.</p>
+
+                    <pre><code># macOS/Linux
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Windows (PowerShell)
+winget install Ollama.Ollama</code></pre>
+
+                    <h3>Step 2: Download a Model</h3>
+                    <pre><code># Pull a lightweight model (7B parameters)
+ollama pull llama3.2
+
+# Or a more powerful model (8B, great for coding)
+ollama pull deepseek-coder-v2
+
+# For reasoning tasks
+ollama pull deepseek-r1</code></pre>
+
+                    <h3>Step 3: Test It Out</h3>
+                    <pre><code># Interactive chat
+ollama run llama3.2
+
+# Or use the REST API
+curl http://localhost:11434/api/generate -d '{
+  "model": "llama3.2",
+  "prompt": "Explain quantum computing in simple terms"
+}'</code></pre>
+
+                    <h2>Real-World Use Cases</h2>
+
+                    <h3>1. Privacy-First Business Chatbot</h3>
+                    <p><strong>Model:</strong> LLaMA 3.1 70B or Mistral Large 3<br>
+                        <strong>Best For:</strong> Companies handling sensitive customer data (healthcare, finance)<br>
+                        <strong>Why Local?:</strong> HIPAA/GDPR compliance, zero data leakage
+                    </p>
+
+                    <h3>2. Code Generation & Review</h3>
+                    <p><strong>Model:</strong> <a href="https://deepseek.com" target="_blank"
+                            rel="noopener">DeepSeek-Coder V2</a> or Qwen3-Coder<br>
+                        <strong>Best For:</strong> Automated code reviews, bug detection, documentation<br>
+                        <strong>Why Local?:</strong> Protect proprietary code, unlimited usage
+                    </p>
+
+                    <h3>3. Document Q&A System</h3>
+                    <p><strong>Model:</strong> Qwen2.5-Turbo (1M context)<br>
+                        <strong>Best For:</strong> Legal document analysis, research papers, knowledge bases<br>
+                        <strong>Why Local?:</strong> Process entire documents without API costs
+                    </p>
+
+                    <h3>4. Content Moderation Pipeline</h3>
+                    <p><strong>Model:</strong> Gemma 3 (4B) or Mistral 7B<br>
+                        <strong>Best For:</strong> Real-time content filtering, spam detection<br>
+                        <strong>Why Local?:</strong> Ultra-low latency, high throughput
+                    </p>
+
+                    <hr>
+
+                    <h2>Deep Dive: Building an AI Code Review Assistant</h2>
+
+                    <p>Let's build a complete system that automatically reviews pull requests, detects bugs,
+                        suggests improvements, and generates documentation.</p>
+
+                    <h3>Tech Stack</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Technology</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>AI Model</strong></td>
+                                <td>DeepSeek-Coder V2 (16B)</td>
+                                <td>Code analysis & generation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Inference Server</strong></td>
+                                <td>Ollama</td>
+                                <td>Model serving</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Backend</strong></td>
+                                <td>Python + FastAPI</td>
+                                <td>API & orchestration</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Vector Database</strong></td>
+                                <td>ChromaDB</td>
+                                <td>Code embedding search</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Git Integration</strong></td>
+                                <td>PyGithub / GitLab API</td>
+                                <td>PR monitoring</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Queue</strong></td>
+                                <td>Redis + Celery</td>
+                                <td>Async task processing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Frontend</strong></td>
+                                <td>React + TypeScript</td>
+                                <td>Dashboard UI</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>System Architecture</h3>
+
+                    <div class="mermaid">
+                        graph TB
+                        subgraph "Code Repository"
+                        PR[Pull Request Created]
+                        end
+
+                        subgraph "Webhook Handler"
+                        WH[FastAPI Webhook Endpoint]
+                        WH -->|Enqueue| Queue[Redis Queue]
+                        end
+
+                        subgraph "Processing Pipeline"
+                        Queue --> Worker[Celery Worker]
+                        Worker -->|1. Fetch Code| GH[GitHub API]
+                        Worker -->|2. Extract Context| VDB[(ChromaDB<br />Code Embeddings)]
+                        Worker -->|3. Analyze| LLM[Ollama<br />DeepSeek-Coder V2]
+                        end
+
+                        subgraph "AI Analysis"
+                        LLM -->|Bug Detection| Bugs[Security Issues<br />Logic Errors]
+                        LLM -->|Code Quality| Quality[Best Practices<br />Refactoring]
+                        LLM -->|Documentation| Docs[Auto-Generated<br />Comments]
+                        end
+
+                        subgraph "Output"
+                        Bugs --> Comment[Post PR Comment]
+                        Quality --> Comment
+                        Docs --> Comment
+                        Comment --> DB[(PostgreSQL<br />Review History)]
+                        Comment --> Dashboard[React Dashboard]
+                        end
+
+                        PR --> WH
+
+                        style LLM fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                        style VDB fill:#f3e5f5,stroke:#4a148c
+                        style Queue fill:#fff3e0,stroke:#e65100
+                    </div>
+
+                    <h3>Implementation: Core Components</h3>
+
+                    <h4>1. Webhook Handler (FastAPI)</h4>
+                    <pre><code>from fastapi import FastAPI, BackgroundTasks
+from tasks import analyze_pr
+
+app = FastAPI()
+
+@app.post("/webhook/github")
+async def github_webhook(payload: dict, tasks: BackgroundTasks):
+    if payload["action"] == "opened":
+        pr_number = payload["pull_request"]["number"]
+        repo = payload["repository"]["full_name"]
+        
+        # Queue async analysis
+        tasks.add_task(analyze_pr, repo, pr_number)
+        
+    return {"status": "queued"}</code></pre>
+
+                    <h4>2. Code Analysis Worker (Celery + Ollama)</h4>
+                    <pre><code>from celery import Celery
+import ollama
+from github import Github
+
+celery = Celery('tasks', broker='redis://localhost:6379')
+
+@celery.task
+def analyze_pr(repo_name, pr_number):
+    # Fetch PR diff
+    g = Github(token=GITHUB_TOKEN)
+    repo = g.get_repo(repo_name)
+    pr = repo.get_pull(pr_number)
+    
+    # Get changed files
+    files = pr.get_files()
+    
+    analysis_results = []
+    
+    for file in files:
+        if file.filename.endswith(('.py', '.js', '.ts', '.go')):
+            # Analyze with DeepSeek-Coder
+            result = ollama.chat(
+                model='deepseek-coder-v2',
+                messages=[{
+                    'role': 'system',
+                    'content': REVIEW_SYSTEM_PROMPT
+                }, {
+                    'role': 'user',
+                    'content': f"Review this code:\n```\n{file.patch}\n```"
+                }]
+            )
+            
+            analysis_results.append({
+                'file': file.filename,
+                'review': result['message']['content']
+            })
+    
+    # Post comment on PR
+    comment = format_review_comment(analysis_results)
+    pr.create_issue_comment(comment)
+    
+    return analysis_results</code></pre>
+
+                    <h4>3. Prompt Engineering: System Prompts</h4>
+
+                    <p><strong>Bug Detection Prompt:</strong></p>
+                    <pre><code>You are an expert code reviewer specializing in security and correctness.
+
+Analyze the following code changes and identify:
+1. Security vulnerabilities (SQL injection, XSS, authentication bypass)
+2. Logic errors (off-by-one, race conditions, null pointer exceptions)
+3. Performance issues (N+1 queries, unnecessary loops, memory leaks)
+4. Edge cases not handled
+
+For each issue found:
+- Severity: Critical / High / Medium / Low
+- Line number(s)
+- Explanation
+- Suggested fix
+
+Format as markdown. Be concise and actionable.</code></pre>
+
+                    <p><strong>Code Quality Prompt:</strong></p>
+                    <pre><code>You are a senior software engineer reviewing code for best practices.
+
+Evaluate the code for:
+1. Readability and maintainability
+2. Adherence to language conventions (PEP 8, ESLint, Go fmt)
+3. Proper error handling
+4. Test coverage suggestions
+5. Opportunities for refactoring
+
+Provide specific, constructive feedback with examples.</code></pre>
+
+                    <p><strong>Documentation Generation Prompt:</strong></p>
+                    <pre><code>Generate clear, concise documentation for the following code:
+
+1. Function/class summary (one line)
+2. Parameters with types and descriptions
+3. Return value(s)
+4. Example usage
+5. Any important notes or warnings
+
+Format as JSDoc/docstring appropriate for the language.</code></pre>
+
+                    <h3>Example Outputs</h3>
+
+                    <h4>Input Code (Python):</h4>
+                    <pre><code>def process_payment(user_id, amount):
+    user = db.query(f"SELECT * FROM users WHERE id = {user_id}")
+    if user.balance &gt;= amount:
+        user.balance -= amount
+        db.execute(f"UPDATE users SET balance = {user.balance} WHERE id = {user_id}")
+        return True
+    return False</code></pre>
+
+                    <h4>AI Review Output:</h4>
+                    <pre><code>## 🔴 Critical Issues
+
+### SQL Injection Vulnerability
+- **Lines:** 2, 4
+- **Severity:** Critical
+- **Issue:** Direct string interpolation creates SQL injection risk
+- **Fix:**
+```python
+user = db.query("SELECT * FROM users WHERE id = ?", (user_id,))
+db.execute("UPDATE users SET balance = ? WHERE id = ?", 
+           (user.balance, user_id))
+```
+
+### Race Condition
+- **Lines:** 3-4
+- **Severity:** High
+- **Issue:** Balance check and update not atomic
+- **Fix:** Use database transaction with row locking
+
+## 🟡 Medium Issues
+
+### Missing Error Handling
+- Add try/except for database errors
+- Validate `amount > 0`
+- Handle case where user doesn't exist</code></pre>
+
+                    <h3>Deployment Considerations</h3>
+
+                    <ul>
+                        <li><strong>Hardware:</strong> Minimum 16GB VRAM (GPU) or 32GB RAM (CPU) for DeepSeek-Coder 16B
+                        </li>
+                        <li><strong>Quantization:</strong> Use Q5_K_M quantization to reduce model size by 50% with
+                            minimal quality loss</li>
+                        <li><strong>Scaling:</strong> Run multiple Ollama instances behind a load balancer for
+                            high-volume repos</li>
+                        <li><strong>Context Management:</strong> For large PRs, analyze files in batches to stay within
+                            context limits</li>
+                        <li><strong>Caching:</strong> Cache embeddings of unchanged files to speed up analysis</li>
+                    </ul>
+
+                    <h3>Cost Comparison</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Approach</th>
+                                <th>Setup Cost</th>
+                                <th>Per-PR Cost</th>
+                                <th>Monthly (100 PRs)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Local (Our Setup)</strong></td>
+                                <td>$500 (GPU server)</td>
+                                <td>$0</td>
+                                <td>$0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>OpenAI GPT-4</strong></td>
+                                <td>$0</td>
+                                <td>~$0.50</td>
+                                <td>$50</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Claude Sonnet</strong></td>
+                                <td>$0</td>
+                                <td>~$0.30</td>
+                                <td>$30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p><em>Break-even at ~10 months. After that, significant cost savings.</em></p>
+
+                    <h2>More Example Use Cases</h2>
+
+                    <h3>Customer Support Automation</h3>
+                    <p><strong>Prompt Template:</strong></p>
+                    <pre><code>You are a helpful customer support agent for [Company Name].
+
+Customer question: {question}
+Relevant documentation: {retrieved_docs}
+
+Provide a clear, friendly response. If you cannot answer, 
+suggest contacting human support.</code></pre>
+
+                    <h3>Data Extraction from Documents</h3>
+                    <p><strong>Prompt Template:</strong></p>
+                    <pre><code>Extract the following information from this invoice:
+- Invoice number
+- Date
+- Vendor name
+- Total amount
+- Line items (description, quantity, price)
+
+Format as JSON. If a field is missing, use null.
+
+Invoice text:
+{document_text}</code></pre>
+
+                    <h2>Best Practices</h2>
+
+                    <ul>
+                        <li><strong>Start Small:</strong> Test with 7B models (Mistral, Gemma) before scaling to 70B+
+                        </li>
+                        <li><strong>Prompt Engineering:</strong> Spend time crafting clear system prompts—they're your
+                            only "training"</li>
+                        <li><strong>Temperature Control:</strong> Use 0.1-0.3 for factual tasks, 0.7-0.9 for creative
+                            tasks</li>
+                        <li><strong>Context Windows:</strong> Truncate intelligently—keep the most relevant information
+                        </li>
+                        <li><strong>Monitoring:</strong> Track response quality, latency, and resource usage</li>
+                        <li><strong>Fallbacks:</strong> Have a backup plan (cloud API) if local inference fails</li>
+                    </ul>
+
+                    <hr>
+
+                    <h2>Getting Started Checklist</h2>
+
+                    <ol>
+                        <li>✅ Install Ollama</li>
+                        <li>✅ Download a model suited to your task</li>
+                        <li>✅ Test basic prompts interactively</li>
+                        <li>✅ Build a simple REST API wrapper</li>
+                        <li>✅ Integrate with your application</li>
+                        <li>✅ Monitor performance and iterate on prompts</li>
+                        <li>✅ Scale horizontally if needed</li>
+                    </ol>
+
+                    <h2>References & Resources</h2>
+
+                    <ul class="references">
+                        <li>
+                            <strong>Ollama Documentation:</strong>
+                            <a href="https://github.com/ollama/ollama" target="_blank" rel="noopener">
+                                GitHub Repository & Guides
+                            </a>
+                        </li>
+                        <li>
+                            <strong>DeepSeek-Coder:</strong>
+                            <a href="https://deepseek.com" target="_blank" rel="noopener">
+                                Official Website
+                            </a>
+                        </li>
+                        <li>
+                            <strong>LangChain (Orchestration):</strong>
+                            <a href="https://python.langchain.com" target="_blank" rel="noopener">
+                                Python Framework for LLM Apps
+                            </a>
+                        </li>
+                        <li>
+                            <strong>ChromaDB:</strong>
+                            <a href="https://www.trychroma.com" target="_blank" rel="noopener">
+                                Vector Database for AI
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p><em>Last updated: February 7, 2026.</em></p>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Krishna. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
