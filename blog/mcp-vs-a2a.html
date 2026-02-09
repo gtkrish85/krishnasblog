@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,12 +19,12 @@
 <body>
     <div class="container">
         <header>
-            <a href="../index.html" class="logo">Krishna.</a>
+            <a href="../index" class="logo">Krishna.</a>
             <nav>
                 <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../about.html">About</a></li>
-                    <li><a href="../projects.html">Projects</a></li>
+                    <li><a href="../index">Home</a></li>
+                    <li><a href="../about">About</a></li>
+                    <li><a href="../projects">Projects</a></li>
                 </ul>
             </nav>
         </header>
@@ -32,7 +32,7 @@
         <main>
             <article>
                 <div class="article-meta">
-                    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+                    <a href="../index" class="back-link">&larr; Back to Home</a>
                     <p>February 9, 2026 &bull; AI Architecture</p>
                 </div>
 
@@ -109,7 +109,7 @@
 
                     <p><a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">MCP</a> is an
                         open standard introduced by <a href="https://www.anthropic.com" target="_blank"
-                            rel="noopener">Anthropic</a> in November 2024 to solve the "N×M problem" of AI integration.
+                            rel="noopener">Anthropic</a> in November 2024 to solve the "NÃ—M problem" of AI integration.
                         Before MCP, every AI application needed custom connectors for each data source, creating a
                         fragmented ecosystem.</p>
 
@@ -196,12 +196,12 @@
                     <h3>MCP Use Cases</h3>
 
                     <ul>
-                        <li>🗂️ <strong>Enterprise Data Access:</strong> Query internal databases, CRMs, knowledge bases
+                        <li>ðŸ—‚ï¸ <strong>Enterprise Data Access:</strong> Query internal databases, CRMs, knowledge bases
                         </li>
-                        <li>🔧 <strong>AI-Powered IDEs:</strong> Give coding assistants access to project context, Git
+                        <li>ðŸ”§ <strong>AI-Powered IDEs:</strong> Give coding assistants access to project context, Git
                             history</li>
-                        <li>📊 <strong>Data Analysis:</strong> Connect spreadsheets, BI tools, analytics platforms</li>
-                        <li>🤖 <strong>Workflow Automation:</strong> Trigger actions across multiple SaaS tools</li>
+                        <li>ðŸ“Š <strong>Data Analysis:</strong> Connect spreadsheets, BI tools, analytics platforms</li>
+                        <li>ðŸ¤– <strong>Workflow Automation:</strong> Trigger actions across multiple SaaS tools</li>
                     </ul>
 
                     <hr>
@@ -308,13 +308,13 @@ POST https://api.company.com/agents/inventory/message
                     <h3>A2A Use Cases</h3>
 
                     <ul>
-                        <li>🏢 <strong>Enterprise Workflows:</strong> Sales agent → Inventory agent → Shipping agent
+                        <li>ðŸ¢ <strong>Enterprise Workflows:</strong> Sales agent â†’ Inventory agent â†’ Shipping agent
                         </li>
-                        <li>🤝 <strong>Cross-Company Collaboration:</strong> Your assistant talks to supplier's
+                        <li>ðŸ¤ <strong>Cross-Company Collaboration:</strong> Your assistant talks to supplier's
                             assistant</li>
-                        <li>🧩 <strong>Distributed Problem Solving:</strong> Research agents collaborate on complex
+                        <li>ðŸ§© <strong>Distributed Problem Solving:</strong> Research agents collaborate on complex
                             queries</li>
-                        <li>🌐 <strong>Federated AI Systems:</strong> Agents from different providers work together</li>
+                        <li>ðŸŒ <strong>Federated AI Systems:</strong> Agents from different providers work together</li>
                     </ul>
 
                     <hr>
@@ -358,8 +358,8 @@ POST https://api.company.com/agents/inventory/message
                         </thead>
                         <tbody>
                             <tr>
-                                <td>AI asks → Server provides data/tools</td>
-                                <td>Agent asks → Another agent performs task</td>
+                                <td>AI asks â†’ Server provides data/tools</td>
+                                <td>Agent asks â†’ Another agent performs task</td>
                             </tr>
                             <tr>
                                 <td>One-to-many (1 client, N servers)</td>
@@ -394,10 +394,10 @@ GET /.well-known/agent-card
 
                     <h3>Use MCP When:</h3>
                     <ul>
-                        <li>✅ You need to connect an AI model to existing APIs, databases, or services</li>
-                        <li>✅ Your use case is primarily "AI + tools/data"</li>
-                        <li>✅ You want standardized access to enterprise data sources</li>
-                        <li>✅ You're building AI-powered IDEs, chatbots, or assistants</li>
+                        <li>âœ… You need to connect an AI model to existing APIs, databases, or services</li>
+                        <li>âœ… Your use case is primarily "AI + tools/data"</li>
+                        <li>âœ… You want standardized access to enterprise data sources</li>
+                        <li>âœ… You're building AI-powered IDEs, chatbots, or assistants</li>
                     </ul>
 
                     <p><strong>Example:</strong> A coding assistant that needs to read files, run terminal commands,
@@ -405,10 +405,10 @@ GET /.well-known/agent-card
 
                     <h3>Use A2A When:</h3>
                     <ul>
-                        <li>✅ You have multiple autonomous agents that need to collaborate</li>
-                        <li>✅ Your use case is "Agent A delegates to Agent B"</li>
-                        <li>✅ You need cross-organizational agent communication</li>
-                        <li>✅ You're building multi-agent systems or agent marketplaces</li>
+                        <li>âœ… You have multiple autonomous agents that need to collaborate</li>
+                        <li>âœ… Your use case is "Agent A delegates to Agent B"</li>
+                        <li>âœ… You need cross-organizational agent communication</li>
+                        <li>âœ… You're building multi-agent systems or agent marketplaces</li>
                     </ul>
 
                     <p><strong>Example:</strong> An ordering agent that delegates to inventory, payment, and
@@ -416,8 +416,8 @@ GET /.well-known/agent-card
 
                     <h3>Use Both When:</h3>
                     <ul>
-                        <li>🔄 Building sophisticated multi-agent systems where each agent also needs tool access</li>
-                        <li>🔄 Your agents need to both collaborate (A2A) and access data sources (MCP)</li>
+                        <li>ðŸ”„ Building sophisticated multi-agent systems where each agent also needs tool access</li>
+                        <li>ðŸ”„ Your agents need to both collaborate (A2A) and access data sources (MCP)</li>
                     </ul>
 
                     <p><strong>Example:</strong> A research agent uses MCP to query academic databases, then uses
@@ -508,10 +508,10 @@ return "Order confirmed! Tracking: " + shipping_response["tracking_number"]</cod
                     <p>As the AI ecosystem matures, we're likely to see:</p>
 
                     <ul>
-                        <li>📊 <strong>Unified frameworks</strong> that support both MCP and A2A seamlessly</li>
-                        <li>🌉 <strong>Bridge protocols</strong> allowing MCP servers to act as A2A agents</li>
-                        <li>🏗️ <strong>Agent operating systems</strong> with built-in support for both standards</li>
-                        <li>🔒 <strong>Enhanced security layers</strong> for inter-agent authentication and
+                        <li>ðŸ“Š <strong>Unified frameworks</strong> that support both MCP and A2A seamlessly</li>
+                        <li>ðŸŒ‰ <strong>Bridge protocols</strong> allowing MCP servers to act as A2A agents</li>
+                        <li>ðŸ—ï¸ <strong>Agent operating systems</strong> with built-in support for both standards</li>
+                        <li>ðŸ”’ <strong>Enhanced security layers</strong> for inter-agent authentication and
                             authorization</li>
                     </ul>
 
@@ -566,11 +566,11 @@ return "Order confirmed! Tracking: " + shipping_response["tracking_number"]</cod
                     <h2>Key Takeaways</h2>
 
                     <ul>
-                        <li>🔧 <strong>MCP</strong> connects AI to tools and data (vertical integration)</li>
-                        <li>🤝 <strong>A2A</strong> connects agents to each other (horizontal collaboration)</li>
-                        <li>⚡ Both use JSON-RPC but serve different architectural needs</li>
-                        <li>🏗️ Modern AI systems will likely use both protocols together</li>
-                        <li>🌐 Both are open standards enabling multi-vendor interoperability</li>
+                        <li>ðŸ”§ <strong>MCP</strong> connects AI to tools and data (vertical integration)</li>
+                        <li>ðŸ¤ <strong>A2A</strong> connects agents to each other (horizontal collaboration)</li>
+                        <li>âš¡ Both use JSON-RPC but serve different architectural needs</li>
+                        <li>ðŸ—ï¸ Modern AI systems will likely use both protocols together</li>
+                        <li>ðŸŒ Both are open standards enabling multi-vendor interoperability</li>
                     </ul>
 
                     <p><em>Last updated: February 9, 2026. Both protocols are actively evolving.</em></p>

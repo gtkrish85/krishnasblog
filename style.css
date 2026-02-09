@@ -287,3 +287,62 @@ hr {
     border-top: 1px solid var(--border-color);
     margin: 40px 0;
 }
+
+/* Social Interaction Section */
+.interaction-section {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-color);
+}
+
+.share-container {
+    margin-bottom: 40px;
+}
+
+.share-container h3,
+.comments-container h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.share-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.share-btn:hover {
+    background-color: var(--hover-bg);
+    transform: translateY(-2px);
+    color: var(--accent-color);
+}
+
+.share-btn.twitter:hover {
+    color: #1da1f2;
+    border-color: #1da1f2;
+}
+
+.share-btn.linkedin:hover {
+    color: #0077b5;
+    border-color: #0077b5;
+}
+
+/* Giscus Comments Styling Override */
+.giscus {
+    margin-top: 20px;
+}
