@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -322,8 +322,38 @@
 
                     <p><em>Last updated: February 6, 2026. Model specifications and availability may change
                             as providers release updates.</em></p>
+                </div>                
+                <!-- Social Interaction Section -->
+                <div class="interaction-section">
+                    <div class="share-container">
+                        <h3>Share this post</h3>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn twitter" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + '&url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share on X</a>
+                            <a href="#" class="share-btn linkedin" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share on LinkedIn</a>
+                            <button onclick="navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')).catch(() => alert('Failed to copy link'));" class="share-btn">Copy Link</button>
+                        </div>
+                    </div>
+                    
+                    <div class="comments-container">
+                        <h3>Comments & Reactions</h3>
+                        <script src="https://giscus.app/client.js"
+                            data-repo="gtkrish85/krishnasblog"
+                            data-repo-id="R_kgDORIInsQ"
+                            data-category="General"
+                            data-category-id="DIC_kwDORIInsQ4CmYfw"
+                            data-mapping="pathname"
+                            data-strict="0"
+                            data-reactions-enabled="1"
+                            data-emit-metadata="0"
+                            data-input-position="bottom"
+                            data-theme="light"
+                            data-lang="en"
+                            crossorigin="anonymous"
+                            async>
+                        </script>
+                    </div>
                 </div>
-            </article>
+</article>
         </main>
 
         <footer>
