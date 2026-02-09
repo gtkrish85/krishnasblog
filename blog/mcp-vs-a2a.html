@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP vs A2A: Understanding AI Communication Protocols (2026) - Krishna</title>
+    <meta name="description"
+        content="Deep dive into Model Context Protocol (MCP) and Agent-to-Agent (A2A) communication. Learn the differences, use cases, and when to use each protocol with architecture diagrams and examples.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+    <!-- Mermaid.js for Diagrams -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="logo">Krishna.</a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../projects.html">Projects</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <div class="article-meta">
+                    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+                    <p>February 9, 2026 &bull; AI Architecture</p>
+                </div>
+
+                <h1>MCP vs A2A: Understanding AI Communication Protocols</h1>
+
+                <div class="article-content">
+                    <p>As AI systems grow more sophisticated, two critical standards have emerged for enabling
+                        communication and interoperability: <strong>Model Context Protocol (MCP)</strong> and
+                        <strong>Agent-to-Agent (A2A)</strong> communication. While both solve connectivity
+                        challenges in the AI ecosystem, they serve fundamentally different purposes.
+                    </p>
+
+                    <p>This guide explains what each protocol does, when to use them, and how they work together
+                        to enable the next generation of AI applications.</p>
+
+                    <h2>Quick Comparison</h2>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>MCP (Model Context Protocol)</th>
+                                <th>A2A (Agent-to-Agent)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Purpose</strong></td>
+                                <td>Connect AI models to data sources & tools</td>
+                                <td>Enable agents to communicate with each other</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Introduced By</strong></td>
+                                <td>Anthropic (Nov 2024)</td>
+                                <td>Google (April 2025)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Primary Use</strong></td>
+                                <td>Context integration, tool calling</td>
+                                <td>Multi-agent collaboration, delegation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Architecture</strong></td>
+                                <td>Client-Server (vertical)</td>
+                                <td>Peer-to-Peer (horizontal)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Transport</strong></td>
+                                <td>JSON-RPC over STDIO/HTTP+SSE</td>
+                                <td>JSON-RPC 2.0 over HTTP/S</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Key Concept</strong></td>
+                                <td>MCP Servers expose Tools, Resources, Prompts</td>
+                                <td>Agents discover each other via Agent Cards</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr>
+
+                    <h2>What is MCP (Model Context Protocol)?</h2>
+
+                    <p><a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">MCP</a> is an
+                        open standard introduced by <a href="https://www.anthropic.com" target="_blank"
+                            rel="noopener">Anthropic</a> in November 2024 to solve the "N×M problem" of AI integration.
+                        Before MCP, every AI application needed custom connectors for each data source, creating a
+                        fragmented ecosystem.</p>
+
+                    <h3>Core Components</h3>
+
+                    <p>An MCP Server can expose three types of elements:</p>
+
+                    <ul>
+                        <li><strong>Tools:</strong> Executable functions (e.g., query database, call API)</li>
+                        <li><strong>Resources:</strong> Raw data or files to inject into context (e.g., documents, logs)
+                        </li>
+                        <li><strong>Prompts:</strong> Predefined templates or slash commands for LLM guidance</li>
+                    </ul>
+
+                    <h3>How MCP Works</h3>
+
+                    <div class="mermaid">
+                        graph LR
+                        subgraph "Host Application"
+                        Client[MCP Client<br />Claude Desktop, IDE, etc.]
+                        end
+
+                        subgraph "MCP Servers"
+                        S1[GitHub Server<br />Tools: create_PR, list_issues<br />Resources: repo files]
+                        S2[Postgres Server<br />Tools: query, insert<br />Resources: schema]
+                        S3[Slack Server<br />Tools: send_message<br />Resources: channels]
+                        end
+
+                        subgraph "External Systems"
+                        GH[(GitHub API)]
+                        DB[(PostgreSQL)]
+                        SL[(Slack API)]
+                        end
+
+                        Client -->|JSON-RPC| S1
+                        Client -->|JSON-RPC| S2
+                        Client -->|JSON-RPC| S3
+
+                        S1 --> GH
+                        S2 --> DB
+                        S3 --> SL
+
+                        style Client fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                        style S1 fill:#f3e5f5,stroke:#4a148c
+                        style S2 fill:#f3e5f5,stroke:#4a148c
+                        style S3 fill:#f3e5f5,stroke:#4a148c
+                    </div>
+
+                    <h3>Example: MCP in Action</h3>
+
+                    <p><strong>Scenario:</strong> You ask Claude Desktop to "Create a PR with my latest changes and
+                        notify the team on Slack."</p>
+
+                    <pre><code># MCP Server Configuration (claude_desktop_config.json)
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "ghp_xxx"
+      }
+    },
+    "slack": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {
+        "SLACK_TOKEN": "xoxb-xxx"
+      }
+    }
+  }
+}</code></pre>
+
+                    <p><strong>What Happens:</strong></p>
+                    <ol>
+                        <li>Claude receives your request</li>
+                        <li>MCP Client discovers available tools from connected servers</li>
+                        <li>Claude invokes <code>github.create_pull_request</code> tool</li>
+                        <li>Then invokes <code>slack.send_message</code> tool</li>
+                        <li>Both servers execute actions and return results</li>
+                        <li>Claude composes a response confirming completion</li>
+                    </ol>
+
+                    <h3>MCP Use Cases</h3>
+
+                    <ul>
+                        <li>🗂️ **Enterprise Data Access:** Query internal databases, CRMs, knowledge bases</li>
+                        <li>🔧 **AI-Powered IDEs:** Give coding assistants access to project context, Git history</li>
+                        <li>📊 **Data Analysis:** Connect spreadsheets, BI tools, analytics platforms</li>
+                        <li>🤖 **Workflow Automation:** Trigger actions across multiple SaaS tools</li>
+                    </ul>
+
+                    <hr>
+
+                    <h2>What is A2A (Agent-to-Agent Communication)?</h2>
+
+                    <p><a href="https://a2aprotocol.ai" target="_blank" rel="noopener">A2A</a> is an open protocol
+                        introduced by Google in April 2025 (now managed by the Linux Foundation) to enable
+                        <strong>autonomous AI agents</strong> to discover and communicate with each other,
+                        regardless of their underlying frameworks.
+                    </p>
+
+                    <h3>Core Concepts</h3>
+
+                    <ul>
+                        <li><strong>Agent Cards:</strong> JSON files describing an agent's capabilities and API
+                            endpoints</li>
+                        <li><strong>A2A Server Agents:</strong> Expose endpoints for discovery and message handling</li>
+                        <li><strong>A2A Client Agents:</strong> Discover and send messages to remote agents</li>
+                        <li><strong>Flexible Interaction:</strong> Supports sync, streaming (SSE), and async push</li>
+                    </ul>
+
+                    <h3>How A2A Works</h3>
+
+                    <div class="mermaid">
+                        graph TB
+                        subgraph "Agent Discovery"
+                        AC1[Agent Card<br />Customer Support Agent]
+                        AC2[Agent Card<br />Inventory Agent]
+                        AC3[Agent Card<br />Payment Agent]
+                        end
+
+                        subgraph "Agent Communication"
+                        A1[Customer Support<br />Agent] -->|Discover| AC2
+                        A1 -->|Request| A2[Inventory Agent]
+                        A2 -->|Response| A1
+
+                        A1 -->|Delegate| A3[Payment Agent]
+                        A3 -->|Confirmation| A1
+                        end
+
+                        subgraph "External Services"
+                        A2 --> INV[(Inventory DB)]
+                        A3 --> PAY[(Payment Gateway)]
+                        end
+
+                        style A1 fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                        style A2 fill:#fff3e0,stroke:#e65100
+                        style A3 fill:#e8f5e9,stroke:#1b5e20
+                    </div>
+
+                    <h3>Example: A2A in Action</h3>
+
+                    <p><strong>Scenario:</strong> A customer asks, "Do you have iPhone 15 Pro in stock?"</p>
+
+                    <pre><code># Agent Card (inventory-agent-card.json)
+{
+  "name": "Inventory Agent",
+  "description": "Real-time inventory checker for all products",
+  "version": "1.0.0",
+  "capabilities": [
+    "check_stock",
+    "reserve_item",
+    "get_arrival_date"
+  ],
+  "endpoint": "https://api.company.com/agents/inventory",
+  "authentication": {
+    "type": "bearer",
+    "required": true
+  }
+}</code></pre>
+
+                    <p><strong>Message Flow:</strong></p>
+
+                    <pre><code># 1. Customer Support Agent discovers Inventory Agent
+GET https://api.company.com/.well-known/agent-card
+
+# 2. Send stock check request
+POST https://api.company.com/agents/inventory/message
+{
+  "method": "check_stock",
+  "params": {
+    "product": "iPhone 15 Pro",
+    "color": "Natural Titanium",
+    "storage": "256GB"
+  },
+  "id": "req-12345",
+  "jsonrpc": "2.0"
+}
+
+# 3. Inventory Agent responds
+{
+  "result": {
+    "in_stock": true,
+    "quantity": 12,
+    "location": "Warehouse B"
+  },
+  "id": "req-12345",
+  "jsonrpc": "2.0"
+}</code></pre>
+
+                    <h3>A2A Use Cases</h3>
+
+                    <ul>
+                        <li>🏢 **Enterprise Workflows:** Sales agent → Inventory agent → Shipping agent</li>
+                        <li>🤝 **Cross-Company Collaboration:** Your assistant talks to supplier's assistant</li>
+                        <li>🧩 **Distributed Problem Solving:** Research agents collaborate on complex queries</li>
+                        <li>🌐 **Federated AI Systems:** Agents from different providers work together</li>
+                    </ul>
+
+                    <hr>
+
+                    <h2>Key Differences</h2>
+
+                    <h3>1. Architecture Pattern</h3>
+
+                    <div class="mermaid">
+                        graph LR
+                        subgraph "MCP: Client-Server (Vertical)"
+                        AI[AI Application]
+                        AI --> DB[Database Server]
+                        AI --> API[API Server]
+                        AI --> FS[Filesystem Server]
+                        end
+
+                        subgraph "A2A: Peer-to-Peer (Horizontal)"
+                        A1[Agent A]
+                        A2[Agent B]
+                        A3[Agent C]
+                        A1 <--> A2
+                            A2 <--> A3
+                                A1 <--> A3
+                                    end
+
+                                    style AI fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                                    style A1 fill:#f3e5f5,stroke:#4a148c
+                                    style A2 fill:#fff3e0,stroke:#e65100
+                                    style A3 fill:#e8f5e9,stroke:#1b5e20
+                    </div>
+
+                    <h3>2. Communication Direction</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>MCP</th>
+                                <th>A2A</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>AI asks → Server provides data/tools</td>
+                                <td>Agent asks → Another agent performs task</td>
+                            </tr>
+                            <tr>
+                                <td>One-to-many (1 client, N servers)</td>
+                                <td>Many-to-many (N agents, N agents)</td>
+                            </tr>
+                            <tr>
+                                <td>Stateless tool execution</td>
+                                <td>Stateful agent conversations</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>3. Discovery Mechanism</h3>
+
+                    <pre><code># MCP: Configuration-based
+{
+  "mcpServers": {
+    "postgres": { "command": "mcp-server-postgres" }
+  }
+}
+
+# A2A: Runtime discovery via Agent Cards
+GET /.well-known/agent-card
+{
+  "name": "Sales Agent",
+  "capabilities": ["process_order", "check_quote"]
+}</code></pre>
+
+                    <hr>
+
+                    <h2>When to Use Each</h2>
+
+                    <h3>Use MCP When:</h3>
+                    <ul>
+                        <li>✅ You need to connect an AI model to existing APIs, databases, or services</li>
+                        <li>✅ Your use case is primarily "AI + tools/data"</li>
+                        <li>✅ You want standardized access to enterprise data sources</li>
+                        <li>✅ You're building AI-powered IDEs, chatbots, or assistants</li>
+                    </ul>
+
+                    <p><strong>Example:</strong> A coding assistant that needs to read files, run terminal commands,
+                        and query documentation.</p>
+
+                    <h3>Use A2A When:</h3>
+                    <ul>
+                        <li>✅ You have multiple autonomous agents that need to collaborate</li>
+                        <li>✅ Your use case is "Agent A delegates to Agent B"</li>
+                        <li>✅ You need cross-organizational agent communication</li>
+                        <li>✅ You're building multi-agent systems or agent marketplaces</li>
+                    </ul>
+
+                    <p><strong>Example:</strong> An ordering agent that delegates to inventory, payment, and
+                        shipping agents from different vendors.</p>
+
+                    <h3>Use Both When:</h3>
+                    <ul>
+                        <li>🔄 Building sophisticated multi-agent systems where each agent also needs tool access</li>
+                        <li>🔄 Your agents need to both collaborate (A2A) and access data sources (MCP)</li>
+                    </ul>
+
+                    <p><strong>Example:</strong> A research agent uses MCP to query academic databases, then uses
+                        A2A to collaborate with a writing agent to draft a summary.</p>
+
+                    <hr>
+
+                    <h2>Complete Example: Hybrid System</h2>
+
+                    <p>Let's build an e-commerce fulfillment system using both protocols:</p>
+
+                    <h3>Architecture</h3>
+
+                    <div class="mermaid">
+                        graph TB
+                        Customer[Customer Message] --> CSA[Customer Support Agent]
+
+                        CSA -->|A2A| IA[Inventory Agent]
+                        CSA -->|A2A| PA[Payment Agent]
+                        CSA -->|A2A| SA[Shipping Agent]
+
+                        IA -->|MCP| IDB[(Inventory DB)]
+                        PA -->|MCP| Stripe[Stripe API]
+                        SA -->|MCP| FedEx[FedEx API]
+
+                        IA -->|Stock Status| CSA
+                        PA -->|Payment Confirmation| CSA
+                        SA -->|Tracking Number| CSA
+                        CSA --> Response[Customer Response]
+
+                        style CSA fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                        style IA fill:#f3e5f5,stroke:#4a148c
+                        style PA fill:#fff3e0,stroke:#e65100
+                        style SA fill:#e8f5e9,stroke:#1b5e20
+                    </div>
+
+                    <h3>Implementation Flow</h3>
+
+                    <pre><code># Customer Support Agent code (uses both A2A and MCP)
+
+# 1. Receive customer order
+customer_message = "I want to buy 2 iPhone 15 Pro 256GB"
+
+# 2. Use A2A to check inventory
+inventory_response = a2a_client.send_message(
+    agent="inventory-agent",
+    method="check_stock",
+    params={"product": "iPhone 15 Pro", "quantity": 2}
+)
+
+# 3. Inventory Agent uses MCP to query database
+# (Inside Inventory Agent)
+stock = mcp_client.call_tool(
+    server="postgres",
+    tool="query",
+    args={"sql": "SELECT quantity FROM inventory WHERE sku='IP15P256'"}
+)
+
+# 4. Use A2A to process payment
+payment_response = a2a_client.send_message(
+    agent="payment-agent",
+    method="charge_card",
+    params={"amount": 2198.00, "customer_id": "cust_123"}
+)
+
+# 5. Payment Agent uses MCP to call Stripe
+# (Inside Payment Agent)
+charge = mcp_client.call_tool(
+    server="stripe",
+    tool="create_charge",
+    args={"amount": 2198, "customer": "cust_123"}
+)
+
+# 6. Use A2A to create shipment
+shipping_response = a2a_client.send_message(
+    agent="shipping-agent",
+    method="create_shipment",
+    params={"order_id": "ORD-456", "address": customer_address}
+)
+
+# 7. Respond to customer
+return "Order confirmed! Tracking: " + shipping_response["tracking_number"]</code></pre>
+
+                    <hr>
+
+                    <h2>The Future: Protocol Convergence</h2>
+
+                    <p>As the AI ecosystem matures, we're likely to see:</p>
+
+                    <ul>
+                        <li>📊 **Unified frameworks** that support both MCP and A2A seamlessly</li>
+                        <li>🌉 **Bridge protocols** allowing MCP servers to act as A2A agents</li>
+                        <li>🏗️ **Agent operating systems** with built-in support for both standards</li>
+                        <li>🔒 **Enhanced security layers** for inter-agent authentication and authorization</li>
+                    </ul>
+
+                    <h2>Getting Started</h2>
+
+                    <h3>MCP Resources</h3>
+                    <ul class="references">
+                        <li>
+                            <strong>Official Spec:</strong>
+                            <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">
+                                modelcontextprotocol.io
+                            </a>
+                        </li>
+                        <li>
+                            <strong>Python SDK:</strong>
+                            <a href="https://github.com/modelcontextprotocol/python-sdk" target="_blank" rel="noopener">
+                                GitHub - MCP Python SDK
+                            </a>
+                        </li>
+                        <li>
+                            <strong>TypeScript SDK:</strong>
+                            <a href="https://github.com/modelcontextprotocol/typescript-sdk" target="_blank"
+                                rel="noopener">
+                                GitHub - MCP TypeScript SDK
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h3>A2A Resources</h3>
+                    <ul class="references">
+                        <li>
+                            <strong>Official Site:</strong>
+                            <a href="https://a2aprotocol.ai" target="_blank" rel="noopener">
+                                a2aprotocol.ai
+                            </a>
+                        </li>
+                        <li>
+                            <strong>Specification:</strong>
+                            <a href="https://github.com/google/a2a-protocol" target="_blank" rel="noopener">
+                                GitHub - A2A Protocol
+                            </a>
+                        </li>
+                        <li>
+                            <strong>Spring AI Integration:</strong>
+                            <a href="https://spring.io/blog/2025/01/24/spring-ai-agent-to-agent-communication-a2a"
+                                target="_blank" rel="noopener">
+                                Spring AI A2A Guide
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h2>Key Takeaways</h2>
+
+                    <ul>
+                        <li>🔧 <strong>MCP</strong> connects AI to tools and data (vertical integration)</li>
+                        <li>🤝 <strong>A2A</strong> connects agents to each other (horizontal collaboration)</li>
+                        <li>⚡ Both use JSON-RPC but serve different architectural needs</li>
+                        <li>🏗️ Modern AI systems will likely use both protocols together</li>
+                        <li>🌐 Both are open standards enabling multi-vendor interoperability</li>
+                    </ul>
+
+                    <p><em>Last updated: February 9, 2026. Both protocols are actively evolving.</em></p>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Krishna. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
