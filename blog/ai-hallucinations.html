@@ -90,7 +90,7 @@
                         <em>Reviewed and written by Krishna &mdash; drawing on peer-reviewed research from arXiv,
                             NIST, ACL, and published technical reports from OpenAI, Meta AI, and Google DeepMind.
                             Every factual claim in this article is backed by a linked, verifiable citation.
-                            No statements here are themselves hallucinated.</em>
+                        </em>
                     </p>
 
                     <p>
@@ -752,6 +752,129 @@
 
                     <hr>
 
+                    <h2>Part VII &mdash; Emerging Research Frontiers (2025&ndash;2026)</h2>
+
+                    <p>
+                        The strategies in Parts III&ndash;V represent the established best practices as of
+                        early 2026. But the field is moving fast. Several breakthrough research directions
+                        from the past 12 months are worth watching closely &mdash; and may become
+                        production-standard within a year.
+                    </p>
+
+                    <h3>1. Multi-Agent Cross-Review: Ensembles That Check Each Other</h3>
+
+                    <p>
+                        Rather than relying on a single model's self-evaluation (which, as HaluEval showed,
+                        is unreliable), a new class of frameworks uses <strong>multiple small specialized
+                            models that cross-examine each other's outputs</strong>. The most notable example
+                        is <strong>EdgeJury</strong> (arXiv:2601.00850, December 2025), a lightweight
+                        ensemble framework that deploys 3B&ndash;8B parameter models in a four-stage
+                        pipeline: parallel role-specialized generation, anonymized cross-review, chairman
+                        synthesis, and claim-level consistency verification. On TruthfulQA (MC1), EdgeJury
+                        achieved <strong>76.2% accuracy</strong> &mdash; a 21.4% relative improvement
+                        over a single 8B baseline &mdash; and reduced factual hallucination errors by
+                        approximately <strong>55%</strong>. Critically, it runs on serverless edge
+                        infrastructure with 8.4-second median latency, making it practical for
+                        resource-constrained SaaS deployments.
+                        [<a href="https://arxiv.org/abs/2601.00850" target="_blank" rel="noopener">EdgeJury
+                            &mdash; arXiv:2601.00850</a>]
+                    </p>
+
+                    <p>
+                        <strong>Reviewer's take:</strong> This is a significant signal. If small-model
+                        ensembles can outperform single large models on factual accuracy at lower cost,
+                        the production architecture for hallucination-resistant SaaS may shift from
+                        "one big model + guardrails" to "multiple small models that verify each other."
+                    </p>
+
+                    <h3>2. RLFR: Using the Model's Own Internal Features as Reward Signals</h3>
+
+                    <p>
+                        Traditional RLHF relies on expensive human preference data to train reward
+                        models. A February 2026 paper, <em>"Features as Rewards: Scalable Supervision
+                            for Open-Ended Tasks via Interpretability"</em> (arXiv:2602.10067), introduces
+                        <strong>RLFR (Reinforcement Learning from Feature Rewards)</strong> &mdash;
+                        a pipeline that identifies internal model activation features correlated with
+                        factual uncertainty and uses them directly as reward functions during RL
+                        fine-tuning. Applied to Google's Gemma-3-12B-IT, RLFR achieved a
+                        <strong>58% reduction in hallucination</strong> while preserving benchmark
+                        performance, at approximately <strong>90x lower cost</strong> than using an
+                        LLM-as-a-judge approach. The improvement comes from three sources: a 10%
+                        gain from the policy becoming inherently more factual, a 35% gain from
+                        in-context reduction (past interventions guide future generation), and
+                        additional gains from test-time monitoring.
+                        [<a href="https://arxiv.org/abs/2602.10067" target="_blank" rel="noopener">RLFR
+                            &mdash; arXiv:2602.10067</a>]
+                    </p>
+
+                    <p>
+                        <strong>Reviewer's take:</strong> RLFR is a paradigm shift in how we think about
+                        supervision for hallucination. Instead of asking humans "is this factual?" after
+                        the fact, RLFR asks the model's own neurons "are you uncertain?" during generation.
+                        This is mechanistic interpretability applied as a training signal &mdash;
+                        a genuinely novel approach that could make hallucination reduction far cheaper
+                        and more scalable.
+                    </p>
+
+                    <h3>3. The Truthfulness vs. Safety Alignment Trade-off</h3>
+
+                    <p>
+                        One of the most important findings of the past year is that <strong>aggressively
+                            fine-tuning a model for truthfulness can accidentally weaken its safety
+                            alignment</strong>. The paper <em>"The Unintended Trade-off of AI Alignment:
+                            Balancing Hallucination Mitigation and Safety in LLMs"</em> (arXiv:2510.07775)
+                        demonstrated that certain attention heads in LLMs encode entangled features
+                        carrying both refusal (safety) and hallucination signals. When fine-tuning
+                        updates these shared components to improve factuality, the model becomes
+                        more susceptible to jailbreak attempts &mdash; a direct trade-off.
+                        The proposed mitigation uses <strong>Sparse Autoencoders (SAEs)</strong> to
+                        disentangle refusal-related features from hallucination features, then
+                        constrains fine-tuning to preserve the refusal subspace via
+                        subspace orthogonalization.
+                        [<a href="https://arxiv.org/abs/2510.07775" target="_blank" rel="noopener">Truthfulness
+                            vs. Safety Trade-off &mdash; arXiv:2510.07775</a>]
+                    </p>
+
+                    <p>
+                        <strong>Reviewer's take:</strong> This is a cautionary finding for any team
+                        doing domain-specific fine-tuning. "Making the model more factual" is not a
+                        free operation &mdash; it has side effects on your safety posture. Production
+                        teams must now evaluate both hallucination rates <em>and</em> safety alignment
+                        benchmarks after every fine-tuning run, not just one or the other.
+                    </p>
+
+                    <h3>4. QueryBandits: Adaptive Query Rewriting for Closed-Source Models</h3>
+
+                    <p>
+                        Many SaaS companies rely on closed-source models (GPT-4, Claude, Gemini) where
+                        they cannot modify model weights. <strong>QueryBandits</strong>
+                        (arXiv:2502.03711, February 2026) takes a fundamentally different approach:
+                        instead of modifying the model, it <strong>learns how to rewrite the user's
+                            query</strong> to minimize the probability of hallucination. The framework
+                        uses a contextual bandit algorithm (Thompson Sampling) that analyzes 17
+                        linguistic features of the input query and dynamically selects the optimal
+                        rewrite strategy (paraphrase, expand, decompose, etc.). In experiments
+                        across 16 QA scenarios, the top QueryBandit achieved an
+                        <strong>87.5% win rate</strong> over a no-rewrite baseline and a
+                        <strong>42.6% gain</strong> over static rewriting strategies like simple
+                        paraphrasing. A critical insight: no single rewrite strategy works best for
+                        all queries, and some static strategies actually <em>increase</em>
+                        hallucination &mdash; making adaptive, per-query optimization essential.
+                        [<a href="https://arxiv.org/abs/2502.03711" target="_blank" rel="noopener">QueryBandits
+                            &mdash; arXiv:2502.03711</a>]
+                    </p>
+
+                    <p>
+                        <strong>Reviewer's take:</strong> QueryBandits is highly relevant for SaaS
+                        teams building on top of API-only models. It is the first rigorous,
+                        peer-reviewed framework demonstrating that <em>how you phrase the question</em>
+                        to the model can be dynamically optimized to reduce hallucination &mdash;
+                        without any model access, retraining, or RAG infrastructure. This could
+                        become a lightweight first line of defense in many production systems.
+                    </p>
+
+                    <hr>
+
                     <h2>Reviewer's Verdict</h2>
 
                     <p>
@@ -903,6 +1026,33 @@
                             Microsoft Open-Source, GitHub.<br>
                             <a href="https://microsoft.github.io/presidio/" target="_blank"
                                 rel="noopener">https://microsoft.github.io/presidio/</a>
+                        </li>
+                        <li>
+                            <strong>[19] EdgeJury: Cross-Reviewed Small-Model Ensembles for Truthful Question
+                                Answering on Serverless Edge Inference</strong><br>
+                            arXiv:2601.00850 | December 2025<br>
+                            <a href="https://arxiv.org/abs/2601.00850" target="_blank"
+                                rel="noopener">https://arxiv.org/abs/2601.00850</a>
+                        </li>
+                        <li>
+                            <strong>[20] Features as Rewards: Scalable Supervision for Open-Ended Tasks via
+                                Interpretability (RLFR)</strong><br>
+                            arXiv:2602.10067 | Goodfire AI, February 2026<br>
+                            <a href="https://arxiv.org/abs/2602.10067" target="_blank"
+                                rel="noopener">https://arxiv.org/abs/2602.10067</a>
+                        </li>
+                        <li>
+                            <strong>[21] The Unintended Trade-off of AI Alignment: Balancing Hallucination Mitigation
+                                and Safety in LLMs</strong><br>
+                            arXiv:2510.07775 | October 2025<br>
+                            <a href="https://arxiv.org/abs/2510.07775" target="_blank"
+                                rel="noopener">https://arxiv.org/abs/2510.07775</a>
+                        </li>
+                        <li>
+                            <strong>[22] No One Size Fits All: QueryBandits for Hallucination Mitigation</strong><br>
+                            arXiv:2502.03711 | February 2026<br>
+                            <a href="https://arxiv.org/abs/2502.03711" target="_blank"
+                                rel="noopener">https://arxiv.org/abs/2502.03711</a>
                         </li>
                     </ul>
 
