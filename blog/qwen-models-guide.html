@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Complete Guide to Qwen Models: Varieties, Use Cases & Setup (2026) - Krishna</title>
+    <meta name="description"
+        content="A reviewer's guide to the Qwen model ecosystem — general LLMs, QwQ reasoning, Coder, Vision-Language, Audio, and Omni models — with verified setup instructions for Ollama, vLLM, and Hugging Face Transformers.">
+    <meta name="keywords"
+        content="Qwen models, Qwen3, QwQ-32B, Qwen2.5-Coder, Qwen2.5-VL, Qwen2-Audio, Qwen2.5-Omni, Alibaba Cloud, open source LLM, Ollama, vLLM, Hugging Face, local AI setup">
+    <meta name="author" content="Krishna">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://krishnamoorthy.site/blog/qwen-models-guide">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://krishnamoorthy.site/blog/qwen-models-guide">
+    <meta property="og:title" content="The Complete Guide to Qwen Models: Varieties, Use Cases & Setup (2026)">
+    <meta property="og:description"
+        content="A reviewer's guide to the Qwen ecosystem — general LLMs, reasoning, coding, vision, audio, and omni models — with hands-on setup for Ollama, vLLM, and Hugging Face.">
+    <meta property="og:site_name" content="Krishna's Blog">
+    <meta property="article:published_time" content="2026-03-28T00:00:00Z">
+    <meta property="article:author" content="Krishna">
+    <meta property="article:tag" content="Qwen Models">
+    <meta property="article:tag" content="Open Source AI">
+    <meta property="article:tag" content="LLMs">
+    <meta property="article:tag" content="Model Setup">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://krishnamoorthy.site/blog/qwen-models-guide">
+    <meta name="twitter:title" content="The Complete Guide to Qwen Models: Varieties, Use Cases & Setup (2026)">
+    <meta name="twitter:description"
+        content="A reviewer's guide to every Qwen variant with verified setup instructions for local and production deployment.">
+
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "The Complete Guide to Qwen Models: Varieties, Use Cases & Setup (2026)",
+      "description": "A reviewer's guide to the Qwen model ecosystem with verified setup instructions for Ollama, vLLM, and Hugging Face Transformers.",
+      "author": {
+        "@type": "Person",
+        "name": "Krishna"
+      },
+      "datePublished": "2026-03-28",
+      "dateModified": "2026-03-28",
+      "url": "https://krishnamoorthy.site/blog/qwen-models-guide",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://krishnamoorthy.site/blog/qwen-models-guide"
+      },
+      "keywords": ["Qwen models", "Qwen3", "QwQ-32B", "Qwen2.5-Coder", "Qwen2.5-VL", "Qwen2-Audio", "open source LLM", "Ollama", "vLLM"]
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index" class="logo">Krishna.</a>
+            <nav>
+                <ul>
+                    <li><a href="../index">Home</a></li>
+                    <li><a href="../about">About</a></li>
+                    <li><a href="../projects">Projects</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <div class="article-meta">
+                    <a href="../index" class="back-link">&larr; Back to Home</a>
+                    <p>March 28, 2026 &bull; Open Source AI &amp; Model Deployment</p>
+                </div>
+
+                <h1>The Complete Guide to Qwen Models: Varieties, Use Cases &amp; Setup</h1>
+
+                <div class="article-content">
+
+                    <p>
+                        <em>Reviewed and written by Krishna &mdash; sourced from official Qwen team publications,
+                            Hugging Face model cards, and peer-reviewed arXiv technical reports. Every factual claim
+                            is linked to its primary source.</em>
+                    </p>
+
+                    <p>
+                        <a href="https://github.com/QwenLM" target="_blank" rel="noopener">Qwen</a> (by Alibaba
+                        Cloud) has grown from a single large language model into a full ecosystem of specialized
+                        AI models &mdash; covering general conversation, chain-of-thought reasoning, code
+                        generation, image/video understanding, audio processing, and real-time multimodal
+                        interaction. Most variants are released under the
+                        <strong>Apache 2.0 license</strong>, permitting unrestricted commercial use.
+                        [<a href="https://qwenlm.github.io/blog/qwen3/" target="_blank" rel="noopener">Qwen3 Blog
+                            &mdash; License Confirmation</a>]
+                    </p>
+
+                    <p>
+                        This guide maps every major variant, explains when to use each, and walks through
+                        three verified setup paths.
+                    </p>
+
+                    <hr>
+
+                    <h2>Part I &mdash; The Model Variants</h2>
+
+                    <h3>1. General-Purpose LLMs (Qwen3)</h3>
+
+                    <p>
+                        The Qwen3 series, released in April 2025, includes <strong>eight open-weight models</strong>:
+                        two Mixture-of-Experts (MoE) models (Qwen3-235B-A22B and Qwen3-30B-A3B) and six dense
+                        models (32B, 14B, 8B, 4B, 1.7B, 0.6B). The flagship Qwen3-235B-A22B achieves competitive
+                        performance against DeepSeek-R1, o1, o3-mini, Grok-3, and Gemini-2.5-Pro on coding, math,
+                        and general benchmarks.
+                        [<a href="https://qwenlm.github.io/blog/qwen3/" target="_blank" rel="noopener">Source: Qwen3
+                            Official Blog</a>]
+                    </p>
+
+                    <p>Key capabilities per the official announcement:</p>
+
+                    <ul>
+                        <li><strong>Hybrid Thinking Modes</strong> &mdash; Qwen3 supports a "Thinking Mode"
+                            (step-by-step reasoning before answering, ideal for hard problems) and a "Non-Thinking Mode"
+                            (instant responses for simpler queries). Users can control reasoning depth per task.
+                            [<a href="https://qwenlm.github.io/blog/qwen3/#key-features" target="_blank"
+                                rel="noopener">Source</a>]</li>
+                        <li><strong>119 languages and dialects</strong> supported.
+                            [<a href="https://qwenlm.github.io/blog/qwen3/#key-features" target="_blank"
+                                rel="noopener">Source</a>]</li>
+                        <li><strong>Agentic capabilities</strong> with MCP (Model Context Protocol) support for tool
+                            use.
+                            [<a href="https://qwenlm.github.io/blog/qwen3/#key-features" target="_blank"
+                                rel="noopener">Source</a>]</li>
+                    </ul>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Total Params</th>
+                                <th>Active Params</th>
+                                <th>Architecture</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Qwen3-235B-A22B</td>
+                                <td>235B</td>
+                                <td>22B</td>
+                                <td>Sparse MoE</td>
+                            </tr>
+                            <tr>
+                                <td>Qwen3-30B-A3B</td>
+                                <td>30B</td>
+                                <td>3B</td>
+                                <td>Sparse MoE</td>
+                            </tr>
+                            <tr>
+                                <td>Qwen3-32B / 14B / 8B / 4B / 1.7B / 0.6B</td>
+                                <td>As named</td>
+                                <td>All (dense)</td>
+                                <td>Dense Transformer</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        <strong>Best for:</strong> General chatbots, content generation, summarization, translation,
+                        and enterprise assistants.
+                    </p>
+
+                    <p>
+                        [<a href="https://huggingface.co/collections/Qwen/qwen3-67dd247413f0e2e4f653967f"
+                            target="_blank" rel="noopener">Qwen3 Collection on Hugging Face</a>]
+                    </p>
+
+                    <h3>2. QwQ &mdash; The Reasoning Specialist</h3>
+
+                    <p>
+                        QwQ is Qwen's dedicated <strong>reasoning model</strong>. Unlike general instruction-tuned
+                        models, QwQ is trained via supervised fine-tuning and reinforcement learning to perform
+                        extended chain-of-thought reasoning. Per the official model card, QwQ-32B achieves
+                        "competitive performance against state-of-the-art reasoning models, e.g., DeepSeek-R1, o1-mini."
+                        [<a href="https://huggingface.co/Qwen/QwQ-32B" target="_blank" rel="noopener">Source: QwQ-32B
+                            Model Card</a>]
+                    </p>
+
+                    <p>Technical specifications from the model card:</p>
+
+                    <ul>
+                        <li><strong>Parameters:</strong> 32.5B (31.0B non-embedding)</li>
+                        <li><strong>Architecture:</strong> Transformers with RoPE, SwiGLU, RMSNorm, Attention QKV bias
+                        </li>
+                        <li><strong>Context length:</strong> 131,072 tokens (YaRN required beyond 8,192 tokens)</li>
+                        <li><strong>Layers:</strong> 64 &bull; <strong>Attention heads:</strong> 40 Q / 8 KV (GQA)</li>
+                    </ul>
+
+                    <p>
+                        <strong>Best for:</strong> Complex math, formal logic, coding challenges, scientific reasoning,
+                        and any problem that benefits from explicit "show your work" reasoning.
+                    </p>
+
+                    <p>
+                        [<a href="https://huggingface.co/Qwen/QwQ-32B" target="_blank" rel="noopener">QwQ-32B on Hugging
+                            Face</a>] &nbsp;
+                        [<a href="https://qwenlm.github.io/blog/qwq-32b/" target="_blank" rel="noopener">QwQ Blog
+                            Post</a>]
+                    </p>
+
+                    <h3>3. Qwen2.5-Coder &mdash; Code Generation</h3>
+
+                    <p>
+                        Qwen2.5-Coder is a code-specific series covering six model sizes (0.5B, 1.5B, 3B, 7B, 14B, 32B),
+                        built on the Qwen2.5 architecture and pre-trained on over <strong>5.5 trillion tokens</strong>
+                        of source code, text-code grounding data, and synthetic data. Per the
+                        <a href="https://arxiv.org/abs/2409.12186" target="_blank" rel="noopener">arXiv technical report
+                            (2409.12186)</a>,
+                        Qwen2.5-Coder-32B achieves "state-of-the-art performance across more than 10 benchmarks"
+                        with "coding abilities matching those of GPT-4o."
+                        [<a href="https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct" target="_blank"
+                            rel="noopener">Source: HF Model Card</a>]
+                    </p>
+
+                    <ul>
+                        <li><strong>Context length:</strong> 131,072 tokens</li>
+                        <li><strong>Evaluation coverage:</strong> Code generation, completion, reasoning, and repair
+                        </li>
+                        <li><strong>Practical tip:</strong> The 7B-Instruct variant (7.61B params) runs on consumer GPUs
+                            and handles the majority of everyday coding tasks effectively.</li>
+                    </ul>
+
+                    <p>
+                        <strong>Best for:</strong> IDE copilots, code review automation, test generation, and
+                        AI-powered development tools.
+                    </p>
+
+                    <p>
+                        [<a href="https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct" target="_blank"
+                            rel="noopener">Qwen2.5-Coder-7B on HF</a>] &nbsp;
+                        [<a href="https://qwenlm.github.io/blog/qwen2.5-coder-family/" target="_blank"
+                            rel="noopener">Coder Family Blog</a>] &nbsp;
+                        [<a href="https://github.com/QwenLM/Qwen2.5-Coder" target="_blank" rel="noopener">GitHub</a>]
+                    </p>
+
+                    <h3>4. Qwen2.5-VL &mdash; Vision-Language</h3>
+
+                    <p>
+                        Qwen2.5-VL combines a vision transformer with the Qwen2.5 language backbone, available in
+                        3B, 7B, and 72B sizes. Per the
+                        <a href="https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct" target="_blank"
+                            rel="noopener">official model card</a>,
+                        key capabilities include:
+                    </p>
+
+                    <ul>
+                        <li><strong>Visual understanding</strong> &mdash; analyzing texts, charts, icons, graphics,
+                            and layouts within images.</li>
+                        <li><strong>Visual agents</strong> &mdash; acting as an autonomous agent capable of
+                            computer and phone GUI interaction.</li>
+                        <li><strong>Long video comprehension</strong> &mdash; understanding videos over 1 hour,
+                            with the ability to pinpoint specific events within video segments.</li>
+                        <li><strong>Visual localization</strong> &mdash; generating bounding boxes or points with
+                            stable JSON output for coordinates and attributes.</li>
+                        <li><strong>Structured output</strong> &mdash; extracting structured data from scans of
+                            invoices, forms, and tables.</li>
+                    </ul>
+
+                    <p>
+                        <strong>Best for:</strong> Document processing, OCR pipelines, visual QA, screen automation,
+                        and multimodal RAG.
+                    </p>
+
+                    <p>
+                        [<a href="https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct" target="_blank"
+                            rel="noopener">Qwen2.5-VL-7B on HF</a>] &nbsp;
+                        [<a href="https://qwenlm.github.io/blog/qwen2.5-vl/" target="_blank" rel="noopener">VL Blog</a>]
+                        &nbsp;
+                        [<a href="https://github.com/QwenLM/Qwen2.5-VL" target="_blank" rel="noopener">GitHub</a>]
+                    </p>
+
+                    <h3>5. Qwen2-Audio &mdash; Audio Understanding</h3>
+
+                    <p>
+                        Qwen2-Audio is a large audio-language model that accepts audio signal inputs and performs
+                        analysis or generates textual responses to speech instructions. Per the
+                        <a href="https://arxiv.org/abs/2407.10759" target="_blank" rel="noopener">arXiv technical report
+                            (2407.10759)</a>,
+                        it supports two interaction modes:
+                    </p>
+
+                    <ul>
+                        <li><strong>Voice chat</strong> &mdash; users can engage in voice interactions without
+                            text input.</li>
+                        <li><strong>Audio analysis</strong> &mdash; users provide audio alongside text instructions
+                            for analysis.</li>
+                    </ul>
+
+                    <p>
+                        The model intelligently distinguishes between these modes without system prompts. It can
+                        parse audio segments containing sounds, multi-speaker conversations, and voice commands
+                        simultaneously. Per the report, Qwen2-Audio outperformed Gemini-1.5-pro on AIR-Bench
+                        audio-centric instruction-following benchmarks.
+                        [<a href="https://huggingface.co/Qwen/Qwen2-Audio-7B-Instruct" target="_blank"
+                            rel="noopener">Source: HF Model Card</a>]
+                    </p>
+
+                    <p>
+                        <strong>Best for:</strong> Audio transcription (ASR), speech translation, audio content
+                        analysis, and voice-based AI assistants.
+                    </p>
+
+                    <p>
+                        [<a href="https://huggingface.co/Qwen/Qwen2-Audio-7B-Instruct" target="_blank"
+                            rel="noopener">Qwen2-Audio on HF</a>] &nbsp;
+                        [<a href="https://github.com/QwenLM/Qwen2-Audio" target="_blank" rel="noopener">GitHub</a>]
+                        &nbsp;
+                        [<a href="https://qwenlm.github.io/blog/qwen2-audio/" target="_blank" rel="noopener">Blog</a>]
+                    </p>
+
+                    <h3>6. Qwen2.5-Omni &mdash; End-to-End Multimodal</h3>
+
+                    <p>
+                        Qwen2.5-Omni is an end-to-end multimodal model that perceives <strong>text, images, audio,
+                            and video</strong> simultaneously, while generating both text and natural speech responses
+                        in a streaming manner. Per the
+                        <a href="https://huggingface.co/Qwen/Qwen2.5-Omni-7B" target="_blank" rel="noopener">official
+                            model card</a>,
+                        it uses a novel "Thinker-Talker" architecture with TMRoPE (Time-aligned Multimodal RoPE)
+                        to synchronize video and audio timestamps.
+                    </p>
+
+                    <p>Verified highlights from the model card:</p>
+
+                    <ul>
+                        <li>Designed for <strong>fully real-time interactions</strong> with chunked input and
+                            immediate output.</li>
+                        <li>Outperforms Qwen2-Audio in audio tasks and matches Qwen2.5-VL-7B in vision tasks.</li>
+                        <li>End-to-end speech instruction following rivals text input performance on MMLU and GSM8K.
+                        </li>
+                        <li>State-of-the-art on OmniBench (multi-modality integration benchmark).</li>
+                    </ul>
+
+                    <p>
+                        <strong>Best for:</strong> Voice-first AI assistants, real-time video/audio analysis, and
+                        interactive multimodal applications.
+                    </p>
+
+                    <p>
+                        [<a href="https://huggingface.co/Qwen/Qwen2.5-Omni-7B" target="_blank"
+                            rel="noopener">Qwen2.5-Omni on HF</a>]
+                    </p>
+
+                    <hr>
+
+                    <h2>Part II &mdash; Quick Decision Matrix</h2>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Use Case</th>
+                                <th>Recommended Model</th>
+                                <th>Why</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>General chatbot / assistant</td>
+                                <td><a href="https://huggingface.co/Qwen/Qwen3-8B" target="_blank"
+                                        rel="noopener">Qwen3-8B</a></td>
+                                <td>Strong all-rounder, runs on consumer hardware</td>
+                            </tr>
+                            <tr>
+                                <td>Complex math / logic</td>
+                                <td><a href="https://huggingface.co/Qwen/QwQ-32B" target="_blank"
+                                        rel="noopener">QwQ-32B</a></td>
+                                <td>Purpose-built chain-of-thought reasoning</td>
+                            </tr>
+                            <tr>
+                                <td>Code generation / copilot</td>
+                                <td><a href="https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct" target="_blank"
+                                        rel="noopener">Qwen2.5-Coder-7B</a></td>
+                                <td>5.5T token code training, 131K context</td>
+                            </tr>
+                            <tr>
+                                <td>Document / image analysis</td>
+                                <td><a href="https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct" target="_blank"
+                                        rel="noopener">Qwen2.5-VL-7B</a></td>
+                                <td>OCR, visual QA, structured output, GUI agents</td>
+                            </tr>
+                            <tr>
+                                <td>Audio transcription / analysis</td>
+                                <td><a href="https://huggingface.co/Qwen/Qwen2-Audio-7B-Instruct" target="_blank"
+                                        rel="noopener">Qwen2-Audio-7B</a></td>
+                                <td>Voice chat + audio analysis, beats Gemini-1.5-pro on AIR-Bench</td>
+                            </tr>
+                            <tr>
+                                <td>Real-time multimodal assistant</td>
+                                <td><a href="https://huggingface.co/Qwen/Qwen2.5-Omni-7B" target="_blank"
+                                        rel="noopener">Qwen2.5-Omni-7B</a></td>
+                                <td>Text + image + audio + video in one streaming model</td>
+                            </tr>
+                            <tr>
+                                <td>Enterprise / frontier quality</td>
+                                <td><a href="https://huggingface.co/Qwen/Qwen3-235B-A22B" target="_blank"
+                                        rel="noopener">Qwen3-235B-A22B</a></td>
+                                <td>Flagship MoE, competitive with o1 and Grok-3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr>
+
+                    <h2>Part III &mdash; Setup Guide</h2>
+
+                    <h3>Path 1: Ollama (Simplest &mdash; Local Desktop)</h3>
+
+                    <p>
+                        <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> manages model
+                        downloads, quantization, and serving automatically. The Qwen team officially recommends
+                        Ollama for local usage.
+                        [<a href="https://qwenlm.github.io/blog/qwen3/#develop-with-qwen3" target="_blank"
+                            rel="noopener">Source</a>]
+                    </p>
+
+                    <h4>Install &amp; Run</h4>
+
+                    <pre><code># Install from https://ollama.com/download (Windows, macOS, Linux)
+
+# Run Qwen3 (general purpose)
+ollama run qwen3:8b
+
+# Run QwQ (reasoning)
+ollama run qwq:32b
+
+# Run Qwen2.5-Coder
+ollama run qwen2.5-coder:7b
+
+# Smaller model for limited hardware
+ollama run qwen3:0.6b</code></pre>
+
+                    <p>Ollama starts a local API server at <code>http://localhost:11434</code> automatically.</p>
+
+                    <h4>API Usage</h4>
+
+                    <pre><code># OpenAI-compatible API endpoint
+curl http://localhost:11434/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "qwen3:8b",
+    "messages": [{"role": "user", "content": "Explain quicksort."}]
+  }'</code></pre>
+
+                    <h3>Path 2: vLLM (High-Throughput &mdash; Production API)</h3>
+
+                    <p>
+                        <a href="https://docs.vllm.ai" target="_blank" rel="noopener">vLLM</a> is
+                        recommended by the Qwen team for production deployment alongside
+                        <a href="https://github.com/sgl-project/sglang" target="_blank" rel="noopener">SGLang</a>.
+                        [<a href="https://qwenlm.github.io/blog/qwen3/#develop-with-qwen3" target="_blank"
+                            rel="noopener">Source</a>]
+                    </p>
+
+                    <pre><code># Install (requires NVIDIA GPU + CUDA)
+pip install vllm
+
+# Serve a Qwen model
+vllm serve Qwen/Qwen3-8B-Instruct
+
+# Multi-GPU for large MoE models
+vllm serve Qwen/Qwen3-235B-A22B-Instruct --tensor-parallel-size 4</code></pre>
+
+                    <pre><code># Query the API (Python, using OpenAI client)
+from openai import OpenAI
+
+client = OpenAI(base_url="http://localhost:8000/v1", api_key="not-needed")
+
+response = client.chat.completions.create(
+    model="Qwen/Qwen3-8B-Instruct",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Write a REST API in FastAPI."}
+    ],
+    max_tokens=1024
+)
+print(response.choices[0].message.content)</code></pre>
+
+                    <h3>Path 3: Hugging Face Transformers (Full Control &mdash; Research)</h3>
+
+                    <p>
+                        Direct model loading via the
+                        <a href="https://huggingface.co/docs/transformers" target="_blank"
+                            rel="noopener">transformers</a>
+                        library. Code below is adapted from official Hugging Face model cards.
+                    </p>
+
+                    <h4>General Model (Qwen3)</h4>
+
+                    <p>
+                        <em>Code adapted from the
+                            <a href="https://huggingface.co/Qwen/QwQ-32B#quickstart" target="_blank"
+                                rel="noopener">QwQ-32B quickstart</a>;
+                            the same pattern applies to all Qwen3 models.</em>
+                    </p>
+
+                    <pre><code>pip install torch transformers accelerate</code></pre>
+
+                    <pre><code>from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_name = "Qwen/Qwen3-8B-Instruct"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(
+    model_name, torch_dtype="auto", device_map="auto"
+)
+
+messages = [{"role": "user", "content": "Explain TCP vs UDP."}]
+text = tokenizer.apply_chat_template(
+    messages, tokenize=False, add_generation_prompt=True
+)
+inputs = tokenizer([text], return_tensors="pt").to(model.device)
+
+generated_ids = model.generate(**inputs, max_new_tokens=512)
+generated_ids = [
+    out[len(inp):] for inp, out in zip(inputs.input_ids, generated_ids)
+]
+print(tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0])</code></pre>
+
+                    <h4>Coder Model</h4>
+
+                    <p>
+                        <em>Adapted from the
+                            <a href="https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct#quickstart" target="_blank"
+                                rel="noopener">Qwen2.5-Coder-7B quickstart</a>.</em>
+                    </p>
+
+                    <pre><code>from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_name = "Qwen/Qwen2.5-Coder-7B-Instruct"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(
+    model_name, torch_dtype="auto", device_map="auto"
+)
+
+messages = [
+    {"role": "system", "content": "You are a helpful coding assistant."},
+    {"role": "user", "content": "Write a binary search function in Python."}
+]
+text = tokenizer.apply_chat_template(
+    messages, tokenize=False, add_generation_prompt=True
+)
+inputs = tokenizer([text], return_tensors="pt").to(model.device)
+
+generated_ids = model.generate(**inputs, max_new_tokens=1024)
+generated_ids = [
+    out[len(inp):] for inp, out in zip(inputs.input_ids, generated_ids)
+]
+print(tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0])</code></pre>
+
+                    <h4>Vision-Language Model</h4>
+
+                    <p>
+                        <em>Adapted from the
+                            <a href="https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct#quickstart" target="_blank"
+                                rel="noopener">Qwen2.5-VL quickstart</a>.
+                            Requires <code>pip install qwen-vl-utils</code> in addition to transformers.</em>
+                    </p>
+
+                    <pre><code>from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
+from qwen_vl_utils import process_vision_info
+
+model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+    "Qwen/Qwen2.5-VL-7B-Instruct", torch_dtype="auto", device_map="auto"
+)
+processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-7B-Instruct")
+
+messages = [{
+    "role": "user",
+    "content": [
+        {"type": "image", "image": "https://example.com/chart.png"},
+        {"type": "text", "text": "Describe the data in this chart."}
+    ]
+}]
+
+text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+image_inputs, video_inputs = process_vision_info(messages)
+inputs = processor(text=[text], images=image_inputs, videos=video_inputs,
+                   padding=True, return_tensors="pt").to(model.device)
+
+output_ids = model.generate(**inputs, max_new_tokens=256)
+print(processor.batch_decode(output_ids, skip_special_tokens=True))</code></pre>
+
+                    <h4>Quantization for Limited Hardware</h4>
+
+                    <p>
+                        Load models in 4-bit precision to reduce memory by ~4&times;:
+                    </p>
+
+                    <pre><code>pip install bitsandbytes</code></pre>
+
+                    <pre><code>from transformers import AutoModelForCausalLM, BitsAndBytesConfig
+
+quantization_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_compute_dtype="float16"
+)
+
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen3-8B-Instruct",
+    quantization_config=quantization_config,
+    device_map="auto"
+)</code></pre>
+
+                    <hr>
+
+                    <h2>Part IV &mdash; Hardware Requirements</h2>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model Size</th>
+                                <th>Min RAM</th>
+                                <th>GPU VRAM</th>
+                                <th>Example Hardware</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0.6B &ndash; 4B</td>
+                                <td>8GB</td>
+                                <td>4GB (or CPU-only)</td>
+                                <td>Any modern laptop</td>
+                            </tr>
+                            <tr>
+                                <td>7B &ndash; 14B</td>
+                                <td>16&ndash;32GB</td>
+                                <td>8&ndash;12GB</td>
+                                <td>RTX 3060/4060 Ti, M1/M2 Mac</td>
+                            </tr>
+                            <tr>
+                                <td>32B (QwQ, Qwen3-32B)</td>
+                                <td>32&ndash;64GB</td>
+                                <td>24GB+</td>
+                                <td>RTX 3090/4090, A5000</td>
+                            </tr>
+                            <tr>
+                                <td>235B MoE (22B active)</td>
+                                <td>128GB+</td>
+                                <td>Multi-GPU</td>
+                                <td>4&ndash;8&times; A100/H100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        <strong>Note on MoE models:</strong> Qwen3-235B-A22B activates only 22B of its 235B
+                        parameters per token, making per-token compute efficient. However, all 235B parameters
+                        must still be loaded into memory.
+                    </p>
+
+                    <hr>
+
+                    <h2>Reviewer's Verdict</h2>
+
+                    <p>
+                        The Qwen ecosystem is among the most comprehensive open-source AI model families
+                        available today. Few other projects cover general LLMs, dedicated reasoning, code
+                        generation, vision-language, audio understanding, and real-time multimodal interaction
+                        &mdash; all under Apache 2.0.
+                    </p>
+
+                    <p>
+                        The practical takeaway: <strong>pick the right specialist for each task</strong>.
+                        Use Qwen3 for general chat, QwQ for deep reasoning, Qwen2.5-Coder for code, Qwen2.5-VL
+                        for image/document work, Qwen2-Audio for audio tasks, and Qwen2.5-Omni when you need
+                        everything in one model. For deployment, use Ollama for desktop, vLLM or SGLang for
+                        production APIs, and Hugging Face Transformers for research and fine-tuning.
+                    </p>
+
+                    <hr>
+
+                    <h2>References &amp; Further Reading</h2>
+
+                    <ul class="references">
+                        <li>
+                            <strong>[1] Qwen3: Think Deeper, Act Faster</strong><br>
+                            Qwen Team, Alibaba Cloud, April 2025.<br>
+                            <a href="https://qwenlm.github.io/blog/qwen3/" target="_blank"
+                                rel="noopener">https://qwenlm.github.io/blog/qwen3/</a>
+                        </li>
+                        <li>
+                            <strong>[2] QwQ-32B &mdash; Model Card</strong><br>
+                            Qwen Team, Hugging Face.<br>
+                            <a href="https://huggingface.co/Qwen/QwQ-32B" target="_blank"
+                                rel="noopener">https://huggingface.co/Qwen/QwQ-32B</a>
+                        </li>
+                        <li>
+                            <strong>[3] Qwen2.5-Coder Technical Report</strong><br>
+                            Hui et al., arXiv:2409.12186, 2024.<br>
+                            <a href="https://arxiv.org/abs/2409.12186" target="_blank"
+                                rel="noopener">https://arxiv.org/abs/2409.12186</a>
+                        </li>
+                        <li>
+                            <strong>[4] Qwen2.5-Coder-7B-Instruct &mdash; Model Card</strong><br>
+                            Qwen Team, Hugging Face.<br>
+                            <a href="https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct" target="_blank"
+                                rel="noopener">https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct</a>
+                        </li>
+                        <li>
+                            <strong>[5] Qwen2.5-VL-7B-Instruct &mdash; Model Card</strong><br>
+                            Qwen Team, Hugging Face.<br>
+                            <a href="https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct" target="_blank"
+                                rel="noopener">https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct</a>
+                        </li>
+                        <li>
+                            <strong>[6] Qwen2-Audio Technical Report</strong><br>
+                            Chu et al., arXiv:2407.10759, 2024.<br>
+                            <a href="https://arxiv.org/abs/2407.10759" target="_blank"
+                                rel="noopener">https://arxiv.org/abs/2407.10759</a>
+                        </li>
+                        <li>
+                            <strong>[7] Qwen2-Audio-7B-Instruct &mdash; Model Card</strong><br>
+                            Qwen Team, Hugging Face.<br>
+                            <a href="https://huggingface.co/Qwen/Qwen2-Audio-7B-Instruct" target="_blank"
+                                rel="noopener">https://huggingface.co/Qwen/Qwen2-Audio-7B-Instruct</a>
+                        </li>
+                        <li>
+                            <strong>[8] Qwen2.5-Omni-7B &mdash; Model Card</strong><br>
+                            Qwen Team, Hugging Face.<br>
+                            <a href="https://huggingface.co/Qwen/Qwen2.5-Omni-7B" target="_blank"
+                                rel="noopener">https://huggingface.co/Qwen/Qwen2.5-Omni-7B</a>
+                        </li>
+                        <li>
+                            <strong>[9] QwenLM &mdash; GitHub Organization</strong><br>
+                            <a href="https://github.com/QwenLM" target="_blank"
+                                rel="noopener">https://github.com/QwenLM</a>
+                        </li>
+                        <li>
+                            <strong>[10] Ollama &mdash; Run LLMs Locally</strong><br>
+                            <a href="https://ollama.com" target="_blank" rel="noopener">https://ollama.com</a>
+                        </li>
+                        <li>
+                            <strong>[11] vLLM &mdash; High-Throughput LLM Serving</strong><br>
+                            <a href="https://docs.vllm.ai" target="_blank" rel="noopener">https://docs.vllm.ai</a>
+                        </li>
+                        <li>
+                            <strong>[12] Hugging Face Transformers Documentation</strong><br>
+                            <a href="https://huggingface.co/docs/transformers" target="_blank"
+                                rel="noopener">https://huggingface.co/docs/transformers</a>
+                        </li>
+                    </ul>
+
+                    <p><em>Last updated: March 28, 2026. The Qwen model family is actively evolving; always
+                            consult the <a href="https://qwenlm.github.io/blog/" target="_blank" rel="noopener">official
+                                Qwen blog</a> and Hugging Face model cards for the latest releases.</em></p>
+                </div>
+
+                <!-- Social Interaction Section -->
+                <div class="interaction-section">
+                    <div class="share-container">
+                        <h3>Share this post</h3>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn twitter"
+                                onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + '&url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share
+                                on X</a>
+                            <a href="#" class="share-btn linkedin"
+                                onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share
+                                on LinkedIn</a>
+                            <button
+                                onclick="navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')).catch(() => alert('Failed to copy link'));"
+                                class="share-btn">Copy Link</button>
+                        </div>
+                    </div>
+
+                    <div class="comments-container">
+                        <h3>Comments &amp; Reactions</h3>
+                        <script src="https://giscus.app/client.js" data-repo="gtkrish85/krishnasblog"
+                            data-repo-id="R_kgDORIInsQ" data-category="General" data-category-id="DIC_kwDORIInsQ4CmYfw"
+                            data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0"
+                            data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous"
+                            async>
+                            </script>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Krishna. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
