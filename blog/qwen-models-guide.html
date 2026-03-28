@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Complete Guide to Qwen Models: Varieties, Use Cases & Setup (2026) - Krishna</title>
+    <title>The Complete Guide to Qwen Models: Varieties & Use Cases (2026) - Krishna</title>
     <meta name="description"
-        content="A reviewer's guide to the Qwen model ecosystem — general LLMs, QwQ reasoning, Coder, Vision-Language, Audio, and Omni models — with verified setup instructions for Ollama, vLLM, and Hugging Face Transformers.">
+        content="A reviewer's guide to the Qwen model ecosystem â€” general LLMs, QwQ reasoning, Coder, Vision-Language, Audio, and Omni models â€” with use cases and a decision matrix for each variant.">
     <meta name="keywords"
-        content="Qwen models, Qwen3, QwQ-32B, Qwen2.5-Coder, Qwen2.5-VL, Qwen2-Audio, Qwen2.5-Omni, Alibaba Cloud, open source LLM, Ollama, vLLM, Hugging Face, local AI setup">
+        content="Qwen models, Qwen3, QwQ-32B, Qwen2.5-Coder, Qwen2.5-VL, Qwen2-Audio, Qwen2.5-Omni, Alibaba Cloud, open source LLM, AI model review">
     <meta name="author" content="Krishna">
 
     <!-- Canonical URL -->
@@ -17,23 +17,23 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://krishnamoorthy.site/blog/qwen-models-guide">
-    <meta property="og:title" content="The Complete Guide to Qwen Models: Varieties, Use Cases & Setup (2026)">
+    <meta property="og:title" content="The Complete Guide to Qwen Models: Varieties & Use Cases (2026)">
     <meta property="og:description"
-        content="A reviewer's guide to the Qwen ecosystem — general LLMs, reasoning, coding, vision, audio, and omni models — with hands-on setup for Ollama, vLLM, and Hugging Face.">
+        content="A reviewer's guide to the Qwen ecosystem â€” general LLMs, reasoning, coding, vision, audio, and omni models â€” with a decision matrix for each variant.">
     <meta property="og:site_name" content="Krishna's Blog">
     <meta property="article:published_time" content="2026-03-28T00:00:00Z">
     <meta property="article:author" content="Krishna">
     <meta property="article:tag" content="Qwen Models">
     <meta property="article:tag" content="Open Source AI">
     <meta property="article:tag" content="LLMs">
-    <meta property="article:tag" content="Model Setup">
+    <meta property="article:tag" content="AI Model Review">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://krishnamoorthy.site/blog/qwen-models-guide">
-    <meta name="twitter:title" content="The Complete Guide to Qwen Models: Varieties, Use Cases & Setup (2026)">
+    <meta name="twitter:title" content="The Complete Guide to Qwen Models: Varieties & Use Cases (2026)">
     <meta name="twitter:description"
-        content="A reviewer's guide to every Qwen variant with verified setup instructions for local and production deployment.">
+        content="A reviewer's guide to every Qwen variant â€” capabilities, benchmarks, and when to use each model.">
 
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../style.css">
@@ -43,8 +43,8 @@
     {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": "The Complete Guide to Qwen Models: Varieties, Use Cases & Setup (2026)",
-      "description": "A reviewer's guide to the Qwen model ecosystem with verified setup instructions for Ollama, vLLM, and Hugging Face Transformers.",
+      "headline": "The Complete Guide to Qwen Models: Varieties & Use Cases (2026)",
+      "description": "A reviewer's guide to the Qwen model ecosystem â€” every variant, its capabilities, and when to use each one.",
       "author": {
         "@type": "Person",
         "name": "Krishna"
@@ -56,7 +56,7 @@
         "@type": "WebPage",
         "@id": "https://krishnamoorthy.site/blog/qwen-models-guide"
       },
-      "keywords": ["Qwen models", "Qwen3", "QwQ-32B", "Qwen2.5-Coder", "Qwen2.5-VL", "Qwen2-Audio", "open source LLM", "Ollama", "vLLM"]
+      "keywords": ["Qwen models", "Qwen3", "QwQ-32B", "Qwen2.5-Coder", "Qwen2.5-VL", "Qwen2-Audio", "open source LLM"]
     }
     </script>
 </head>
@@ -81,7 +81,7 @@
                     <p>March 28, 2026 &bull; Open Source AI &amp; Model Deployment</p>
                 </div>
 
-                <h1>The Complete Guide to Qwen Models: Varieties, Use Cases &amp; Setup</h1>
+                <h1>The Complete Guide to Qwen Models: Varieties &amp; Use Cases</h1>
 
                 <div class="article-content">
 
@@ -103,8 +103,7 @@
                     </p>
 
                     <p>
-                        This guide maps every major variant, explains when to use each, and walks through
-                        three verified setup paths.
+                        This guide maps every major variant and explains when and why you'd pick each one.
                     </p>
 
                     <hr>
@@ -415,210 +414,10 @@
                         </tbody>
                     </table>
 
-                    <hr>
-
-                    <h2>Part III &mdash; Setup Guide</h2>
-
-                    <h3>Path 1: Ollama (Simplest &mdash; Local Desktop)</h3>
-
-                    <p>
-                        <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> manages model
-                        downloads, quantization, and serving automatically. The Qwen team officially recommends
-                        Ollama for local usage.
-                        [<a href="https://qwenlm.github.io/blog/qwen3/#develop-with-qwen3" target="_blank"
-                            rel="noopener">Source</a>]
-                    </p>
-
-                    <h4>Install &amp; Run</h4>
-
-                    <pre><code># Install from https://ollama.com/download (Windows, macOS, Linux)
-
-# Run Qwen3 (general purpose)
-ollama run qwen3:8b
-
-# Run QwQ (reasoning)
-ollama run qwq:32b
-
-# Run Qwen2.5-Coder
-ollama run qwen2.5-coder:7b
-
-# Smaller model for limited hardware
-ollama run qwen3:0.6b</code></pre>
-
-                    <p>Ollama starts a local API server at <code>http://localhost:11434</code> automatically.</p>
-
-                    <h4>API Usage</h4>
-
-                    <pre><code># OpenAI-compatible API endpoint
-curl http://localhost:11434/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "qwen3:8b",
-    "messages": [{"role": "user", "content": "Explain quicksort."}]
-  }'</code></pre>
-
-                    <h3>Path 2: vLLM (High-Throughput &mdash; Production API)</h3>
-
-                    <p>
-                        <a href="https://docs.vllm.ai" target="_blank" rel="noopener">vLLM</a> is
-                        recommended by the Qwen team for production deployment alongside
-                        <a href="https://github.com/sgl-project/sglang" target="_blank" rel="noopener">SGLang</a>.
-                        [<a href="https://qwenlm.github.io/blog/qwen3/#develop-with-qwen3" target="_blank"
-                            rel="noopener">Source</a>]
-                    </p>
-
-                    <pre><code># Install (requires NVIDIA GPU + CUDA)
-pip install vllm
-
-# Serve a Qwen model
-vllm serve Qwen/Qwen3-8B-Instruct
-
-# Multi-GPU for large MoE models
-vllm serve Qwen/Qwen3-235B-A22B-Instruct --tensor-parallel-size 4</code></pre>
-
-                    <pre><code># Query the API (Python, using OpenAI client)
-from openai import OpenAI
-
-client = OpenAI(base_url="http://localhost:8000/v1", api_key="not-needed")
-
-response = client.chat.completions.create(
-    model="Qwen/Qwen3-8B-Instruct",
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Write a REST API in FastAPI."}
-    ],
-    max_tokens=1024
-)
-print(response.choices[0].message.content)</code></pre>
-
-                    <h3>Path 3: Hugging Face Transformers (Full Control &mdash; Research)</h3>
-
-                    <p>
-                        Direct model loading via the
-                        <a href="https://huggingface.co/docs/transformers" target="_blank"
-                            rel="noopener">transformers</a>
-                        library. Code below is adapted from official Hugging Face model cards.
-                    </p>
-
-                    <h4>General Model (Qwen3)</h4>
-
-                    <p>
-                        <em>Code adapted from the
-                            <a href="https://huggingface.co/Qwen/QwQ-32B#quickstart" target="_blank"
-                                rel="noopener">QwQ-32B quickstart</a>;
-                            the same pattern applies to all Qwen3 models.</em>
-                    </p>
-
-                    <pre><code>pip install torch transformers accelerate</code></pre>
-
-                    <pre><code>from transformers import AutoModelForCausalLM, AutoTokenizer
-
-model_name = "Qwen/Qwen3-8B-Instruct"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(
-    model_name, torch_dtype="auto", device_map="auto"
-)
-
-messages = [{"role": "user", "content": "Explain TCP vs UDP."}]
-text = tokenizer.apply_chat_template(
-    messages, tokenize=False, add_generation_prompt=True
-)
-inputs = tokenizer([text], return_tensors="pt").to(model.device)
-
-generated_ids = model.generate(**inputs, max_new_tokens=512)
-generated_ids = [
-    out[len(inp):] for inp, out in zip(inputs.input_ids, generated_ids)
-]
-print(tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0])</code></pre>
-
-                    <h4>Coder Model</h4>
-
-                    <p>
-                        <em>Adapted from the
-                            <a href="https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct#quickstart" target="_blank"
-                                rel="noopener">Qwen2.5-Coder-7B quickstart</a>.</em>
-                    </p>
-
-                    <pre><code>from transformers import AutoModelForCausalLM, AutoTokenizer
-
-model_name = "Qwen/Qwen2.5-Coder-7B-Instruct"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(
-    model_name, torch_dtype="auto", device_map="auto"
-)
-
-messages = [
-    {"role": "system", "content": "You are a helpful coding assistant."},
-    {"role": "user", "content": "Write a binary search function in Python."}
-]
-text = tokenizer.apply_chat_template(
-    messages, tokenize=False, add_generation_prompt=True
-)
-inputs = tokenizer([text], return_tensors="pt").to(model.device)
-
-generated_ids = model.generate(**inputs, max_new_tokens=1024)
-generated_ids = [
-    out[len(inp):] for inp, out in zip(inputs.input_ids, generated_ids)
-]
-print(tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0])</code></pre>
-
-                    <h4>Vision-Language Model</h4>
-
-                    <p>
-                        <em>Adapted from the
-                            <a href="https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct#quickstart" target="_blank"
-                                rel="noopener">Qwen2.5-VL quickstart</a>.
-                            Requires <code>pip install qwen-vl-utils</code> in addition to transformers.</em>
-                    </p>
-
-                    <pre><code>from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
-from qwen_vl_utils import process_vision_info
-
-model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-    "Qwen/Qwen2.5-VL-7B-Instruct", torch_dtype="auto", device_map="auto"
-)
-processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-7B-Instruct")
-
-messages = [{
-    "role": "user",
-    "content": [
-        {"type": "image", "image": "https://example.com/chart.png"},
-        {"type": "text", "text": "Describe the data in this chart."}
-    ]
-}]
-
-text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-image_inputs, video_inputs = process_vision_info(messages)
-inputs = processor(text=[text], images=image_inputs, videos=video_inputs,
-                   padding=True, return_tensors="pt").to(model.device)
-
-output_ids = model.generate(**inputs, max_new_tokens=256)
-print(processor.batch_decode(output_ids, skip_special_tokens=True))</code></pre>
-
-                    <h4>Quantization for Limited Hardware</h4>
-
-                    <p>
-                        Load models in 4-bit precision to reduce memory by ~4&times;:
-                    </p>
-
-                    <pre><code>pip install bitsandbytes</code></pre>
-
-                    <pre><code>from transformers import AutoModelForCausalLM, BitsAndBytesConfig
-
-quantization_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    bnb_4bit_compute_dtype="float16"
-)
-
-model = AutoModelForCausalLM.from_pretrained(
-    "Qwen/Qwen3-8B-Instruct",
-    quantization_config=quantization_config,
-    device_map="auto"
-)</code></pre>
 
                     <hr>
 
-                    <h2>Part IV &mdash; Hardware Requirements</h2>
+                    <h2>Part III &mdash; Hardware Requirements</h2>
 
                     <table>
                         <thead>
@@ -678,8 +477,7 @@ model = AutoModelForCausalLM.from_pretrained(
                         The practical takeaway: <strong>pick the right specialist for each task</strong>.
                         Use Qwen3 for general chat, QwQ for deep reasoning, Qwen2.5-Coder for code, Qwen2.5-VL
                         for image/document work, Qwen2-Audio for audio tasks, and Qwen2.5-Omni when you need
-                        everything in one model. For deployment, use Ollama for desktop, vLLM or SGLang for
-                        production APIs, and Hugging Face Transformers for research and fine-tuning.
+                        everything in one model.
                     </p>
 
                     <hr>
@@ -739,19 +537,6 @@ model = AutoModelForCausalLM.from_pretrained(
                             <strong>[9] QwenLM &mdash; GitHub Organization</strong><br>
                             <a href="https://github.com/QwenLM" target="_blank"
                                 rel="noopener">https://github.com/QwenLM</a>
-                        </li>
-                        <li>
-                            <strong>[10] Ollama &mdash; Run LLMs Locally</strong><br>
-                            <a href="https://ollama.com" target="_blank" rel="noopener">https://ollama.com</a>
-                        </li>
-                        <li>
-                            <strong>[11] vLLM &mdash; High-Throughput LLM Serving</strong><br>
-                            <a href="https://docs.vllm.ai" target="_blank" rel="noopener">https://docs.vllm.ai</a>
-                        </li>
-                        <li>
-                            <strong>[12] Hugging Face Transformers Documentation</strong><br>
-                            <a href="https://huggingface.co/docs/transformers" target="_blank"
-                                rel="noopener">https://huggingface.co/docs/transformers</a>
                         </li>
                     </ul>
 
