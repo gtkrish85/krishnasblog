@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemma 4: Google's Most Capable Open-Weight Model Family Yet - Krishna</title>
+    <meta name="description"
+        content="A reviewer's guide to Google DeepMind's Gemma 4 — what it can do, why it's powerful, how it compares to Llama 4 and Qwen 3.5, and the practical ways you can use it today.">
+    <meta name="keywords"
+        content="Gemma 4, Google DeepMind, open-weight model, MoE, dense model, multimodal AI, function calling, Apache 2.0, AI model review, Gemma 4 E2B, Gemma 4 E4B, Gemma 4 26B, Gemma 4 31B">
+    <meta name="author" content="Krishna">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://krishnamoorthy.site/blog/gemma-4-review">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://krishnamoorthy.site/blog/gemma-4-review">
+    <meta property="og:title" content="Gemma 4: Google's Most Capable Open-Weight Model Family Yet">
+    <meta property="og:description"
+        content="What Gemma 4 can do, why it's powerful, how it differs from Llama 4 and Qwen 3.5, and practical ways to use it — all under Apache 2.0.">
+    <meta property="og:site_name" content="Krishna's Blog">
+    <meta property="article:published_time" content="2026-04-07T00:00:00Z">
+    <meta property="article:author" content="Krishna">
+    <meta property="article:tag" content="Gemma 4">
+    <meta property="article:tag" content="Google DeepMind">
+    <meta property="article:tag" content="Open Source AI">
+    <meta property="article:tag" content="Multimodal AI">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://krishnamoorthy.site/blog/gemma-4-review">
+    <meta name="twitter:title" content="Gemma 4: Google's Most Capable Open-Weight Model Family Yet">
+    <meta name="twitter:description"
+        content="A reviewer's deep-dive into Gemma 4 — capabilities, power, differentiation, and real-world use cases.">
+
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Gemma 4: Google's Most Capable Open-Weight Model Family Yet",
+      "description": "What Gemma 4 can do, why it's powerful, how it compares to competing open models, and practical ways to put it to work.",
+      "author": {
+        "@type": "Person",
+        "name": "Krishna"
+      },
+      "datePublished": "2026-04-07",
+      "dateModified": "2026-04-07",
+      "url": "https://krishnamoorthy.site/blog/gemma-4-review",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://krishnamoorthy.site/blog/gemma-4-review"
+      },
+      "keywords": ["Gemma 4", "Google DeepMind", "open-weight model", "MoE", "multimodal AI", "Apache 2.0", "function calling"]
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index" class="logo">Krishna.</a>
+            <nav>
+                <ul>
+                    <li><a href="../index">Home</a></li>
+                    <li><a href="../about">About</a></li>
+                    <li><a href="../projects">Projects</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <div class="article-meta">
+                    <a href="../index" class="back-link">&larr; Back to Home</a>
+                    <p>April 7, 2026 &bull; Open Source AI &amp; Model Review</p>
+                </div>
+
+                <h1>Gemma 4: Google&rsquo;s Most Capable Open-Weight Model Family Yet</h1>
+
+                <div class="article-content">
+
+                    <p>
+                        On April 2, 2026, Google DeepMind released
+                        <a href="https://ai.google.dev/gemma/docs/core" target="_blank" rel="noopener">Gemma 4</a>
+                        &mdash; four open-weight models that, for the first time, bring Gemini-class
+                        intelligence to everything from a smartphone to a server rack, all under the
+                        <strong>Apache 2.0 license</strong>.
+                        [<a href="https://ai.google.dev/gemma/apache_2" target="_blank"
+                            rel="noopener">License</a>]
+                    </p>
+
+                    <p>
+                        The previous Gemma releases were solid but felt like scaled-down Gemini
+                        leftovers &mdash; text-centric, restrictively licensed, and limited to
+                        images at best. Gemma 4 is a fundamentally different proposition. This post
+                        breaks down what it can actually do, why it matters, how it stacks up against
+                        the competition, and &mdash; most importantly &mdash; the practical ways you
+                        can put it to work.
+                    </p>
+
+                    <hr>
+
+                    <h2>What Gemma 4 Can Do</h2>
+
+                    <p>
+                        At its core, Gemma 4 is a <strong>natively multimodal</strong> model family.
+                        Every variant &mdash; from the 2-billion-parameter edge model to the
+                        31-billion-parameter dense flagship &mdash; can process text and images out
+                        of the box. But the capabilities go considerably further:
+                    </p>
+
+                    <h3>See, Hear, and Reason</h3>
+
+                    <p>
+                        The smaller <strong>E2B</strong> and <strong>E4B</strong> models support
+                        <strong>native audio input</strong>, meaning they can directly understand
+                        spoken language, environmental sounds, and voice commands &mdash; no separate
+                        speech-to-text pipeline required. The larger <strong>26B</strong> and
+                        <strong>31B</strong> models handle <strong>video input</strong>, enabling
+                        them to analyze footage, extract events from long clips, and answer questions
+                        about visual sequences over time.
+                        [<a href="https://ai.google.dev/gemma/docs/capabilities/audio" target="_blank"
+                            rel="noopener">Audio Docs</a>]
+                        [<a href="https://ai.google.dev/gemma/docs/capabilities/vision/video" target="_blank"
+                            rel="noopener">Video Docs</a>]
+                    </p>
+
+                    <p>
+                        All four models also feature a configurable
+                        <a href="https://ai.google.dev/gemma/docs/capabilities/thinking" target="_blank"
+                            rel="noopener"><strong>thinking mode</strong></a>.
+                        Turn it on, and the model shows its work with detailed chain-of-thought
+                        reasoning before answering &mdash; ideal for math, logic, or planning tasks.
+                        Turn it off, and you get instant, concise responses for simpler queries. You
+                        control this per request, not per deployment.
+                    </p>
+
+                    <h3>Act: Built-In Function Calling</h3>
+
+                    <p>
+                        Gemma 4 is the first Gemma generation with <strong>native function-calling
+                        support</strong>. You define tools in the system prompt; the model decides
+                        when to call them, emits structured JSON, consumes the results, and chains
+                        multiple calls before producing a final answer. This is the foundation for
+                        building autonomous AI agents &mdash; models that don&rsquo;t just answer
+                        questions but <em>take actions</em>: querying databases, calling APIs,
+                        browsing the web, or controlling software.
+                        [<a href="https://ai.google.dev/gemma/docs/capabilities/text/function-calling-gemma4"
+                            target="_blank" rel="noopener">Function Calling Guide</a>]
+                    </p>
+
+                    <h3>Remember: Massive Context Windows</h3>
+
+                    <p>
+                        The smaller models offer <strong>128K tokens</strong> of context; the 26B
+                        and 31B models push to <strong>256K tokens</strong>. In practical terms,
+                        256K tokens is roughly the equivalent of a 500-page book. You can feed
+                        entire codebases, lengthy legal contracts, or hours of meeting transcripts
+                        in a single prompt without chunking or summarization workarounds.
+                        [<a href="https://ai.google.dev/gemma/docs/core" target="_blank"
+                            rel="noopener">Source</a>]
+                    </p>
+
+                    <hr>
+
+                    <h2>Why Gemma 4 Is Powerful</h2>
+
+                    <p>
+                        Raw capabilities are only part of the story. What makes Gemma 4 genuinely
+                        powerful is <em>how</em> those capabilities are delivered:
+                    </p>
+
+                    <ul>
+                        <li><strong>One family, every hardware tier.</strong> Most open model
+                            releases target a single sweet spot &mdash; either &ldquo;small enough
+                            for a phone&rdquo; or &ldquo;big enough for a server.&rdquo; Gemma 4
+                            covers both extremes and everything in between with E2B (phone), E4B
+                            (laptop), 26B MoE (workstation), and 31B dense (cloud). You can
+                            prototype on the 31B, deploy to production on the 26B MoE, and ship a
+                            companion mobile experience on the E4B &mdash; all within one model
+                            family with consistent behavior.</li>
+
+                        <li><strong>MoE efficiency matters.</strong> The 26B model contains 26
+                            billion total parameters but activates only <strong>~4 billion per
+                            token</strong>. This means it delivers quality approaching the 31B dense
+                            model at a fraction of the inference cost. For any workload where you
+                            pay per token (and most cloud workloads are) this is a direct cost
+                            reduction with minimal quality loss.</li>
+
+                        <li><strong>Thinking on demand.</strong> The configurable reasoning mode
+                            means you aren&rsquo;t stuck choosing between &ldquo;fast but shallow&rdquo;
+                            and &ldquo;slow but thorough.&rdquo; A single deployment can handle
+                            quick customer-service queries in non-thinking mode and switch to deep
+                            chain-of-thought for a complex analysis request &mdash; no model swap
+                            required.</li>
+
+                        <li><strong>Apache 2.0 &mdash; no strings.</strong> Previous Gemma releases
+                            used a custom license with redistribution restrictions that gave
+                            enterprise legal teams pause. Apache 2.0 removes that friction entirely:
+                            modify it, sell it, embed it, fine-tune it, no attribution gymnastics.</li>
+                    </ul>
+
+                    <hr>
+
+                    <h2>How It Differs from Other Open Models</h2>
+
+                    <p>
+                        April 2026 is a three-horse race among open-weight model families:
+                        <strong>Gemma 4</strong> (Google), <strong>Llama 4</strong> (Meta), and
+                        <strong>Qwen 3.5</strong> (Alibaba). All three are now Apache 2.0 licensed,
+                        so the differentiators are purely technical.
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Dimension</th>
+                                <th>Gemma 4</th>
+                                <th>Llama 4</th>
+                                <th>Qwen 3.5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Hardware coverage</strong></td>
+                                <td>Phone &rarr; server (4 sizes)</td>
+                                <td>Server-focused</td>
+                                <td>Server-focused (MoE + dense)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Audio input</strong></td>
+                                <td>Native (E2B, E4B)</td>
+                                <td>No</td>
+                                <td>Via Qwen2-Audio (separate model)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Video input</strong></td>
+                                <td>Native (26B, 31B)</td>
+                                <td>Limited</td>
+                                <td>Strong (Qwen2.5-VL)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Max context</strong></td>
+                                <td>256K</td>
+                                <td>Up to 10M tokens</td>
+                                <td>131K</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Function calling</strong></td>
+                                <td>Built-in, native</td>
+                                <td>Supported</td>
+                                <td>Via MCP / tool prompts</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Math (AIME 2026)</strong></td>
+                                <td>~89.2% (31B)</td>
+                                <td>&mdash;</td>
+                                <td>~48.7% (27B)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Edge deployment</strong></td>
+                                <td>Purpose-built (PLE arch)</td>
+                                <td>Not a focus</td>
+                                <td>Small models available (0.6B&ndash;4B)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>
+                        <strong>Where Gemma 4 wins:</strong> Hardware breadth (phone to cloud in one
+                        family), mathematical reasoning (~89% on AIME vs. ~49% for Qwen at similar
+                        sizes), and native audio on the smallest models.
+                    </p>
+
+                    <p>
+                        <strong>Where competitors win:</strong> Llama 4 has an unmatched 10M-token
+                        context window. Qwen 3.5 edges ahead on general knowledge benchmarks like
+                        MMLU Pro (~86% vs. ~85%). Both have more mature ecosystems for certain
+                        specialized tasks (code with Qwen2.5-Coder, long-document summarization with
+                        Llama 4).
+                    </p>
+
+                    <hr>
+
+                    <h2>The Four Models at a Glance</h2>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Architecture</th>
+                                <th>Context</th>
+                                <th>Modalities</th>
+                                <th>Runs On</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>E2B</strong></td>
+                                <td>Dense + PLE</td>
+                                <td>128K</td>
+                                <td>Text, Image, Audio</td>
+                                <td>Phones, IoT, browser</td>
+                            </tr>
+                            <tr>
+                                <td><strong>E4B</strong></td>
+                                <td>Dense + PLE</td>
+                                <td>128K</td>
+                                <td>Text, Image, Audio</td>
+                                <td>Laptops, edge devices</td>
+                            </tr>
+                            <tr>
+                                <td><strong>26B (A4B)</strong></td>
+                                <td>Mixture of Experts</td>
+                                <td>256K</td>
+                                <td>Text, Image, Video</td>
+                                <td>Workstations, cloud GPU</td>
+                            </tr>
+                            <tr>
+                                <td><strong>31B</strong></td>
+                                <td>Dense</td>
+                                <td>256K</td>
+                                <td>Text, Image, Video</td>
+                                <td>Server, multi-GPU</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr>
+
+                    <h2>Under the Hood: Architecture &amp; Specs</h2>
+
+                    <p>
+                        For those who want the technical details, here&rsquo;s what powers the
+                        numbers above.
+                    </p>
+
+                    <h3>Hybrid Attention</h3>
+                    <p>
+                        All Gemma 4 models interleave <strong>local sliding-window attention</strong>
+                        (512&ndash;1,024 tokens) with <strong>global full-context attention</strong>.
+                        Local layers keep per-token cost low; global layers ensure the model
+                        doesn&rsquo;t lose information far back in the context window. This is
+                        what makes the 256K context feasible without blowing up compute.
+                        [<a href="https://huggingface.co/collections/google/gemma-4" target="_blank"
+                            rel="noopener">Source: Hugging Face</a>]
+                    </p>
+
+                    <h3>Dual RoPE Positional Encoding</h3>
+                    <p>
+                        Standard Rotary Position Embeddings (RoPE) are used for sliding-window
+                        layers, while <strong>proportional RoPE</strong> handles global layers.
+                        This dual approach prevents quality degradation at extreme context lengths
+                        &mdash; a known failure mode when a single RoPE scheme is stretched to
+                        256K tokens.
+                    </p>
+
+                    <h3>Shared KV Cache</h3>
+                    <p>
+                        The final N layers reuse key-value states from earlier layers instead of
+                        recomputing them. This substantially reduces VRAM during long-context
+                        inference without measurably hurting output quality &mdash; a critical
+                        optimization for the 256K models.
+                    </p>
+
+                    <h3>Per-Layer Embeddings (PLE) in E Models</h3>
+                    <p>
+                        The E2B and E4B models give each decoder layer its own small embedding
+                        table for every token. These tables are large but serve as fast lookups,
+                        maximizing representational depth without increasing the effective parameter
+                        count. The trade-off: total memory is higher than the &ldquo;2B&rdquo; or
+                        &ldquo;4B&rdquo; label suggests.
+                        [<a href="https://ai.google.dev/gemma/docs/core" target="_blank"
+                            rel="noopener">Source</a>]
+                    </p>
+
+                    <h3>MoE Routing (26B Model)</h3>
+                    <p>
+                        The 26B model activates <strong>~4 billion parameters per token</strong>,
+                        routing each input through a subset of expert networks. Inference is
+                        dramatically faster than a comparable dense model, but all 26B parameters
+                        must remain loaded in memory for fast expert routing.
+                    </p>
+
+                    <h3>Hardware Requirements</h3>
+
+                    <p>
+                        Per the
+                        <a href="https://ai.google.dev/gemma/docs/core" target="_blank"
+                            rel="noopener">official documentation</a>, approximate memory for
+                        <strong>base weights only</strong> (excluding the dynamic KV cache):
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>BF16 / FP16</th>
+                                <th>INT8</th>
+                                <th>INT4</th>
+                                <th>Example Hardware</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>E2B</td>
+                                <td>~5 GB</td>
+                                <td>~3 GB</td>
+                                <td>~2 GB</td>
+                                <td>Pixel phone, Raspberry Pi 5</td>
+                            </tr>
+                            <tr>
+                                <td>E4B</td>
+                                <td>~9 GB</td>
+                                <td>~5 GB</td>
+                                <td>~3 GB</td>
+                                <td>MacBook Air M2, mobile GPU</td>
+                            </tr>
+                            <tr>
+                                <td>26B MoE</td>
+                                <td>~52 GB</td>
+                                <td>~26 GB</td>
+                                <td>~14 GB</td>
+                                <td>RTX 4090 (INT4); dual-GPU at FP16</td>
+                            </tr>
+                            <tr>
+                                <td>31B Dense</td>
+                                <td>~62 GB</td>
+                                <td>~31 GB</td>
+                                <td>~16 GB</td>
+                                <td>A100/H100; RTX 4090 at INT4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Benchmark Snapshot</h3>
+
+                    <p>
+                        Early evaluations position the 31B among the strongest open models at its
+                        weight class:
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Benchmark</th>
+                                <th>Gemma 4 31B</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MMLU Pro</td>
+                                <td>~85.2%</td>
+                                <td>Closely competitive with Qwen 3.5-27B (~86.1%)</td>
+                            </tr>
+                            <tr>
+                                <td>AIME 2026 (Math)</td>
+                                <td>~89.2%</td>
+                                <td>Dramatic lead in mathematical reasoning</td>
+                            </tr>
+                            <tr>
+                                <td>Codeforces ELO</td>
+                                <td>~2150</td>
+                                <td>Highly competitive in competitive programming</td>
+                            </tr>
+                            <tr>
+                                <td>GPQA Diamond</td>
+                                <td>~84.3%</td>
+                                <td>Near parity with leading open models</td>
+                            </tr>
+                            <tr>
+                                <td>Arena AI (Text)</td>
+                                <td>#3 globally</td>
+                                <td>Among all open-weight models</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr>
+
+                    <h2>Practical Ways to Use Gemma 4</h2>
+
+                    <p>
+                        Here&rsquo;s where things get concrete. Below are real-world use cases
+                        matched to the right model variant:
+                    </p>
+
+                    <h3>1. On-Device Voice Assistant (E2B / E4B)</h3>
+                    <p>
+                        Because the smaller models understand audio natively, you can build a voice
+                        assistant that runs <em>entirely on the device</em> &mdash; no cloud
+                        round-trip, no latency, and no data leaving the phone. Think a private
+                        Siri/Alexa that works offline: take voice commands, answer questions about
+                        images on screen, and control smart-home devices via function calling.
+                    </p>
+
+                    <h3>2. Code Copilot with Full-Repo Context (26B / 31B)</h3>
+                    <p>
+                        With 256K tokens of context, the larger models can ingest entire small-to-medium
+                        codebases in a single prompt. Pair that with function calling &mdash; let the
+                        model invoke your linter, test runner, or version control &mdash; and you
+                        have a code assistant that understands your whole project, not just the file
+                        you&rsquo;re editing.
+                    </p>
+
+                    <h3>3. Agentic Workflows &amp; AI Pipelines (26B MoE)</h3>
+                    <p>
+                        The 26B MoE variant is tailor-made for high-throughput agentic systems.
+                        Because it activates only ~4B parameters per token, you can run far more
+                        concurrent requests per GPU than a 31B dense model. Use it as the &ldquo;brain&rdquo;
+                        of a multi-step agent that researches, plans, calls external tools, and
+                        compiles results &mdash; all at production-grade speed and cost.
+                    </p>
+
+                    <h3>4. Video Monitoring &amp; Analysis (26B / 31B)</h3>
+                    <p>
+                        Feed security camera footage or production-line video into the 26B or 31B
+                        model. It can narrate what&rsquo;s happening, flag anomalies, answer
+                        questions about specific moments, and generate structured logs &mdash; tasks
+                        that previously required purpose-built computer-vision pipelines.
+                    </p>
+
+                    <h3>5. Document Intelligence (Any Size)</h3>
+                    <p>
+                        From scanning invoices on a phone (E2B/E4B with image input) to analyzing
+                        a 300-page contract on a server (31B with 256K context), Gemma 4 handles
+                        document ingestion across the spectrum. The built-in structured JSON output
+                        means you can extract fields, tables, and clauses directly into your
+                        application&rsquo;s data model.
+                    </p>
+
+                    <h3>6. Fine-Tuned Domain Expert (31B Dense)</h3>
+                    <p>
+                        The 31B dense model is the most straightforward to fine-tune (MoE models
+                        require specialized techniques). Take it, fine-tune on your medical records,
+                        legal corpus, or customer support logs using LoRA or QLoRA via
+                        <a href="https://ai.google.dev/gemma/docs/core/huggingface_text_finetune_qlora"
+                            target="_blank" rel="noopener">Hugging Face Transformers</a>,
+                        and deploy a domain expert that speaks your industry&rsquo;s language.
+                    </p>
+
+                    <hr>
+
+                    <h2>Where to Get Started</h2>
+
+                    <p>
+                        All models are available right now on:
+                    </p>
+
+                    <ul>
+                        <li><a href="https://huggingface.co/collections/google/gemma-4" target="_blank"
+                                rel="noopener">Hugging Face</a></li>
+                        <li><a href="https://www.kaggle.com/models?query=gemma-4&publisher=google" target="_blank"
+                                rel="noopener">Kaggle</a></li>
+                        <li><a href="https://aistudio.google.com" target="_blank"
+                                rel="noopener">Google AI Studio</a> (try it without downloading)</li>
+                        <li><a href="https://ai.google.dev/gemma/docs/integrations/ollama" target="_blank"
+                                rel="noopener">Ollama</a> (local, one command: <code>ollama run gemma4</code>)</li>
+                        <li><a href="https://ai.google.dev/gemma/docs/integrations/lmstudio" target="_blank"
+                                rel="noopener">LM Studio</a> (GUI-based local inference)</li>
+                    </ul>
+
+                    <p>
+                        For production, Google documents deployment paths via
+                        <a href="https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api" target="_blank"
+                            rel="noopener">Gemini API</a>,
+                        <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/open-models/use-gemma"
+                            target="_blank" rel="noopener">Vertex AI</a>, and
+                        <a href="https://docs.cloud.google.com/kubernetes-engine/docs/tutorials/serve-gemma-gpu-vllm"
+                            target="_blank" rel="noopener">vLLM on GKE</a>.
+                    </p>
+
+                    <hr>
+
+                    <h2>Reviewer&rsquo;s Verdict</h2>
+
+                    <p>
+                        Gemma 4 isn&rsquo;t just &ldquo;Gemma 3, but bigger.&rdquo; It&rsquo;s a
+                        rethinking of what an open model family should cover. The jump from
+                        text-and-images to text, images, audio, video, function calling, and
+                        configurable reasoning &mdash; deployed across four hardware tiers under a
+                        genuinely unrestricted license &mdash; is the largest single-generation leap
+                        in the Gemma lineage.
+                    </p>
+
+                    <p>
+                        No single model wins everything. Llama 4 has a bigger context window.
+                        Qwen 3.5 is marginally ahead on some knowledge benchmarks. But no other
+                        open-weight family gives you a <em>phone-to-server</em> deployment story with
+                        native multimodality and agentic tool use at every tier. If you&rsquo;re
+                        building AI products that need to work across form factors &mdash; or if
+                        you just want one model family to learn, fine-tune, and deploy everywhere
+                        &mdash; Gemma 4 is the strongest starting point available today.
+                    </p>
+
+                    <hr>
+
+                    <h2>References &amp; Further Reading</h2>
+
+                    <ul class="references">
+                        <li>
+                            <strong>[1] Gemma 4 Model Overview</strong><br>
+                            Google AI for Developers, April 2026.<br>
+                            <a href="https://ai.google.dev/gemma/docs/core" target="_blank"
+                                rel="noopener">https://ai.google.dev/gemma/docs/core</a>
+                        </li>
+                        <li>
+                            <strong>[2] Gemma 4 Model Card</strong><br>
+                            Google AI for Developers.<br>
+                            <a href="https://ai.google.dev/gemma/docs/core/model_card_4" target="_blank"
+                                rel="noopener">https://ai.google.dev/gemma/docs/core/model_card_4</a>
+                        </li>
+                        <li>
+                            <strong>[3] Gemma 4 on Hugging Face</strong><br>
+                            <a href="https://huggingface.co/collections/google/gemma-4" target="_blank"
+                                rel="noopener">https://huggingface.co/collections/google/gemma-4</a>
+                        </li>
+                        <li>
+                            <strong>[4] Function Calling Guide (Gemma 4)</strong><br>
+                            <a href="https://ai.google.dev/gemma/docs/capabilities/text/function-calling-gemma4"
+                                target="_blank"
+                                rel="noopener">https://ai.google.dev/gemma/docs/capabilities/text/function-calling-gemma4</a>
+                        </li>
+                        <li>
+                            <strong>[5] Gemma 4 Thinking Mode</strong><br>
+                            <a href="https://ai.google.dev/gemma/docs/capabilities/thinking" target="_blank"
+                                rel="noopener">https://ai.google.dev/gemma/docs/capabilities/thinking</a>
+                        </li>
+                        <li>
+                            <strong>[6] Gemma 4 Apache 2.0 License</strong><br>
+                            <a href="https://ai.google.dev/gemma/apache_2" target="_blank"
+                                rel="noopener">https://ai.google.dev/gemma/apache_2</a>
+                        </li>
+                        <li>
+                            <strong>[7] Gemma &mdash; Google DeepMind</strong><br>
+                            <a href="https://deepmind.google/models/gemma" target="_blank"
+                                rel="noopener">https://deepmind.google/models/gemma</a>
+                        </li>
+                    </ul>
+
+                    <p><em>Last updated: April 7, 2026. Gemma 4 was released on April 2, 2026.
+                            Benchmark numbers are from early community evaluations and may shift.
+                            Always consult the
+                            <a href="https://ai.google.dev/gemma/docs/core" target="_blank" rel="noopener">official
+                                Gemma documentation</a> for the latest information.</em></p>
+                </div>
+
+                <!-- Social Interaction Section -->
+                <div class="interaction-section">
+                    <div class="share-container">
+                        <h3>Share this post</h3>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn twitter"
+                                onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + '&url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share
+                                on X</a>
+                            <a href="#" class="share-btn linkedin"
+                                onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share
+                                on LinkedIn</a>
+                            <button
+                                onclick="navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')).catch(() => alert('Failed to copy link'));"
+                                class="share-btn">Copy Link</button>
+                        </div>
+                    </div>
+
+                    <div class="comments-container">
+                        <h3>Comments &amp; Reactions</h3>
+                        <script src="https://giscus.app/client.js" data-repo="gtkrish85/krishnasblog"
+                            data-repo-id="R_kgDORIInsQ" data-category="General" data-category-id="DIC_kwDORIInsQ4CmYfw"
+                            data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0"
+                            data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous"
+                            async>
+                            </script>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Krishna. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
