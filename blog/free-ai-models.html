@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free & Open Source AI Models Guide (2026) - Krishna</title>
+    <title>Free & Open-Weight AI Models Guide (Late 2026) - Krishna</title>
     <meta name="description"
-        content="Complete guide to free and open-source AI models including LLaMA, Mistral, Gemma, DeepSeek, and Qwen with download links, token limits, and use cases.">
+        content="Complete guide to free and open-weight AI models including Llama 4, Qwen3, DeepSeek V4, Mistral, Gemma 4, gpt-oss, Phi, Kimi K3, and GLM-4.7 with licenses, specs, and references.">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -28,226 +28,349 @@
             <article>
                 <div class="article-meta">
                     <a href="../index" class="back-link">&larr; Back to Home</a>
-                    <p>February 6, 2026 &bull; AI Research</p>
+                    <p>September 29, 2026 &bull; AI Research</p>
                 </div>
 
-                <h1>Free & Open Source AI Models: Complete 2026 Guide</h1>
+                <h1>Free & Open-Weight AI Models: Complete Late-2026 Guide</h1>
 
                 <div class="article-content">
-                    <p>The open-source AI revolution is in full swing. Whether you want to run AI locally for privacy,
-                        reduce API costs, or customize models for specific tasks, there are now dozens of powerful
-                        free options available. This guide covers the top open-source AI models, their strengths,
-                        token limits, and where to download them.</p>
+                    <p>The open-weight AI landscape has changed dramatically since February. New model generations
+                        have shipped from every major family, licensing has shifted (notably Gemma going Apache 2.0),
+                        OpenAI released its first open-weight LLMs in years, and entirely new families entered the
+                        field. This is a full refresh of the February 2026 guide — updated models, corrected
+                        licenses, and new recommendations.</p>
+
+                    <blockquote>
+                        <p><strong>A note on terminology:</strong> most models here are <em>open-weight</em>, not
+                            <em>open-source</em>. You get downloadable weights you can run, fine-tune, and build
+                            on — but not the training data or full training pipeline. Licenses vary more than
+                            marketing suggests; the table below gives the real terms per family.</p>
+                    </blockquote>
+
+                    <h2>What changed since February 2026</h2>
+
+                    <ul>
+                        <li><strong>Llama 4</strong> (Scout/Maverick, MoE) replaced Llama 3.x as Meta's current line
+                        </li>
+                        <li><strong>Gemma 4</strong> moved to <strong>Apache 2.0</strong> — a major licensing
+                            improvement over Gemma 3's custom terms</li>
+                        <li><strong>DeepSeek V4 / V4.1-Flash</strong> pushed efficiency further: 4x less KV-cache
+                            memory via a new encoder-decoder architecture</li>
+                        <li><strong>Qwen3</strong> expanded into a full ladder: dense, MoE, coder, vision, and
+                            omni variants (plus a 397B Qwen3.5 MoE)</li>
+                        <li><strong>OpenAI released gpt-oss</strong> (20B/120B MoE, Apache 2.0) — its first
+                            open-weight language models since GPT-2</li>
+                        <li><strong>New families:</strong> Microsoft's <strong>Phi</strong> (small-model specialist,
+                            MIT), Moonshot's <strong>Kimi K3</strong> (2.8T-parameter MoE), Z.ai's
+                            <strong>GLM-4.7</strong> (coding-focused, MIT)</li>
+                    </ul>
 
                     <h2>Quick Comparison Table</h2>
 
                     <table>
                         <thead>
                             <tr>
-                                <th>Model</th>
+                                <th>Family</th>
                                 <th>Provider</th>
-                                <th>Context Window</th>
+                                <th>Sizes</th>
                                 <th>Best For</th>
                                 <th>License</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Qwen2.5-Turbo</strong></td>
+                                <td><strong>Qwen3</strong></td>
                                 <td>Alibaba</td>
-                                <td>1,000,000</td>
-                                <td>Long documents, multilingual</td>
+                                <td>0.6B – 235B (dense + MoE); 397B in Qwen3.5</td>
+                                <td>Coding, multilingual, full ladder</td>
                                 <td>Apache 2.0</td>
                             </tr>
                             <tr>
-                                <td><strong>Mistral Large 3</strong></td>
-                                <td>Mistral AI</td>
-                                <td>256,000</td>
-                                <td>General, enterprise</td>
-                                <td>Apache 2.0</td>
-                            </tr>
-                            <tr>
-                                <td><strong>LLaMA 3.2</strong></td>
+                                <td><strong>Llama 4</strong></td>
                                 <td>Meta</td>
-                                <td>128,000</td>
-                                <td>General purpose, research</td>
-                                <td>Meta License</td>
+                                <td>Scout 109B / Maverick ~400B (MoE, 17B active)</td>
+                                <td>General purpose, largest ecosystem</td>
+                                <td>Custom Community License (gated)</td>
                             </tr>
                             <tr>
-                                <td><strong>Gemma 3</strong></td>
-                                <td>Google</td>
-                                <td>128,000</td>
-                                <td>Multimodal, lightweight</td>
-                                <td>Gemma License</td>
-                            </tr>
-                            <tr>
-                                <td><strong>DeepSeek-V3</strong></td>
+                                <td><strong>DeepSeek V4</strong></td>
                                 <td>DeepSeek</td>
-                                <td>128,000</td>
-                                <td>Reasoning, math</td>
+                                <td>284B – 1.6T MoE (13B – 49B active)</td>
+                                <td>Reasoning, agentic coding, efficiency</td>
                                 <td>MIT</td>
                             </tr>
                             <tr>
-                                <td><strong>DeepSeek-R1</strong></td>
-                                <td>DeepSeek</td>
-                                <td>128,000</td>
-                                <td>Logic, problem-solving</td>
-                                <td>MIT</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Qwen2.5</strong></td>
-                                <td>Alibaba</td>
-                                <td>128,000</td>
-                                <td>Coding, general</td>
-                                <td>Apache 2.0</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Mistral 7B</strong></td>
+                                <td><strong>Mistral</strong></td>
                                 <td>Mistral AI</td>
-                                <td>32,000</td>
-                                <td>Lightweight, local use</td>
+                                <td>3B – 675B (dense + MoE)</td>
+                                <td>Efficiency, EU hosting, enterprise</td>
+                                <td>Apache 2.0 (Small/Large); Modified MIT w/ monthly revenue cap (Medium)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gemma 4</strong></td>
+                                <td>Google</td>
+                                <td>E2B, E4B, 12B, 26B MoE, 31B</td>
+                                <td>Lightweight, mobile/edge, multimodal</td>
+                                <td>Apache 2.0 (+ Prohibited Use Policy)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>gpt-oss</strong></td>
+                                <td>OpenAI</td>
+                                <td>20B / 120B MoE</td>
+                                <td>OpenAI-compatible open weights</td>
                                 <td>Apache 2.0</td>
                             </tr>
                             <tr>
-                                <td><strong>Gemma 3 1B</strong></td>
-                                <td>Google</td>
-                                <td>32,000</td>
-                                <td>Mobile, edge devices</td>
-                                <td>Gemma License</td>
+                                <td><strong>Phi</strong></td>
+                                <td>Microsoft</td>
+                                <td>1.3B – 15B</td>
+                                <td>Small models, edge, reasoning</td>
+                                <td>MIT</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kimi K3</strong></td>
+                                <td>Moonshot AI</td>
+                                <td>2.8T MoE (104B active)</td>
+                                <td>Long context (1M), agentic tasks</td>
+                                <td>Custom Kimi K3 License</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GLM-4.7</strong></td>
+                                <td>Z.ai</td>
+                                <td>Varies</td>
+                                <td>Coding, multilingual coding</td>
+                                <td>MIT</td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <h2>1. LLaMA (Meta)</h2>
+                    <h2>1. Qwen3 (Alibaba)</h2>
 
                     <h3>Overview</h3>
-                    <p>Meta's LLaMA (Large Language Model Meta AI) series has become the foundation for many
-                        open-source AI projects. LLaMA 3.1 and 3.2 offer impressive capabilities rivaling
-                        commercial models, with LLaMA 4 expected in late 2025 or early 2026.</p>
+                    <p>Qwen is the broadest open-weight family: the original Qwen3 series spans 0.6B–235B across
+                        dense and MoE architectures, with dedicated coder, vision-language, and omni variants.
+                        Qwen3-Coder is officially billed as the Qwen team's "most agentic code model to date."
+                        The newer Qwen3.5 series adds a 397B MoE flagship.</p>
 
                     <h3>Key Specifications</h3>
                     <ul>
-                        <li><strong>Context Window:</strong> 128,000 tokens</li>
-                        <li><strong>Sizes:</strong> 8B, 70B, and 405B parameters</li>
-                        <li><strong>Strengths:</strong> Strong general performance, extensive community support,
-                            foundation for many fine-tuned models</li>
-                        <li><strong>License:</strong> Meta Community License (free for most uses)</li>
-                    </ul>
-
-                    <h3>Download Links</h3>
-                    <ul>
-                        <li><a href="https://llama.meta.com" target="_blank" rel="noopener">Official Meta LLaMA</a></li>
-                        <li><a href="https://huggingface.co/meta-llama" target="_blank" rel="noopener">Hugging Face</a>
-                        </li>
-                        <li><a href="https://ollama.com/library/llama3.2" target="_blank" rel="noopener">Ollama</a></li>
-                    </ul>
-
-                    <h2>2. Mistral AI</h2>
-
-                    <h3>Overview</h3>
-                    <p>Mistral AI, founded by former Google DeepMind and Meta researchers, produces some of the
-                        most efficient open-source models. Their models are known for punching above their weight
-                        class in performance.</p>
-
-                    <h3>Key Specifications</h3>
-                    <ul>
-                        <li><strong>Mistral Large 3:</strong> 256K context, enterprise-grade performance</li>
-                        <li><strong>Mistral Large 2:</strong> 128K context, multimodal support</li>
-                        <li><strong>Mistral 7B:</strong> 32K context, extremely efficient for local use</li>
-                        <li><strong>Strengths:</strong> High efficiency, strong reasoning, excellent code generation
-                        </li>
-                        <li><strong>License:</strong> Apache 2.0 (fully open)</li>
-                    </ul>
-
-                    <h3>Download Links</h3>
-                    <ul>
-                        <li><a href="https://mistral.ai/models" target="_blank" rel="noopener">Official Mistral</a></li>
-                        <li><a href="https://huggingface.co/mistralai" target="_blank" rel="noopener">Hugging Face</a>
-                        </li>
-                        <li><a href="https://ollama.com/library/mistral" target="_blank" rel="noopener">Ollama</a></li>
-                    </ul>
-
-                    <h2>3. Gemma (Google)</h2>
-
-                    <h3>Overview</h3>
-                    <p>Gemma models are Google's lightweight open models built on the same technology as Gemini.
-                        Gemma 3, released in March 2025, is multimodal and supports over 140 languages.</p>
-
-                    <h3>Key Specifications</h3>
-                    <ul>
-                        <li><strong>Context Window:</strong> 128K (4B, 12B, 27B) or 32K (1B variant)</li>
-                        <li><strong>Sizes:</strong> 1B, 4B, 12B, and 27B parameters</li>
-                        <li><strong>Strengths:</strong> Multimodal (images, text, video), lightweight,
-                            runs on consumer hardware, multilingual</li>
-                        <li><strong>License:</strong> Gemma Terms of Use (free for most applications)</li>
-                    </ul>
-
-                    <h3>Download Links</h3>
-                    <ul>
-                        <li><a href="https://ai.google.dev/gemma" target="_blank" rel="noopener">Google AI Studio</a>
-                        </li>
-                        <li><a href="https://www.kaggle.com/models/google/gemma" target="_blank"
-                                rel="noopener">Kaggle</a></li>
-                        <li><a href="https://huggingface.co/google/gemma" target="_blank" rel="noopener">Hugging
-                                Face</a></li>
-                        <li><a href="https://ollama.com/library/gemma3" target="_blank" rel="noopener">Ollama</a></li>
-                    </ul>
-
-                    <h2>4. DeepSeek</h2>
-
-                    <h3>Overview</h3>
-                    <p>DeepSeek is a Chinese AI lab focused on open-source models with exceptional reasoning
-                        and mathematical capabilities. Their models have gained significant attention for
-                        matching or exceeding proprietary model performance at a fraction of the cost.</p>
-
-                    <h3>Key Specifications</h3>
-                    <ul>
-                        <li><strong>DeepSeek-V3:</strong> General language and reasoning, MIT licensed</li>
-                        <li><strong>DeepSeek-R1:</strong> Advanced logic and mathematical reasoning</li>
-                        <li><strong>DeepSeek-Coder V2:</strong> Optimized for software development</li>
-                        <li><strong>Context Window:</strong> 128K tokens (flagship models)</li>
-                        <li><strong>Strengths:</strong> Exceptional reasoning, math, cost efficiency</li>
-                        <li><strong>License:</strong> MIT (very permissive)</li>
-                    </ul>
-
-                    <h3>Download Links</h3>
-                    <ul>
-                        <li><a href="https://deepseek.com" target="_blank" rel="noopener">Official DeepSeek</a></li>
-                        <li><a href="https://huggingface.co/deepseek-ai" target="_blank" rel="noopener">Hugging Face</a>
-                        </li>
-                        <li><a href="https://github.com/deepseek-ai" target="_blank" rel="noopener">GitHub</a></li>
-                        <li><a href="https://ollama.com/library/deepseek-coder-v2" target="_blank"
-                                rel="noopener">Ollama</a></li>
-                    </ul>
-
-                    <h2>5. Qwen (Alibaba)</h2>
-
-                    <h3>Overview</h3>
-                    <p>Alibaba's Qwen series offers some of the largest context windows among open-source
-                        models. Qwen2.5-Turbo supports up to 1 million tokens, making it ideal for processing
-                        entire books or large codebases.</p>
-
-                    <h3>Key Specifications</h3>
-                    <ul>
-                        <li><strong>Qwen2.5-Turbo:</strong> 1M token context window</li>
-                        <li><strong>Qwen2.5:</strong> 128K context, multiple sizes (7B to 72B)</li>
-                        <li><strong>Qwen3-Coder:</strong> Specialized for agentic coding tasks</li>
-                        <li><strong>Strengths:</strong> Massive context, strong multilingual (especially CJK),
-                            excellent coding</li>
-                        <li><strong>License:</strong> Apache 2.0</li>
+                        <li><strong>Sizes:</strong> 0.6B to 235B (dense + MoE);
+                            Qwen3.5-397B-A17B (397B total / 17B active) is the largest</li>
+                        <li><strong>Variants:</strong> Qwen3 (general), Qwen3-Coder, Qwen3-VL, Qwen3-Omni</li>
+                        <li><strong>Strengths:</strong> Agentic coding (Qwen3-Coder-480B-A35B-Instruct), 119
+                            languages and dialects, 1M-token context via Qwen3-Coder extrapolation</li>
+                        <li><strong>License:</strong> Apache 2.0 — all Qwen3 models, per the official technical
+                            report</li>
                     </ul>
 
                     <h3>Download Links</h3>
                     <ul>
                         <li><a href="https://qwen.ai" target="_blank" rel="noopener">Official Qwen</a></li>
-                        <li><a href="https://huggingface.co/Qwen" target="_blank" rel="noopener">Hugging Face</a></li>
-                        <li><a href="https://github.com/QwenLM" target="_blank" rel="noopener">GitHub</a></li>
-                        <li><a href="https://ollama.com/library/qwen2.5" target="_blank" rel="noopener">Ollama</a></li>
+                        <li><a href="https://huggingface.co/Qwen" target="_blank" rel="noopener">Hugging Face</a>
+                        </li>
+                        <li><a href="https://ollama.com/library/qwen3" target="_blank" rel="noopener">Ollama</a>
+                        </li>
+                    </ul>
+
+                    <h2>2. Llama 4 (Meta)</h2>
+
+                    <h3>Overview</h3>
+                    <p>Meta's current generation: Scout (109B total) and Maverick (~400B total), both MoE with
+                        17B active parameters. Llama remains the default choice for the largest fine-tuning
+                        ecosystem — but the license carries restrictions that matter at commercial scale: gated
+                        downloads, a &gt;700M monthly-active-user threshold requiring a separate Meta license,
+                        an Acceptable Use Policy, "Built with Llama" attribution, and EU restrictions on the
+                        multimodal models.</p>
+
+                    <h3>Key Specifications</h3>
+                    <ul>
+                        <li><strong>Models:</strong> Llama 4 Scout (109B total / 17B active), Llama 4 Maverick
+                            (~400B total / 17B active), MoE</li>
+                        <li><strong>Strengths:</strong> Largest community, most fine-tunes and integrations,
+                            natively multimodal</li>
+                        <li><strong>License:</strong> Custom Llama 4 Community License — gated downloads, usage
+                            thresholds apply. Read it before commercial deployment.</li>
+                    </ul>
+
+                    <h3>Download Links</h3>
+                    <ul>
+                        <li><a href="https://llama.meta.com" target="_blank" rel="noopener">Official Meta LLaMA</a>
+                        </li>
+                        <li><a href="https://huggingface.co/meta-llama" target="_blank" rel="noopener">Hugging
+                                Face</a></li>
+                        <li><a href="https://ollama.com/library/llama4" target="_blank" rel="noopener">Ollama</a>
+                        </li>
+                    </ul>
+
+                    <h2>3. DeepSeek (V4 / R1)</h2>
+
+                    <h3>Overview</h3>
+                    <p>DeepSeek continues to set the efficiency bar. V4-Pro (1.6T total / 49B active) and
+                        V4-Flash (284B / 13B active) ship with 1M-token context and thinking modes; V4.1-Flash's
+                        Causal Encoder-Decoder architecture cut KV-cache memory ~4x versus V4-Flash (890
+                        bytes/token). R1 remains the reference open reasoning model (671B / 37B active). All
+                        recent releases are MIT-licensed — the safest default for commercial use.</p>
+
+                    <h3>Key Specifications</h3>
+                    <ul>
+                        <li><strong>DeepSeek-V4-Pro / V4-Flash:</strong> Flagship MoE, 1M context, agentic coding
+                            SOTA among open models</li>
+                        <li><strong>DeepSeek-V4.1-Flash:</strong> Efficiency-optimized — ~4x less KV-cache
+                            memory than V4-Flash</li>
+                        <li><strong>DeepSeek-R1:</strong> Advanced reasoning, math, logic — comparable to
+                            OpenAI's o1-class at release</li>
+                        <li><strong>Strengths:</strong> Reasoning quality near the closed frontier, cost
+                            efficiency, permissive MIT terms</li>
+                        <li><strong>License:</strong> MIT across recent releases (R1, V4, V4.1). The older V3
+                            line used a custom DeepSeek license.</li>
+                    </ul>
+
+                    <h3>Download Links</h3>
+                    <ul>
+                        <li><a href="https://deepseek.com" target="_blank" rel="noopener">Official DeepSeek</a>
+                        </li>
+                        <li><a href="https://huggingface.co/deepseek-ai" target="_blank" rel="noopener">Hugging
+                                Face</a></li>
+                        <li><a href="https://github.com/deepseek-ai" target="_blank" rel="noopener">GitHub</a>
+                        </li>
+                        <li><a href="https://ollama.com/library" target="_blank"
+                                rel="noopener">Ollama (library)</a></li>
+                    </ul>
+
+                    <h2>4. Mistral AI</h2>
+
+                    <h3>Overview</h3>
+                    <p>Mistral's lineup splits by license: Small and Large lines are Apache 2.0, while Medium
+                        ships under a Modified MIT license with a monthly revenue cap ($20M consolidated revenue
+                        in the preceding month). Still the efficiency-first European option, and the natural pick
+                        for EU data-residency requirements — La Plateforme hosts data in the EU by default.
+                        Codestral's 22B weights are non-commercial (MNLP-0.1 license).</p>
+
+                    <h3>Key Specifications</h3>
+                    <ul>
+                        <li><strong>Sizes:</strong> 3B (Ministral/Voxtral edge models) to 675B (Mistral Large 3,
+                            41B active MoE)</li>
+                        <li><strong>Models:</strong> Mistral Small 4 (119B MoE, Apache 2.0), Mistral Medium 3.5
+                            (128B dense, Modified MIT), Mixtral MoE variants, Codestral</li>
+                        <li><strong>Strengths:</strong> Performance per parameter, 77.6% SWE-bench Verified
+                            (Medium 3.5), EU hosting</li>
+                        <li><strong>License:</strong> Apache 2.0 (Small 4 / Large 3); Modified MIT with monthly
+                            revenue cap (Medium 3.5) — verify which applies to your use</li>
+                    </ul>
+
+                    <h3>Download Links</h3>
+                    <ul>
+                        <li><a href="https://mistral.ai/models" target="_blank" rel="noopener">Official
+                                Mistral</a></li>
+                        <li><a href="https://huggingface.co/mistralai" target="_blank" rel="noopener">Hugging
+                                Face</a></li>
+                        <li><a href="https://ollama.com/library/mistral-small" target="_blank"
+                                rel="noopener">Ollama</a></li>
+                    </ul>
+
+                    <h2>5. Gemma 4 (Google)</h2>
+
+                    <h3>Overview</h3>
+                    <p>The biggest licensing story of the year in open weights: Gemma 4 moved to Apache 2.0,
+                        replacing Gemma 3's custom terms (note: Apache 2.0 is paired with a separate Prohibited
+                        Use Policy — not a bare license). The lineup is now five sizes, including an MoE tier
+                        that activates only 3.8B parameters. Same lightweight, multimodal, multilingual strengths
+                        — 140+ languages — now with far less legal friction.</p>
+
+                    <h3>Key Specifications</h3>
+                    <ul>
+                        <li><strong>Sizes:</strong> E2B, E4B, 12B Unified, 26B MoE (A4B — 3.8B active), 31B
+                            Dense</li>
+                        <li><strong>Variants:</strong> Pre-trained (base) and instruction-tuned; ShieldGemma 2
+                            is a companion safety model, not a Gemma 4 variant</li>
+                        <li><strong>Strengths:</strong> Runs on consumer hardware and mobile, natively
+                            multimodal (video, images; audio on E2B/E4B), 140+ languages, 128K–256K context</li>
+                        <li><strong>License:</strong> Apache 2.0 (Gemma 4) plus the Gemma Prohibited Use Policy;
+                            older Gemma 1–3 used custom Gemma Terms</li>
+                    </ul>
+
+                    <h3>Download Links</h3>
+                    <ul>
+                        <li><a href="https://ai.google.dev/gemma" target="_blank" rel="noopener">Google AI
+                                Studio</a></li>
+                        <li><a href="https://www.kaggle.com/models/google/gemma" target="_blank"
+                                rel="noopener">Kaggle</a></li>
+                        <li><a href="https://huggingface.co/google" target="_blank" rel="noopener">Hugging
+                                Face</a></li>
+                        <li><a href="https://ollama.com/library/gemma4" target="_blank" rel="noopener">Ollama</a>
+                        </li>
+                    </ul>
+
+                    <h2>6. gpt-oss (OpenAI)</h2>
+
+                    <h3>Overview</h3>
+                    <p>OpenAI's first open-weight language models since GPT-2: two MoE models under Apache 2.0,
+                        natively quantized in MXFP4 with 128K context. The 120B model reaches near-parity with
+                        o4-mini on reasoning benchmarks; the 20B matches or exceeds o3-mini. For teams standardized
+                        on OpenAI's API formats, these are the natural self-hosted fallback — compatible with the
+                        Responses API and the open-sourced Harmony prompt format.</p>
+
+                    <h3>Key Specifications</h3>
+                    <ul>
+                        <li><strong>Sizes:</strong> gpt-oss-120b (117B total / 5.1B active), gpt-oss-20b (21B
+                            total / 3.6B active)</li>
+                        <li><strong>Strengths:</strong> OpenAI-compatible behavior, permissive license, exposed
+                            chain-of-thought, tool use</li>
+                        <li><strong>License:</strong> Apache 2.0</li>
+                    </ul>
+
+                    <h3>Download Links</h3>
+                    <ul>
+                        <li><a href="https://huggingface.co/openai" target="_blank" rel="noopener">Hugging
+                                Face</a></li>
+                        <li><a href="https://ollama.com/library/gpt-oss" target="_blank"
+                                rel="noopener">Ollama</a></li>
+                    </ul>
+
+                    <h2>7. Phi (Microsoft)</h2>
+
+                    <h3>Overview</h3>
+                    <p>The small-model specialist: Phi models (1.3B–15B, MIT) trained on curated textbook-quality
+                        synthetic data, designed for memory/compute-constrained and latency-bound scenarios. A full
+                        reasoning line exists (Phi-4-reasoning, mini reasoning, and a 15B multimodal reasoning
+                        variant).</p>
+
+                    <h3>Key Specifications</h3>
+                    <ul>
+                        <li><strong>Sizes:</strong> 1.3B to 15B</li>
+                        <li><strong>Strengths:</strong> Best-in-class tiny models, reasoning variants, runs on
+                            phones and laptops</li>
+                        <li><strong>License:</strong> MIT</li>
+                    </ul>
+
+                    <h3>Download Links</h3>
+                    <ul>
+                        <li><a href="https://huggingface.co/microsoft" target="_blank" rel="noopener">Hugging
+                                Face</a></li>
+                        <li><a href="https://ollama.com/library/phi4" target="_blank" rel="noopener">Ollama</a>
+                        </li>
+                    </ul>
+
+                    <h2>8. Kimi K3 (Moonshot AI) &amp; GLM-4.7 (Z.ai)</h2>
+
+                    <h3>Overview</h3>
+                    <p>Two newer entrants worth tracking. Moonshot's Kimi K3 is a 2.8-trillion-parameter MoE (896
+                        experts, 104B activated) with 1M-token context and native multimodal input, positioned as
+                        an agentic long-horizon coding model — under a custom Kimi K3 License, not a permissive
+                        OSI license. Z.ai's GLM-4.7 is a coding-focused open model (73.8% SWE-bench Verified)
+                        with strong multilingual coding performance, released under MIT.</p>
+
+                    <h3>Download Links</h3>
+                    <ul>
+                        <li><a href="https://huggingface.co/moonshotai" target="_blank" rel="noopener">Kimi on
+                                Hugging Face</a></li>
+                        <li><a href="https://huggingface.co/zai-org" target="_blank" rel="noopener">GLM on
+                                Hugging Face</a></li>
+                        <li><a href="https://ollama.com" target="_blank" rel="noopener">Ollama (availability
+                                varies)</a></li>
                     </ul>
 
                     <h2>How to Run These Models Locally</h2>
-
-                    <p>Several tools make running open-source AI models locally straightforward:</p>
 
                     <table>
                         <thead>
@@ -269,6 +392,12 @@
                                 <td><a href="https://lmstudio.ai" target="_blank" rel="noopener">lmstudio.ai</a></td>
                             </tr>
                             <tr>
+                                <td><strong>vLLM</strong></td>
+                                <td>High-throughput serving, production inference</td>
+                                <td><a href="https://github.com/vllm-project/vllm" target="_blank"
+                                        rel="noopener">GitHub</a></td>
+                            </tr>
+                            <tr>
                                 <td><strong>llama.cpp</strong></td>
                                 <td>Maximum performance, developers</td>
                                 <td><a href="https://github.com/ggerganov/llama.cpp" target="_blank"
@@ -283,46 +412,135 @@
                         </tbody>
                     </table>
 
+                    <p><strong>Rule of thumb:</strong> the smallest model that passes your eval wins. Don't
+                        reach for 70B when a well-chosen 8B clears the bar — it's cheaper, faster, and fits more
+                        hardware.</p>
+
                     <h2>Choosing the Right Model</h2>
 
                     <h3>For General Use</h3>
-                    <p><strong>LLaMA 3.2 (70B)</strong> or <strong>Mistral Large 3</strong> offer the best
-                        balance of capability and accessibility. Both have strong general knowledge and
-                        reasoning abilities.</p>
+                    <p><strong>Llama 4 (Maverick-class)</strong> or <strong>Qwen3 (235B-class)</strong> — best
+                        balance of capability and ecosystem. Llama if you want maximum community support; Qwen if
+                        you want Apache 2.0 certainty.</p>
 
                     <h3>For Coding</h3>
-                    <p><strong>DeepSeek-Coder V2</strong> and <strong>Qwen3-Coder</strong> are specifically
-                        optimized for software development, with strong performance on code generation,
-                        debugging, and explanation.</p>
+                    <p><strong>Qwen3-Coder</strong> and <strong>DeepSeek</strong> variants are purpose-built for
+                        code generation, debugging, and agentic coding workflows. <strong>GLM-4.7</strong> is a
+                        strong MIT-licensed alternative.</p>
 
                     <h3>For Limited Hardware</h3>
-                    <p><strong>Gemma 3 (4B)</strong> and <strong>Mistral 7B</strong> run efficiently on
-                        consumer GPUs and even some high-end CPUs. Gemma 1B can run on mobile devices.</p>
+                    <p><strong>Gemma 4 (E4B)</strong> or <strong>Phi (3–4B)</strong> — run on consumer GPUs,
+                        high-end CPUs, even mobile. Now both under permissive licenses.</p>
 
                     <h3>For Long Documents</h3>
-                    <p><strong>Qwen2.5-Turbo</strong> with its 1M token context is ideal for processing
-                        entire books, large codebases, or lengthy conversation histories.</p>
+                    <p><strong>Qwen3-Coder</strong> (1M via extrapolation), <strong>DeepSeek V4</strong> (1M),
+                        or <strong>Kimi K3</strong> (1M) — built for entire codebases and book-length
+                        context.</p>
 
                     <h3>For Math and Reasoning</h3>
-                    <p><strong>DeepSeek-R1</strong> excels at complex logical problems, mathematical proofs,
-                        and step-by-step reasoning tasks.</p>
+                    <p><strong>DeepSeek-R1</strong> — still the open reference for step-by-step reasoning and
+                        proofs.</p>
+
+                    <h3>For Commercial Products</h3>
+                    <p>Prefer <strong>MIT / Apache 2.0</strong> families (Qwen, DeepSeek, Gemma 4, gpt-oss, Phi,
+                        GLM-4.7, Mistral Small/Large). Treat <strong>Llama's Community License</strong>,
+                        <strong>Mistral Medium's revenue-capped terms</strong>, and <strong>Kimi K3's custom
+                            license</strong> as requiring legal review.</p>
 
                     <h2>Important Considerations</h2>
 
                     <ul>
-                        <li><strong>Hardware Requirements:</strong> Larger models (70B+) typically require
-                            48GB+ VRAM or significant RAM for CPU inference</li>
-                        <li><strong>Quantization:</strong> Models can be quantized (compressed) to run on
-                            less powerful hardware with minimal quality loss</li>
-                        <li><strong>Commercial Use:</strong> Check each model's license—Apache 2.0 and MIT
-                            are generally safe for commercial use</li>
-                        <li><strong>Updates:</strong> Open-source models are frequently updated; check for
-                            the latest versions</li>
+                        <li><strong>Hardware:</strong> 70B+ models typically need 48GB+ VRAM or significant RAM
+                            for CPU inference; quantized 7–8B models run on a single consumer GPU</li>
+                        <li><strong>Quantization:</strong> GGUF/AWQ quants run on far less hardware with minimal
+                            quality loss — always check for quantized releases before buying GPUs</li>
+                        <li><strong>Licenses:</strong> "open" is not one thing. Apache 2.0/MIT are safe
+                            defaults; custom community licenses may restrict commercial scale or require
+                            gating</li>
+                        <li><strong>Freshness:</strong> Open-weight releases now ship monthly. Pin versions in
+                            production; re-evaluate quarterly</li>
                     </ul>
 
-                    <p><em>Last updated: February 6, 2026. Model specifications and availability may change
-                            as providers release updates.</em></p>
-                </div>                
+                    <p><em>Last updated: September 29, 2026. Model specifications and availability change
+                            frequently — verify against the model card before deploying.</em></p>
+
+                    <h2>References</h2>
+                    <p>All model specifications, license terms, and version details above were verified against
+                        official vendor sources on September 29, 2026:</p>
+                    <ul>
+                        <li>Meta — Llama 4 announcement:
+                            <a href="https://ai.meta.com/blog/llama-4-multimodal-intelligence/" target="_blank"
+                                rel="noopener">ai.meta.com/blog/llama-4-multimodal-intelligence</a></li>
+                        <li>Meta — Llama 4 Community License:
+                            <a href="https://www.llama.com/llama4/license/" target="_blank"
+                                rel="noopener">llama.com/llama4/license</a></li>
+                        <li>Hugging Face — Llama 4 technical docs:
+                            <a href="https://huggingface.co/docs/transformers/model_doc/llama4" target="_blank"
+                                rel="noopener">huggingface.co/docs/transformers/model_doc/llama4</a></li>
+                        <li>Google — Gemma 4 announcement:
+                            <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/"
+                                target="_blank"
+                                rel="noopener">blog.google/.../gemma-4</a></li>
+                        <li>Google — Gemma 4 license:
+                            <a href="https://ai.google.dev/gemma/docs/gemma_4_license" target="_blank"
+                                rel="noopener">ai.google.dev/gemma/docs/gemma_4_license</a></li>
+                        <li>OpenAI — Introducing gpt-oss:
+                            <a href="https://openai.com/index/introducing-gpt-oss/" target="_blank"
+                                rel="noopener">openai.com/index/introducing-gpt-oss</a></li>
+                        <li>Qwen — Qwen3 repository &amp; technical report (arXiv:2505.09388):
+                            <a href="https://github.com/QwenLM/Qwen3" target="_blank"
+                                rel="noopener">github.com/QwenLM/Qwen3</a></li>
+                        <li>Qwen — Qwen3-Coder announcement:
+                            <a href="https://qwenlm.github.io/blog/qwen3-coder" target="_blank"
+                                rel="noopener">qwenlm.github.io/blog/qwen3-coder</a></li>
+                        <li>Qwen — Qwen3-Omni repository:
+                            <a href="https://github.com/QwenLM/Qwen3-Omni" target="_blank"
+                                rel="noopener">github.com/QwenLM/Qwen3-Omni</a></li>
+                        <li>DeepSeek — V4 release announcement:
+                            <a href="https://api-docs.deepseek.com/news/news260424" target="_blank"
+                                rel="noopener">api-docs.deepseek.com/news/news260424</a></li>
+                        <li>Hugging Face — DeepSeek-V4-Pro model card:
+                            <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" target="_blank"
+                                rel="noopener">huggingface.co/deepseek-ai/DeepSeek-V4-Pro</a></li>
+                        <li>Hugging Face — DeepSeek-V4.1-Flash model card:
+                            <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash" target="_blank"
+                                rel="noopener">huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash</a></li>
+                        <li>Hugging Face — DeepSeek-R1 model card:
+                            <a href="https://huggingface.co/deepseek-ai/DeepSeek-R1" target="_blank"
+                                rel="noopener">huggingface.co/deepseek-ai/DeepSeek-R1</a></li>
+                        <li>Mistral AI — Mistral Small 4 announcement:
+                            <a href="https://mistral.ai/news/mistral-small-4" target="_blank"
+                                rel="noopener">mistral.ai/news/mistral-small-4</a></li>
+                        <li>Mistral AI — Hugging Face organization:
+                            <a href="https://huggingface.co/mistralai" target="_blank"
+                                rel="noopener">huggingface.co/mistralai</a></li>
+                        <li>Hugging Face — Mistral Medium 3.5 (Modified MIT):
+                            <a href="https://huggingface.co/mistralai/Mistral-Medium-3.5-128B" target="_blank"
+                                rel="noopener">huggingface.co/mistralai/Mistral-Medium-3.5-128B</a></li>
+                        <li>Hugging Face — Codestral-22B (MNLP-0.1):
+                            <a href="https://huggingface.co/mistralai/Codestral-22B-v0.1" target="_blank"
+                                rel="noopener">huggingface.co/mistralai/Codestral-22B-v0.1</a></li>
+                        <li>Mistral AI — data residency policy:
+                            <a href="https://help.mistral.ai/en/articles/347629-where-do-you-store-my-data-or-my-organization-s-data"
+                                target="_blank" rel="noopener">help.mistral.ai (data residency)</a></li>
+                        <li>Microsoft — Phi-4 model card:
+                            <a href="https://huggingface.co/microsoft/phi-4" target="_blank"
+                                rel="noopener">huggingface.co/microsoft/phi-4</a></li>
+                        <li>Microsoft — Phi-4-reasoning-vision announcement:
+                            <a href="https://www.microsoft.com/en-us/research/blog/phi-4-reasoning-vision-and-the-lessons-of-training-a-multimodal-reasoning-model/"
+                                target="_blank" rel="noopener">microsoft.com/research (Phi-4 reasoning)</a>
+                        </li>
+                        <li>Microsoft — phi-1_5 model card:
+                            <a href="https://huggingface.co/microsoft/phi-1_5" target="_blank"
+                                rel="noopener">huggingface.co/microsoft/phi-1_5</a></li>
+                        <li>Moonshot AI — Kimi-K3 model card:
+                            <a href="https://huggingface.co/moonshotai/Kimi-K3" target="_blank"
+                                rel="noopener">huggingface.co/moonshotai/Kimi-K3</a></li>
+                        <li>Z.ai — GLM-4.7 model card:
+                            <a href="https://huggingface.co/zai-org/GLM-4.7" target="_blank"
+                                rel="noopener">huggingface.co/zai-org/GLM-4.7</a></li>
+                    </ul>
+                </div>
                 <!-- Social Interaction Section -->
                 <div class="interaction-section">
                     <div class="share-container">
@@ -333,7 +551,7 @@
                             <button onclick="navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')).catch(() => alert('Failed to copy link'));" class="share-btn">Copy Link</button>
                         </div>
                     </div>
-                    
+
                     <div class="comments-container">
                         <h3>Comments & Reactions</h3>
                         <script src="https://giscus.app/client.js"
@@ -353,7 +571,7 @@
                         </script>
                     </div>
                 </div>
-</article>
+            </article>
         </main>
 
         <footer>
