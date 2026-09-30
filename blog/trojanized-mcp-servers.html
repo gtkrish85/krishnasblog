@@ -35,7 +35,10 @@
 
                 <div class="article-content">
                     <p>Your AI coding assistant's superpowers come from plug-ins called MCP
-                        servers — they read files and run commands with <em>your</em> permissions. In
+                        servers — they read files and run commands with <em>your</em> permissions. MCP is
+                        an open standard that lets an AI call outside tools like file readers, databases,
+                        and browsers. You add a server with a line in a config file, and from then on your
+                        agent can reach whatever you've given it access to. In
                         September 2026, attackers started poisoning them at scale: Google caught criminals
                         shipping trojanized servers, researchers found 7,600 fake repos built to trick
                         agents, and a lab demo showed one making an agent leak secrets silently. The short
@@ -45,7 +48,11 @@
                         alt="Pencil sketch: a developer's laptop connects to an MCP server box; a magnifying glass reveals hidden instructions scribbled inside the server, while the AI agent sends files toward it."
                         style="max-width: 100%; height: auto; border-radius: 8px;">
                     <p><em>The basic trick: the server looks helpful, but the fine print inside its tool
-                            descriptions is giving your agent secret orders.</em></p>
+                            descriptions is giving your agent secret orders. Your agent reads those
+                            descriptions to learn what each tool does — so it trusts them completely. The
+                            attacker writes "search your files" where you can see it, and buries "send me
+                            a copy too" where only the agent looks. You approved a file searcher; your
+                            agent installed a spy.</em></p>
 
                     <h2>Attackers now run the whole playbook through AI</h2>
 
