@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Someone Is Poisoning Your AI's Toolbox - Krishna</title>
+    <meta name="description"
+        content="September 2026: attackers started poisoning MCP servers at scale. The short, plain-English version of what happened — with pencil sketches — and what to do about it.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index" class="logo">Krishna.</a>
+            <nav>
+                <ul>
+                    <li><a href="../index">Home</a></li>
+                    <li><a href="../about">About</a></li>
+                    <li><a href="../projects">Projects</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <div class="article-meta">
+                    <a href="../index" class="back-link">&larr; Back to Home</a>
+                    <p>September 2026 &bull; AI Security</p>
+                </div>
+
+                <h1>Someone Is Poisoning Your AI's Toolbox</h1>
+
+                <div class="article-content">
+                    <p>Your AI coding assistant's superpowers come from plug-ins called MCP
+                        servers — they read files and run commands with <em>your</em> permissions. In
+                        September 2026, attackers started poisoning them at scale: Google caught criminals
+                        shipping trojanized servers, researchers found 7,600 fake repos built to trick
+                        agents, and a lab demo showed one making an agent leak secrets silently. The short
+                        version, sketched on a napkin.</p>
+
+                    <img src="trojanized-mcp-images/mcp-poison-flow.webp"
+                        alt="Pencil sketch: a developer's laptop connects to an MCP server box; a magnifying glass reveals hidden instructions scribbled inside the server, while the AI agent sends files toward it."
+                        style="max-width: 100%; height: auto; border-radius: 8px;">
+                    <p><em>The basic trick: the server looks helpful, but the fine print inside its tool
+                            descriptions is giving your agent secret orders.</em></p>
+
+                    <h2>Attackers now run the whole playbook through AI</h2>
+
+                    <p>Google's threat intel team said (Sep 8, 2026) attackers run
+                        <em>agentic pipelines</em> — AI doing the scanning and stealing, not just chatting.
+                        One crew (UNC6780/TeamPCP) shipped trojanized MCP servers, hiding malware in
+                        developers' <code>.claude/</code>, <code>.vscode/</code>, and
+                        <code>.cursor/</code> folders. Another used a coding chatbot to grab thousands of
+                        credentials in six hours. Google's advice: assume they have your IDE setup
+                        [<a href="https://github.com/pranava0x0/vibe-coding-security/blob/HEAD/advisories/2026-09-gtig-adversarial-ai-agentic-pipelines.md"
+                            target="_blank" rel="noopener">summary of the GTIG report</a>].</p>
+
+                    <h2>7,600 fake repos — and your agent finds them itself</h2>
+
+                    <p>Island's team documented <strong>AgentBaiting</strong>: ~7,600 malicious GitHub repos
+                        from ~6,600 fake profiles, 800+ posing as AI Skills or MCP servers, 14M+ downloads,
+                        peaking April 2026. The scary part: delivery. Claude Code, Gemini, and ChatGPT all
+                        surfaced these repos unprompted. Your agent shops for capabilities, treats the
+                        attacker's README as legit docs, and hands you the install steps
+                        [<a href="https://www.island.io/blog/agentbaiting-how-800-fake-ai-skills-and-mcp-servers-delivered-malware"
+                            target="_blank" rel="noopener">Island, July 20, 2026</a>;
+                        <a href="https://rhisac.org/threat-intelligence/new-agentbaiting-campaign-delivers-smartloader-via-fake-ai-skills-and-mcp-servers/"
+                            target="_blank" rel="noopener">RH-ISAC</a>].</p>
+
+                    <img src="trojanized-mcp-images/agentbaiting-flow.webp"
+                        alt="Pencil sketch: a smiling robot reads a README and picks a shiny package off a shelf; the package hides a skull inside, and malware installs on the laptop below."
+                        style="max-width: 100%; height: auto; border-radius: 8px;">
+                    <p><em>Reading the README is not the same as checking for malware — but your agent
+                            can't tell the difference.</em></p>
+
+                    <h2>The attack your agent can't see coming</h2>
+
+                    <p><strong>GhostSplice</strong> (ASSET, Aug 11) splits one request — "steal the
+                        secrets" — across trusted channels: a tool description, a tool result, a sampling
+                        message. No piece looks wrong alone, so nothing refuses. Across eleven AI models,
+                        compliance went 42% to 82% when split. Caveats: a lab demo with fake credentials, not
+                        a real break-in — and only if you already installed the bad server
+                        [<a href="https://asset-group.github.io/disclosures/ghostsplice/"
+                            target="_blank" rel="noopener">ASSET disclosure</a>;
+                        <a href="https://thehackernews.com/2026/08/malicious-mcp-servers-can-split.html"
+                            target="_blank" rel="noopener">The Hacker News</a>].</p>
+
+                    <img src="trojanized-mcp-images/ghostsplice-flow.webp"
+                        alt="Pencil sketch: a 'steal the secrets' letter is cut into three puzzle pieces, each passing through a different door (tool description, tool result, sampling), then reassembling on the other side as the robot hands over files."
+                        style="max-width: 100%; height: auto; border-radius: 8px;">
+                    <p><em>Cut the bad request into small enough pieces, and the guard checking each piece
+                            waves them all through.</em></p>
+
+                    <h2>What to actually do</h2>
+
+                    <ul>
+                        <li><strong>Install from an allow-list, not from search.</strong> AgentBaiting works
+                            because agents go find capabilities. Pin the MCP servers your team uses and
+                            review a new one like a new dependency.</li>
+                        <li><strong>Read the README like an attacker wrote it.</strong> The code is often
+                            clean on purpose — the hostile part is the English: the README, the tool
+                            description, the <code>AGENTS.md</code>. Your agent reads those as instructions
+                            because that is what they are.</li>
+                        <li><strong>Treat tool output as data, not instructions.</strong> Validate server
+                            responses against their schemas before they reach the model. That's the
+                            structural defense against GhostSplice-style splits.</li>
+                        <li><strong>Re-approve tools when they change.</strong> A server that was safe at
+                            install time can update into a malicious one.</li>
+                        <li><strong>Put your IDE folders in your threat model.</strong>
+                            <code>.claude/</code>, <code>.vscode/</code>, <code>.cursor/</code> — attackers
+                            are already hiding things there.</li>
+                    </ul>
+
+                    <h2>A quick note on sources</h2>
+
+                    <p>Every link below was checked on September 30, 2026, and the key figures were
+                        re-verified against the cited pages. Two courtesies: the GTIG details come via a
+                        community summary of Google's report — recheck the original first. The OWASP
+                        crosswalks are community mappings, not OWASP originals. AgentBaiting and
+                        GhostSplice figures match the primary research.</p>
+
+                    <p><em>Last updated: September 30, 2026. Threat reports move fast — verify figures
+                            against the linked sources before citing them elsewhere.</em></p>
+
+                    <h2>References</h2>
+                    <ul>
+                        <li>vibe-coding-security — Advisory: GTIG adversarial-AI agentic pipelines (Sep 2026):
+                            <a href="https://github.com/pranava0x0/vibe-coding-security/blob/HEAD/advisories/2026-09-gtig-adversarial-ai-agentic-pipelines.md"
+                                target="_blank"
+                                rel="noopener">github.com/pranava0x0/vibe-coding-security/.../2026-09-gtig-adversarial-ai-agentic-pipelines.md</a>
+                        </li>
+                        <li>Island — AgentBaiting: How Fake AI Skills Deliver Malware at Scale (Jul 20, 2026):
+                            <a href="https://www.island.io/blog/agentbaiting-how-800-fake-ai-skills-and-mcp-servers-delivered-malware"
+                                target="_blank" rel="noopener">island.io/blog/agentbaiting-how-800-fake-ai-skills-and-mcp-servers-delivered-malware</a>
+                        </li>
+                        <li>RH-ISAC — New AgentBaiting Campaign Delivers SmartLoader Via Fake AI Skills and MCP
+                            Servers:
+                            <a href="https://rhisac.org/threat-intelligence/new-agentbaiting-campaign-delivers-smartloader-via-fake-ai-skills-and-mcp-servers/"
+                                target="_blank"
+                                rel="noopener">rhisac.org/threat-intelligence/new-agentbaiting-campaign-delivers-smartloader-via-fake-ai-skills-and-mcp-servers</a>
+                        </li>
+                        <li>RelayShield — Your agent reads the README and that is the attack surface:
+                            <a href="https://huggingface.co/blog/relayshieldadmin/your-agent-reads-the-readme-and-that-is-the-attack"
+                                target="_blank"
+                                rel="noopener">huggingface.co/blog/relayshieldadmin/your-agent-reads-the-readme-and-that-is-the-attack</a>
+                        </li>
+                        <li>ASSET Research Group — GhostSplice disclosure:
+                            <a href="https://asset-group.github.io/disclosures/ghostsplice/" target="_blank"
+                                rel="noopener">asset-group.github.io/disclosures/ghostsplice</a></li>
+                        <li>The Hacker News — Malicious MCP Servers Can Split Instructions to Make AI Coding
+                            Agents Exfiltrate Secrets (Aug 11, 2026):
+                            <a href="https://thehackernews.com/2026/08/malicious-mcp-servers-can-split.html"
+                                target="_blank"
+                                rel="noopener">thehackernews.com/2026/08/malicious-mcp-servers-can-split.html</a>
+                        </li>
+                        <li>Future Parse — GhostSplice MCP Attack Splits Prompt Injection Across Tool
+                            Channels (Aug 21, 2026):
+                            <a href="https://futureparse.com/stories/ghostsplice-mcp-cross-channel-prompt-injection"
+                                target="_blank"
+                                rel="noopener">futureparse.com/stories/ghostsplice-mcp-cross-channel-prompt-injection</a>
+                        </li>
+                        <li>genai-security-project — AISVS crosswalk, Agentic Top 10 mapping:
+                            <a href="https://github.com/genai-security-project/crosswalk/blob/HEAD/agentic-top10/Agentic_AISVS.md"
+                                target="_blank"
+                                rel="noopener">github.com/genai-security-project/crosswalk/.../Agentic_AISVS.md</a>
+                        </li>
+                        <li>genai-security-project — AISVS crosswalk, DSGAI mapping:
+                            <a href="https://github.com/genai-security-project/crosswalk/blob/HEAD/dsgai-2026/DSGAI_AISVS.md"
+                                target="_blank"
+                                rel="noopener">github.com/genai-security-project/crosswalk/.../DSGAI_AISVS.md</a>
+                        </li>
+                        <li>OWASP AISVS — Glossary (tool poisoning):
+                            <a href="https://github.com/owasp/aisvs/blob/HEAD/1.01-dev/research/appendices/Appendix-A-Glossary.md"
+                                target="_blank"
+                                rel="noopener">github.com/owasp/aisvs/.../Appendix-A-Glossary.md</a></li>
+                        <li>rhodium-org — throughline-aisvs: AISVS 1.0 category map:
+                            <a href="https://github.com/rhodium-org/throughline-aisvs" target="_blank"
+                                rel="noopener">github.com/rhodium-org/throughline-aisvs</a></li>
+                    </ul>
+                </div>
+                <!-- Social Interaction Section -->
+                <div class="interaction-section">
+                    <div class="share-container">
+                        <h3>Share this post</h3>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn twitter" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + '&url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share on X</a>
+                            <a href="#" class="share-btn linkedin" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share on LinkedIn</a>
+                            <button onclick="navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')).catch(() => alert('Failed to copy link')); return false;" class="share-btn">Copy Link</button>
+                        </div>
+                    </div>
+
+                    <div class="comments-container">
+                        <h3>Comments & Reactions</h3>
+                        <script src="https://giscus.app/client.js"
+                            data-repo="gtkrish85/krishnasblog"
+                            data-repo-id="R_kgDORIInsQ"
+                            data-category="General"
+                            data-category-id="DIC_kwDORIInsQ4CmYfw"
+                            data-mapping="pathname"
+                            data-strict="0"
+                            data-reactions-enabled="1"
+                            data-emit-metadata="0"
+                            data-input-position="bottom"
+                            data-theme="light"
+                            data-lang="en"
+                            crossorigin="anonymous"
+                            async>
+                        </script>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Krishna. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
