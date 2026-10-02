@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Glasswing: The AI Model Anthropic Won't Release - Krishna</title>
+    <meta name="description"
+        content="Anthropic's Claude Mythos Preview is too good at finding security holes to release publicly. Project Glasswing gives it to vetted defenders instead.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index" class="logo">Krishna.</a>
+            <nav>
+                <ul>
+                    <li><a href="../index">Home</a></li>
+                    <li><a href="../about">About</a></li>
+                    <li><a href="../projects">Projects</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <div class="article-meta">
+                    <a href="../index" class="back-link">&larr; Back to Home</a>
+                    <p>October 2, 2026 &bull; AI Security</p>
+                </div>
+
+                <h1>Project Glasswing: The AI Model Anthropic Won't Release</h1>
+
+                <div class="article-content">
+                    <p>In April 2026, Anthropic did something unusual.</p>
+
+                    <p>It announced its most powerful model yet — Claude Mythos Preview — and said it would not
+                        release it to the public. Instead, the model went to a small group of trusted partners to
+                        fix security flaws in the world's most critical software. That effort is called
+                        <strong>Project Glasswing</strong>.</p>
+
+                    <h2>What is Project Glasswing?</h2>
+
+                    <p>Project Glasswing is a security program Anthropic launched on April 7, 2026.</p>
+
+                    <p>It gives selected organizations access to an unreleased model, <strong>Claude Mythos
+                            Preview</strong>, for one job: find and fix security vulnerabilities in critical
+                        software before attackers find them.</p>
+
+                    <p>The name is a nod to the glasswing butterfly, per launch coverage — a fitting image for a
+                        tool built to find flaws that have been hiding in plain sight for years.</p>
+
+                    <h2>Why this model is different</h2>
+
+                    <p>Anthropic says AI models have crossed a line. They can now beat all but the most skilled
+                        humans at finding and exploiting software vulnerabilities.</p>
+
+                    <p>Mythos Preview was not trained specifically for security. Anthropic says the skill is a
+                        side effect of strong coding and reasoning. Before the announcement, the model had found
+                        thousands of high-severity vulnerabilities — including some in <strong>every major
+                            operating system and every major web browser</strong>.</p>
+
+                    <h2>What it found</h2>
+
+                    <p>Three examples Anthropic shared:</p>
+
+                    <ul>
+                        <li>A <strong>27-year-old flaw in OpenBSD</strong>, one of the most security-hardened
+                            operating systems in the world. It let an attacker crash a machine just by connecting
+                            to it.</li>
+                        <li>A <strong>16-year-old flaw in FFmpeg</strong>, the video tool built into countless
+                            apps. The buggy line of code had been hit five million times by automated testing
+                            tools without anyone catching it.</li>
+                        <li>Several <strong>Linux kernel flaws</strong> the model chained together on its own to
+                            go from ordinary user access to full control of a machine.</li>
+                    </ul>
+
+                    <p>Anthropic says these were found almost entirely autonomously, reported to the maintainers,
+                        and are now patched.</p>
+
+                    <h2>Why you can't use it</h2>
+
+                    <p>Anthropic is blunt about the risk. A model this good at finding holes in software is
+                        dangerous in the wrong hands.</p>
+
+                    <p>So Mythos Preview will not be generally available. Anthropic says the safeguards needed to
+                        block its worst outputs do not exist yet — at Anthropic or, to its knowledge, anywhere
+                        else.</p>
+
+                    <p>The plan is to build those safeguards first, testing them on a future Claude Opus model
+                        that is less risky. General access to Mythos-class models is the goal, but only when it
+                        can be done safely.</p>
+
+                    <h2>Who gets access, and what it costs</h2>
+
+                    <p>The launch partners are a who's who of critical infrastructure: Amazon Web Services,
+                        Apple, Broadcom, Cisco, CrowdStrike, Google, JPMorganChase, the Linux Foundation,
+                        Microsoft, NVIDIA, and Palo Alto Networks.</p>
+
+                    <p>Anthropic also gave access to more than 40 additional organizations that build or maintain
+                        critical software, so they can scan their own and open-source systems.</p>
+
+                    <p>Anthropic committed up to <strong>$100 million in usage credits</strong> for the program,
+                        plus <strong>$4 million in donations</strong> to open-source security groups ($2.5
+                        million to Alpha-Omega and OpenSSF, $1.5 million to the Apache Software Foundation).</p>
+
+                    <p>After the credit period, partners pay <strong>$25 per million input tokens and $125 per
+                            million output tokens</strong>. Access runs through the Claude API, Amazon Bedrock,
+                        Google Vertex AI, and Microsoft Foundry.</p>
+
+                    <h2>The program grew fast</h2>
+
+                    <p>In June 2026, Anthropic expanded Project Glasswing to roughly 150 new organizations —
+                        about 200 in total, across more than 15 countries.</p>
+
+                    <p>The new group looks different from the first. Instead of big tech companies, it is heavy on
+                        critical infrastructure: power, water, healthcare, communications, and hardware vendors
+                        whose code other companies rely on.</p>
+
+                    <p>By the time of the June 2 expansion, the first partners had used Mythos Preview to find
+                        more than <strong>10,000 high- or critical-severity flaws</strong>, according to
+                        Anthropic.</p>
+
+                    <p>Anthropic also released <strong>Claude Security</strong>, a product that scans codebases
+                        and suggests patches using its public models like Claude Opus 4.8 — a version of the idea
+                        the rest of us can actually use.</p>
+
+                    <h2>The bigger picture</h2>
+
+                    <p>Within 6 to 12 months, Anthropic expects many other AI companies to have Mythos-class
+                        models — and some may release them without safeguards.</p>
+
+                    <p>When that happens, attacks could get faster and more common. Project Glasswing is a bet
+                        that defenders should get the head start.</p>
+
+                    <p>There is an honest catch. Finding flaws is now the easy part. Anthropic itself says the
+                        bottleneck has moved to verifying, disclosing, and patching the large numbers of
+                        vulnerabilities these models surface.</p>
+
+                    <h2>Bottom line</h2>
+
+                    <p>Project Glasswing is what happens when a model gets too capable for a normal launch: no
+                        public release, but a coordinated effort to point it at defense first.</p>
+
+                    <p>Whether this becomes the standard pattern for frontier models is the real story to watch.</p>
+
+                    <h2>References</h2>
+
+                    <p>All benchmark figures, vulnerability counts, partner quotes, and program details are
+                        Anthropic's own, as reported on its official pages below — they are not independently
+                        measured by this post.</p>
+
+                    <ol>
+                        <li>Anthropic — Project Glasswing: Securing critical software for the AI era (April 7,
+                            2026):
+                            <a href="https://www.anthropic.com/glasswing" target="_blank"
+                                rel="noopener">anthropic.com/glasswing</a></li>
+                        <li>Anthropic — Expanding Project Glasswing (June 2, 2026):
+                            <a href="https://www.anthropic.com/news/expanding-project-glasswing" target="_blank"
+                                rel="noopener">anthropic.com/news/expanding-project-glasswing</a></li>
+                        <li>Infosecurity Magazine — Anthropic Launches Project Glasswing to Fix Software Bugs
+                            With AI:
+                            <a href="https://www.infosecurity-magazine.com/news/anthropic-launch-project-glasswing/"
+                                target="_blank"
+                                rel="noopener">infosecurity-magazine.com/news/anthropic-launch-project-glasswing</a>
+                        </li>
+                        <li>Infosecurity Magazine — Anthropic Expands Mythos Access to 150 More Organizations:
+                            <a href="https://www.infosecurity-magazine.com/news/anthropic-glasswing-expansion/"
+                                target="_blank"
+                                rel="noopener">infosecurity-magazine.com/news/anthropic-glasswing-expansion</a>
+                        </li>
+                        <li>TechCrunch — Anthropic scales Claude Mythos to critical infrastructure in 15+
+                            countries (June 2, 2026):
+                            <a href="https://techcrunch.com/2026/06/02/anthropic-scales-claude-mythos-to-critical-infrastructure-in-15-countries/"
+                                target="_blank"
+                                rel="noopener">techcrunch.com/2026/06/02/anthropic-scales-claude-mythos-to-critical-infrastructure-in-15-countries</a>
+                        </li>
+                    </ol>
+                </div>
+                <!-- Social Interaction Section -->
+                <div class="interaction-section">
+                    <div class="share-container">
+                        <h3>Share this post</h3>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn twitter"
+                                onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + '&url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share
+                                on X</a>
+                            <a href="#" class="share-btn linkedin"
+                                onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share
+                                on LinkedIn</a>
+                            <button
+                                onclick="navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')).catch(() => alert('Failed to copy link')); return false;"
+                                class="share-btn">Copy Link</button>
+                        </div>
+                    </div>
+
+                    <div class="comments-container">
+                        <h3>Comments & Reactions</h3>
+                        <script src="https://giscus.app/client.js"
+                            data-repo="gtkrish85/krishnasblog"
+                            data-repo-id="R_kgDORIInsQ"
+                            data-category="General"
+                            data-category-id="DIC_kwDORIInsQ4CmYfw"
+                            data-mapping="pathname"
+                            data-strict="0"
+                            data-reactions-enabled="1"
+                            data-emit-metadata="0"
+                            data-input-position="bottom"
+                            data-theme="light"
+                            data-lang="en"
+                            crossorigin="anonymous"
+                            async>
+                            </script>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Krishna. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
