@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 8 Factors That Decide What an AI Model Really Costs - Krishna</title>
+    <meta name="description"
+        content="Two models can sit 100× apart on the price chart and land within cents of each other on your bill. Here are the eight factors that decide which way it goes, with math you can check.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index" class="logo">Krishna.</a>
+            <nav>
+                <ul>
+                    <li><a href="../index">Home</a></li>
+                    <li><a href="../about">About</a></li>
+                    <li><a href="../projects">Projects</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <div class="article-meta">
+                    <a href="../index" class="back-link">&larr; Back to Home</a>
+                    <p>October 3, 2026 &bull; Comparing AI Models</p>
+                </div>
+
+                <h1>The 8 Factors That Decide What an AI Model Really Costs</h1>
+
+                <div class="article-content">
+                    <p>Every AI pricing chart shows you one number: dollars per million tokens.</p>
+
+                    <p>That number is real. It is also close to useless for predicting your actual bill.</p>
+
+                    <p>Two models can sit 100× apart on the price chart and land within cents of each other on
+                        your credit card — or the other way around. Here are the eight factors that decide
+                        which way it goes, with the math you can check yourself.</p>
+
+                    <h2>The price sheet at a glance</h2>
+
+                    <p>US dollars per 1M tokens, verified against official pricing pages on October 3, 2026.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Input</th>
+                                <th>Output</th>
+                                <th>Cache read</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>GPT-6 Luna</td>
+                                <td>$0.10</td>
+                                <td>$0.50</td>
+                                <td>10% of input</td>
+                                <td>The cheap workhorse</td>
+                            </tr>
+                            <tr>
+                                <td>DeepSeek V4.1-Flash</td>
+                                <td>$0.15</td>
+                                <td>$0.60</td>
+                                <td>$0.003</td>
+                                <td>Off-peak rates; doubles in weekday peak hours (UTC)</td>
+                            </tr>
+                            <tr>
+                                <td>Gemini 3.8 Flash</td>
+                                <td>$0.75</td>
+                                <td>$3.75</td>
+                                <td>0.1× input</td>
+                                <td>Intro pricing; doubles to $1.50/$7.50 on Jan 1, 2027</td>
+                            </tr>
+                            <tr>
+                                <td>GPT-6.1 Sol</td>
+                                <td>$2</td>
+                                <td>$10</td>
+                                <td>10% of input</td>
+                                <td>&gt;272K-token requests re-tier the whole bill</td>
+                            </tr>
+                            <tr>
+                                <td>Claude Sonnet 5.5</td>
+                                <td>$2</td>
+                                <td>$10</td>
+                                <td>0.1× input</td>
+                                <td>The daily-driver tier</td>
+                            </tr>
+                            <tr>
+                                <td>Claude Opus 5.5</td>
+                                <td>$4</td>
+                                <td>$20</td>
+                                <td>0.05× input</td>
+                                <td>Step up for harder problems</td>
+                            </tr>
+                            <tr>
+                                <td>Gemini 4 Argon</td>
+                                <td>$2</td>
+                                <td>$10</td>
+                                <td>$0.10 (95% off input)</td>
+                                <td>Introductory rate; Google says the regular rate will be $4/$20 (not yet in
+                                    effect)</td>
+                            </tr>
+                            <tr>
+                                <td>GPT-6 Astra</td>
+                                <td>$10</td>
+                                <td>$50</td>
+                                <td>10% of input</td>
+                                <td>Frontier flagship</td>
+                            </tr>
+                            <tr>
+                                <td>Claude Fable 5.1</td>
+                                <td>$10</td>
+                                <td>$50</td>
+                                <td>0.025× input</td>
+                                <td>Frontier flagship</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Output is ~90% of a real coding turn's cost (see Factor 2), so read the Output column
+                        first.</p>
+
+                    <h2>1. Cost per finished task, not per token</h2>
+
+                    <p>You never buy tokens. You buy <em>done work</em> — a fixed bug, a working feature, a test
+                        that passes.</p>
+
+                    <p>So the only fair comparison is: how much did the finished task cost?</p>
+
+                    <p>That math includes retries. It includes the extra turns where the model apologizes and
+                        tries again. And it includes your own time babysitting it, which is the most expensive
+                        input of all.</p>
+
+                    <p><strong>A worked example.</strong> Say one agent coding turn is 100K tokens of context in
+                        (cached) and 10K tokens out. At official rates:</p>
+
+                    <ul>
+                        <li>GPT-6 Luna: about <strong>$0.006 per turn</strong>, so $100 buys ~16,600 turns</li>
+                        <li>Claude Sonnet 5.5: about <strong>$0.12 per turn</strong>, so $100 buys ~830 turns
+                        </li>
+                        <li>GPT-6 Astra: about <strong>$0.60 per turn</strong>, so $100 buys ~166 turns</li>
+                    </ul>
+
+                    <p>Luna buys roughly <strong>100× more turns</strong> than Astra for the same $100. But
+                        flip it around: Astra only needs to succeed where Luna fails more than 99 times out of
+                        100 for Astra to be the cheaper <em>task</em>. On hard bugs, that happens. On
+                        boilerplate, it doesn't.</p>
+
+                    <p><strong>What to do:</strong> for your top 3 recurring tasks, count turns per finished
+                        task per model. That one personal number beats every benchmark.</p>
+
+                    <h2>2. Input vs output pricing — coding is output-heavy</h2>
+
+                    <p>Every model charges two prices: input (what you send) and output (what it writes back).
+                        Output is almost always the expensive half.<sup><a
+                                href="https://platform.openai.com/docs/pricing" target="_blank"
+                                rel="noopener">[1]</a></sup><sup><a
+                                href="https://docs.anthropic.com/en/docs/about-claude/pricing" target="_blank"
+                                rel="noopener">[2]</a></sup></p>
+
+                    <p>Look at GPT-6.1 Sol: $2 per million in, $10 per million out. Claude Sonnet 5.5 is the
+                        same $2/$10. The top tier doubles down: GPT-6 Astra and Claude Fable 5.1 charge $10 in
+                        / <strong>$50 out</strong>.</p>
+
+                    <p>Now rerun that coding turn. 100K cached input on Sol costs $0.01. The 10K of output
+                        costs $0.10.</p>
+
+                    <p><strong>The output is ~90% of the turn's cost.</strong> Code generation, test writing,
+                        long explanations — it's all output. A model that looks cheap on input can be five
+                        times more expensive than you budgeted once it starts writing.</p>
+
+                    <p><strong>What to do:</strong> compare output prices first. Input price is the small print.
+                    </p>
+
+                    <h2>3. Verbosity: some models burn more tokens to do the same job</h2>
+
+                    <p>Price per token assumes every model spends the same number of tokens on your task. They
+                        don't.</p>
+
+                    <p>Independent testing by Artificial Analysis found Gemini 4 Argon using roughly
+                        <strong>62,000 output tokens per task</strong> while GPT-6 Astra used about
+                        <strong>27,000</strong> on the same work. Same job, more than double the
+                        tokens.<sup><a
+                                href="https://the-decoder.com/google-gemini-4-argon-closes-the-gap-with-openai-and-anthropic-but-doesnt-take-a-clear-lead/"
+                                target="_blank" rel="noopener">[9]</a></sup></p>
+
+                    <p>Argon's rate ($2/$10) still wins that math — 62K out costs $0.62 vs Astra's $1.35 for
+                        27K — but that is a ~2× gap, not the 5× gap the rate card suggests, and it shrank that
+                        far purely because of verbosity. Reasoning models especially will think longer, and
+                        you pay for every thought.</p>
+
+                    <p><strong>What to do:</strong> multiply the sticker price by the tokens-per-task, not by
+                        the token count you're imagining. Two numbers, not one.</p>
+
+                    <h2>4. Context gets re-read every turn — and long contexts get re-priced</h2>
+
+                    <p>An agent doesn't send your question once. Every turn, it re-sends the conversation: your
+                        files, the history, the tool results. A 30-turn session pays for its context roughly 30
+                        times.</p>
+
+                    <p>Two things keep this from bankrupting you — and one thing that can:</p>
+
+                    <ul>
+                        <li><strong>Prompt caching.</strong> Cached input is 90–99% cheaper than fresh input
+                            at every major vendor. OpenAI charges 10% of input price for cached reads;
+                            Anthropic's Sonnet 5.5 cache reads cost 0.1× input; DeepSeek's off-peak cache hit
+                            is $0.003 per million against a $0.15 fresh price. If your tool doesn't cache, you
+                            are overpaying by about an order of magnitude.<sup><a
+                                    href="https://platform.openai.com/docs/pricing" target="_blank"
+                                    rel="noopener">[1]</a></sup><sup><a
+                                    href="https://docs.anthropic.com/en/docs/about-claude/pricing"
+                                    target="_blank" rel="noopener">[2]</a></sup><sup><a
+                                    href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank"
+                                    rel="noopener">[4]</a></sup></li>
+                        <li><strong>The long-context cliff.</strong> OpenAI re-prices the <em>entire
+                                request</em> once input passes 272K tokens: 2× the input rate and 1.5× the
+                            output rate. A session that quietly grows past that line doubles its own bill
+                            mid-run, no warning shown.<sup><a href="https://platform.openai.com/docs/pricing"
+                                    target="_blank" rel="noopener">[1]</a></sup></li>
+                        <li><strong>Batch discounts</strong> (Anthropic's Batch API takes 50% off input and
+                            output) help only if your work can wait for async results — fine for bulk edits,
+                            useless for interactive coding.<sup><a
+                                    href="https://docs.anthropic.com/en/docs/about-claude/pricing"
+                                    target="_blank" rel="noopener">[2]</a></sup></li>
+                    </ul>
+
+                    <p><strong>What to do:</strong> watch your context size like a fuel gauge, compact or
+                        restart sessions before they bloat, and confirm your tool actually uses caching.</p>
+
+                    <h2>5. Subscription vs API: do the break-even math, not the vibes</h2>
+
+                    <p>A subscription is a flat fee with a usage cap. The API is a meter with no cap. Neither
+                        is "cheaper" — it depends on which side of the break-even line your usage lands.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>Price</th>
+                                <th>What you actually get</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Google AI Plus</td>
+                                <td>$4.99/mo</td>
+                                <td>Gemini access at the budget tier (the value pick)</td>
+                            </tr>
+                            <tr>
+                                <td>ChatGPT Plus</td>
+                                <td>$20/mo</td>
+                                <td>ChatGPT access; zero API credits included</td>
+                            </tr>
+                            <tr>
+                                <td>Claude Pro</td>
+                                <td>$20/mo ($17/mo billed yearly)</td>
+                                <td>Claude + Claude Code for interactive work</td>
+                            </tr>
+                            <tr>
+                                <td>Claude Max 5x / 20x</td>
+                                <td>$100 / $200 per month</td>
+                                <td>Same models, much higher usage caps</td>
+                            </tr>
+                            <tr>
+                                <td>Google AI Pro</td>
+                                <td>$19.99/mo</td>
+                                <td>Higher Gemini limits and more storage</td>
+                            </tr>
+                            <tr>
+                                <td>Google AI Ultra</td>
+                                <td>$99.99/mo and up</td>
+                                <td>Top Gemini tier</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Rough napkin math: Claude Pro is $20/month. On the API, a Sonnet 5.5 coding turn costs
+                        about $0.12. So $20 of API buys ~165 turns a month. If your agent habit is bigger than
+                        that, the subscription wins — until you hit its session caps, at which point the meter
+                        (Max tiers at $100–$200) is the only way up.</p>
+
+                    <p>The trap is paying for both by accident: a ChatGPT Plus subscription includes zero API
+                        credits, and vice versa. Separate products, separate bills.</p>
+
+                    <p><strong>What to do:</strong> one flagship subscription for interactive work, API for
+                        agents and scripts, and only upgrade tiers when caps actually interrupt you — roughly
+                        once a week is the honest threshold.</p>
+
+                    <h2>6. Free tiers have a price too</h2>
+
+                    <p>Free is a real option for learning — the free tiers of ChatGPT, Claude, and the Gemini
+                        API are genuinely capable. But read what you're paying with:</p>
+
+                    <ul>
+                        <li><strong>Your content.</strong> On Google's Gemini API free tier, Google says your
+                            prompts and responses may be used to improve its products. Rule: never paste
+                            secrets, client code, or anything you'd mind a stranger reading.<sup><a
+                                    href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank"
+                                    rel="noopener">[3]</a></sup></li>
+                        <li><strong>Your flow.</strong> Free tiers cap messages per window, then make you wait
+                            for a reset. Fine for homework, miserable mid-debugging-session.</li>
+                        <li><strong>Your lock-in.</strong> Free tiers teach you one tool's habits. That's a
+                            cost too (see factor 8).</li>
+                    </ul>
+
+                    <p><strong>What to do:</strong> free for learning and throwaway projects; the moment real
+                        code or deadlines show up, pay the $20.</p>
+
+                    <h2>7. Prices have dates on them</h2>
+
+                    <p>Per-token prices are launch marketing now. They move.</p>
+
+                    <p>The big one this year: Gemini 3.8 Flash launched at $0.75 in / $3.75 out —
+                        <em>introductory</em> pricing that Google states plainly on its pricing page. On
+                        <strong>January 1, 2027 it doubles to $1.50/$7.50</strong>. If Flash is your default,
+                        your Q1 bill doubles while you sleep.<sup><a
+                                href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank"
+                                rel="noopener">[3]</a></sup></p>
+
+                    <p>It's not just Google. DeepSeek halves all its rates outside its weekday UTC peak
+                        windows (01:00–04:00 and 06:00–10:00 UTC, Monday to Friday) — the same code costs half
+                        as much off-peak as it does during a weekday UTC morning peak.<sup><a
+                                href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank"
+                                rel="noopener">[4]</a></sup></p>
+
+                    <p><strong>What to do:</strong> budget on the price you'll pay in three months, not
+                        today's headline. Check the pricing page's footnotes for the words "introductory" and
+                        "through."</p>
+
+                    <h2>8. Switching models costs money too</h2>
+
+                    <p>The cheapest model on paper can be expensive to <em>adopt</em>:</p>
+
+                    <ul>
+                        <li><strong>Prompt rewrites.</strong> Prompts tuned for one model's habits
+                            underperform on another until you re-tune them.</li>
+                        <li><strong>Cached prompts don't transfer.</strong> Your cache discount lives with one
+                            vendor; switching means paying full input prices while the new cache warms up.
+                        </li>
+                        <li><strong>Tool compatibility.</strong> Agents wired to one vendor's function-calling
+                            quirks need testing, not just a new API key. (One exception: DeepSeek's API
+                            accepts both OpenAI and Anthropic request formats, so pointing existing tools at
+                            it is a config change.)</li>
+                        <li><strong>Re-earning trust.</strong> You re-run your evals, re-learn the failure
+                            modes, re-build your instincts.</li>
+                    </ul>
+
+                    <p>Economics favors a <strong>routing strategy</strong> instead of a single winner: cheap
+                        models (Luna at $0.10/$0.50, DeepSeek Flash) take first passes, boilerplate, and
+                        tests; a flagship handles only what the cheap model fails. You pay flagship prices on
+                        a small slice of your work instead of all of it — and if a vendor doubles prices in
+                        January, you're only re-routing one lane, not rebuilding the garage.</p>
+
+                    <h2>The 8 factors at a glance</h2>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Factor</th>
+                                <th>What it does to your bill</th>
+                                <th>What to check</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Cost per finished task</td>
+                                <td>Retries and failed attempts multiply the sticker price</td>
+                                <td>Turns per finished task, per model</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Input vs output pricing</td>
+                                <td>Output is ~90% of a coding turn's cost</td>
+                                <td>The output column first, always</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Verbosity</td>
+                                <td>A model that writes 2× the tokens costs 2× at the same rate</td>
+                                <td>Tokens per task, not per prompt</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Context re-reads &amp; cliffs</td>
+                                <td>Uncached context re-bills every turn; &gt;272K re-tiers the whole request
+                                </td>
+                                <td>Whether your tool caches; session size</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Subscription vs API</td>
+                                <td>Flat fee vs meter — break-even depends on your real usage</td>
+                                <td>Turns per month vs the sub's caps</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Free-tier traps</td>
+                                <td>Your content may train the product; caps reset mid-session</td>
+                                <td>The data-use line in the fine print</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Price-change dates</td>
+                                <td>Intro prices expire; peak pricing doubles at set hours</td>
+                                <td>Footnotes: "introductory," "through Dec 31"</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Switching costs</td>
+                                <td>Prompt rewrites, cold caches, tool re-testing</td>
+                                <td>Routing cheap models first keeps exits cheap</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>The short version</h2>
+
+                    <p>Cost per finished task beats cost per token. Output price beats input price.
+                        Tokens-per-task beats both. Cache your context, watch for the 272K cliff, match
+                        subscriptions to your real usage, treat free tiers as samples not infrastructure,
+                        budget for the price <em>after</em> the intro expires, and route cheap-first so
+                        switching stays cheap.</p>
+
+                    <p>The $100 experiment says it all: the same money buys 166 turns or 16,600. The model's
+                        price tag tells you which end of that range you're shopping in — these eight factors
+                        decide where you actually land.</p>
+
+                    <h2>Disclaimers</h2>
+
+                    <ul>
+                        <li>This post is not financial advice, and it is not an endorsement of any vendor or
+                            plan. It is a framework for comparing costs, written from the numbers available on
+                            the dates stated.</li>
+                        <li>All prices were verified against the vendors' official pricing pages on October
+                            3, 2026. Prices, tiers, usage limits, and introductory offers change without
+                            notice — check the vendor page before you buy.</li>
+                        <li>The vendor names mentioned in this post are not sponsors of this blog, and no
+                            affiliate or referral links are included. Product names are trademarks of their
+                            owners and are used here for identification only.</li>
+                        <li>The worked examples (like the $100 coding-turns math) use the assumptions stated
+                            in the text. They are estimates to compare models, not measured benchmarks from
+                            production workloads — your own turn counts will differ, which is Factor 1 in
+                            action.</li>
+                    </ul>
+
+                    <h2>References</h2>
+
+                    <p>Pricing data courtesy of the vendors' official pricing pages (OpenAI, Anthropic,
+                        Google, DeepSeek), checked October 3, 2026; independent token-usage testing courtesy
+                        of Artificial Analysis, via The Decoder.</p>
+
+                    <ol>
+                        <li>OpenAI — API pricing (GPT-6 Astra, GPT-6.1 Sol, GPT-6 Luna; cached input at 10%
+                            of input; long-context rates above 272K input tokens):
+                            <a href="https://platform.openai.com/docs/pricing" target="_blank"
+                                rel="noopener">platform.openai.com/docs/pricing</a></li>
+                        <li>Anthropic — Claude model pricing (Sonnet 5.5, Opus 5.5, Fable 5.1; 0.1× cache
+                            reads standard, 0.025× on Fable 5.1, 0.05× on Opus 5.5; Batch API 50% discount):
+                            <a href="https://docs.anthropic.com/en/docs/about-claude/pricing" target="_blank"
+                                rel="noopener">docs.anthropic.com/en/docs/about-claude/pricing</a></li>
+                        <li>Google — Gemini Developer API pricing (3.8 Flash $0.75/$3.75 until Dec 31, 2026,
+                            then $1.50/$7.50; cache reads at 0.1× input; free-tier content used to improve
+                            Google's products):
+                            <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank"
+                                rel="noopener">ai.google.dev/gemini-api/docs/pricing</a></li>
+                        <li>DeepSeek — Models &amp; Pricing (V4.1-Flash off-peak/peak rates, $0.003 cache-hit
+                            pricing, OpenAI/Anthropic-format base URLs):
+                            <a href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank"
+                                rel="noopener">api-docs.deepseek.com/quick_start/pricing</a></li>
+                        <li>Google — "Introducing Gemini 4 Argon" (introductory $2/$10 with cached input 95%
+                            off; regular $4/$20 rate announced):
+                            <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"
+                                target="_blank"
+                                rel="noopener">blog.google/.../gemini-4-argon</a></li>
+                        <li>Anthropic — Claude plans and pricing (Pro $20/month or $17/month billed yearly,
+                            Max 5x/20x from $100):
+                            <a href="https://claude.com/pricing" target="_blank"
+                                rel="noopener">claude.com/pricing</a></li>
+                        <li>OpenAI Help Center — "What is ChatGPT Plus?" ($20/month; API billed separately):
+                            <a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus"
+                                target="_blank"
+                                rel="noopener">help.openai.com/.../what-is-chatgpt-plus</a></li>
+                        <li>Google AI plan tiers (AI Plus $4.99/mo, AI Pro $19.99/mo, AI Ultra from
+                            $99.99/mo):
+                            <a href="https://gemini.google/subscriptions/" target="_blank"
+                                rel="noopener">gemini.google/subscriptions</a></li>
+                        <li>The Decoder, reporting Artificial Analysis testing (Gemini 4 Argon ~62K vs GPT-6
+                            Astra ~27K average output tokens per task):
+                            <a href="https://the-decoder.com/google-gemini-4-argon-closes-the-gap-with-openai-and-anthropic-but-doesnt-take-a-clear-lead/"
+                                target="_blank"
+                                rel="noopener">the-decoder.com/.../gemini-4-argon-closes-the-gap</a></li>
+                    </ol>
+
+                    <p><em>Prices checked against official vendor pages on October 3, 2026. They will move —
+                            the factors won't.</em></p>
+                </div>
+                <!-- Social Interaction Section -->
+                <div class="interaction-section">
+                    <div class="share-container">
+                        <h3>Share this post</h3>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn twitter"
+                                onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + '&url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share
+                                on X</a>
+                            <a href="#" class="share-btn linkedin"
+                                onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share
+                                on LinkedIn</a>
+                            <button
+                                onclick="navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')).catch(() => alert('Failed to copy link')); return false;"
+                                class="share-btn">Copy Link</button>
+                        </div>
+                    </div>
+
+                    <div class="comments-container">
+                        <h3>Comments & Reactions</h3>
+                        <script src="https://giscus.app/client.js"
+                            data-repo="gtkrish85/krishnasblog"
+                            data-repo-id="R_kgDORIInsQ"
+                            data-category="General"
+                            data-category-id="DIC_kwDORIInsQ4CmYfw"
+                            data-mapping="pathname"
+                            data-strict="0"
+                            data-reactions-enabled="1"
+                            data-emit-metadata="0"
+                            data-input-position="bottom"
+                            data-theme="light"
+                            data-lang="en"
+                            crossorigin="anonymous"
+                            async>
+                            </script>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Krishna. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
