@@ -356,8 +356,8 @@ header::before {
     display: block;
     flex-basis: 100%;
     width: 100%;
-    aspect-ratio: 16 / 9;
-    background: url('blog-banner.webp') center / cover no-repeat;
+    aspect-ratio: 3 / 1;
+    background: url('blog-banner.webp') center 30% / cover no-repeat;
     border-radius: 10px;
     margin-bottom: 28px;
 }
