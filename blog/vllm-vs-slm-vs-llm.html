@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vLLM vs SLM vs LLM: You're Comparing Three Different Things - Krishna</title>
+    <meta name="description"
+        content="vLLM is a serving engine, SLM is a size class of models, LLM is a class of models. What each one is, how they fit together, when vLLM helps, and how to pick a model size — with verified sources.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="../index" class="logo">Krishna.</a>
+            <nav>
+                <ul>
+                    <li><a href="../index">Home</a></li>
+                    <li><a href="../about">About</a></li>
+                    <li><a href="../projects">Projects</a></li>
+                </ul>
+            </nav>
+        </header>
+        <img src="../blog-banner.webp" alt="Krishna's Blog &mdash; AI, Technology &amp; Software Engineering" style="width: 100%; height: auto; display: block; border-radius: 8px; margin: 16px 0;">
+
+
+        <main>
+            <article>
+                <div class="article-meta">
+                    <a href="../index" class="back-link">&larr; Back to Home</a>
+                    <p>November 12, 2026 &bull; AI Engineering</p>
+                </div>
+
+                <h1>vLLM <small>vs</small> SLM <small>vs</small> LLM: You're Comparing Three Different Things</h1>
+
+                <div class="article-content">
+                    <p>A team planning a support chatbot asks: "Should we use vLLM or an SLM?" That question has no answer, because it compares things from three different categories. vLLM is a serving engine. SLM is a size class of models. LLM is a class of models. Asking "vLLM or SLM" is like asking "should we use a truck or a small box" — the truck carries the box.</p>
+
+                    <p>This post defines each term from its primary source, shows how they fit together, and ends with the practical decisions: when vLLM helps, when it doesn't, and how to pick a model size.</p>
+
+                    <h2>LLM: the model class</h2>
+
+                    <p>A large language model is a language model trained at large scale. The landmark paper is "Language Models are Few-Shot Learners" (Brown et al., 2020), which trained GPT-3, an autoregressive language model with 175 billion parameters — 10x more than any previous non-sparse language model — and showed that scaling up greatly improves task-agnostic, few-shot performance [3].</p>
+
+                    <p>Two things matter in that definition. First, "large" refers to scale: parameters, training data, and compute. Second, the capability that made LLMs notable is generality: one model applied to translation, question-answering, and reasoning without task-specific fine-tuning, with tasks specified purely via text [3]. An LLM is a thing you train and evaluate. It is not a serving system.</p>
+
+                    <h2>SLM: the size class</h2>
+
+                    <p>A small language model is the same kind of thing, smaller. There is no standards body that defines where "small" ends — SLM is a vendor and community label, not a specification. The clearest primary-source use comes from Microsoft, which introduced the Phi-3 family in April 2024 as "the most capable and cost-effective small language models (SLMs) available" [7]. The smallest, Phi-3-mini, has 3.8 billion parameters and was trained on 3.3 trillion tokens; the same family's Phi-3-small is 7B and Phi-3-medium is 14B [4][7].</p>
+
+                    <p>The Phi-3 technical report gives the concrete case for why size is not the whole story: phi-3-mini scores 69% on MMLU and 8.38 on MT-bench, which the authors report as rivalling models such as Mixtral 8x7B and GPT-3.5, "despite being small enough to be deployed on a phone" [4]. Microsoft is equally direct about the trade-off: Phi-3 models "do not perform as well on factual knowledge benchmarks (such as TriviaQA) as the smaller model size results in less capacity to retain facts" [7].</p>
+
+                    <p>Microsoft's own guidance on when SLMs fit: resource-constrained environments including on-device and offline inference, latency-bound scenarios where fast response times are critical, and cost-constrained use cases, particularly those with simpler tasks [7]. NVIDIA's June 2025 position paper makes the same argument for agentic systems, arguing that SLMs are "sufficiently powerful, inherently more suitable, and necessarily more economical for many invocations in agentic systems" — while noting that where general-purpose conversational ability is essential, heterogeneous systems that invoke multiple models are the natural choice [8].</p>
+
+                    <p>So SLM is a statement about the size and cost of a model, not about a different technology. An SLM is still a language model. The label tells you what it costs to run, not what it is.</p>
+
+                    <h2>vLLM: the serving engine</h2>
+
+                    <p>vLLM is "a fast and easy-to-use library for LLM inference and serving," originally developed in the Sky Computing Lab at UC Berkeley [1] and released as open source under the Apache 2.0 license [9]. It does not train models and it does not make a model smarter. It runs models and serves their outputs to applications.</p>
+
+                    <p>What it does, per its own documentation: efficient management of attention key and value memory with PagedAttention, continuous batching of incoming requests, chunked prefill, prefix caching, quantization (FP8, INT8, INT4, GPTQ, AWQ, and others), speculative decoding, and an OpenAI-compatible API server [1]. It supports 200+ model architectures from Hugging Face, including decoder-only models such as Llama, Qwen, and Gemma, and mixture-of-experts models such as Mixtral and DeepSeek-V3 [1].</p>
+
+                    <h2>The three, side by side</h2>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>LLM</th>
+                                <th>SLM</th>
+                                <th>vLLM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>What it is</strong></td>
+                                <td>A class of models</td>
+                                <td>A size class of models</td>
+                                <td>An inference and serving engine</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Answers the question</strong></td>
+                                <td>What can the model do?</td>
+                                <td>What does it cost to run?</td>
+                                <td>How do we serve it efficiently?</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Example</strong></td>
+                                <td>GPT-3, 175B parameters [3]</td>
+                                <td>Phi-3-mini, 3.8B parameters [4]</td>
+                                <td>The library that serves either one [1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>You choose it when</strong></td>
+                                <td>You need broad, general capability</td>
+                                <td>The task is narrow, repeated, or latency- and cost-bound [7]</td>
+                                <td>You have serving traffic and want throughput per GPU [6]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>How they fit together</h2>
+
+                    <p>You serve an SLM or an LLM with vLLM — or with something else. The engine and the model are independent choices, and vLLM's own documentation demonstrates both ends of the range: its serving quickstart launches a 1.5B-parameter model, Qwen2.5-1.5B-Instruct, while its launch benchmarks ran LLaMA-7B and LLaMA-13B [2][5]. The question is never "vLLM or an SLM." The questions are, in order: which model is good enough for the task, and how do we serve it.</p>
+
+                    <h2>How vLLM makes serving faster</h2>
+
+                    <p>Serving a language model is mostly a memory problem. During autoregressive decoding, every input token produces attention key and value tensors — the KV cache — that must stay in GPU memory while the model generates the next tokens. The vLLM launch post states the scale plainly: the KV cache takes up to 1.7 GB for a single sequence in LLaMA-13B, and its size depends on sequence length, which is variable and unpredictable [5]. The vLLM team measured 60–80% memory waste in the serving systems of that era, lost to fragmentation and over-reservation [5].</p>
+
+                    <p><strong>PagedAttention.</strong> vLLM's answer is PagedAttention, an attention algorithm inspired by virtual memory and paging in operating systems. It partitions each sequence's KV cache into blocks, each holding the keys and values for a fixed number of tokens, and stores those blocks in non-contiguous memory — contiguous logical blocks mapped to non-contiguous physical blocks through a block table, allocated on demand as tokens are generated [5]. The paper's version of the claim: PagedAttention gives "near-zero waste in KV cache memory" and flexible sharing of KV cache within and across requests [6]. The launch post quantifies it as under 4% waste in practice [5]. The same block-table mechanism lets sequences share blocks — for example, parallel sampling generates multiple outputs from one prompt while sharing the prompt's computation and memory — cutting memory use for those sampling methods by up to 55% [5].</p>
+
+                    <p><strong>Continuous batching.</strong> vLLM also batches requests continuously: new requests join the running batch as slots free up, instead of waiting for an entire batch to finish before the next one starts. The documentation lists continuous batching alongside chunked prefill and prefix caching as core serving features [1]. The effect is higher GPU utilization — the GPU spends less time idle between requests.</p>
+
+                    <p><strong>Throughput vs latency.</strong> These mechanisms raise throughput: more tokens and more requests completed per unit of time on the same hardware. The peer-reviewed result, from the PagedAttention paper presented at SOSP 2023, is that vLLM improves the throughput of popular LLMs by 2–4x "with the same level of latency" compared to the state-of-the-art systems of the time, FasterTransformer and Orca — with the improvement more pronounced for longer sequences, larger models, and more complex decoding algorithms [6]. The project's own June 2023 launch post reported a larger number against a general-purpose baseline: up to 24x higher throughput than HuggingFace Transformers, and up to 3.5x higher than TGI, measured on LLaMA-7B on an NVIDIA A10G and LLaMA-13B on an NVIDIA A100 (40GB) with request lengths sampled from ShareGPT [5]. The two numbers are not contradictory; they measure different baselines, and the paper's 2–4x against the best systems of its day is the one to quote.</p>
+
+                    <p>Note what throughput is not: it is not single-request latency. If one user sends one prompt and waits, the engine's batching has little to batch, and the wait is dominated by the model's own forward passes. vLLM's gains show up when requests share the GPU — concurrent users, background batch jobs, or sampling many outputs. That is the throughput/latency distinction in one line: vLLM makes the GPU busier, not the model faster.</p>
+
+                    <h2>Running it</h2>
+
+                    <p>The quickstart is short, and it is worth showing in full because both modes of vLLM appear there. Prerequisites per the documentation: Linux, Python 3.11–3.14 [2].</p>
+
+                    <p>Install:</p>
+
+                    <pre><code>
+uv venv --python 3.12 --seed
+source .venv/bin/activate
+uv pip install vllm --torch-backend=auto
+vllm download-kernels
+                    </code></pre>
+
+                    <p>Offline batched inference — a list of prompts, run through the engine in one process [2]:</p>
+
+                    <pre><code>
+from vllm import LLM, SamplingParams
+
+prompts = [
+    "Hello, my name is",
+    "The president of the United States is",
+    "The capital of France is",
+    "The future of AI is",
+]
+sampling_params = SamplingParams(temperature=0.8, top_p=0.95)
+
+llm = LLM(model="facebook/opt-125m")
+
+outputs = llm.generate(prompts, sampling_params)
+for output in outputs:
+    prompt = output.prompt
+    generated_text = output.outputs[0].text
+    print(f"Prompt: {prompt!r}, Generated text: {generated_text!r}")
+                    </code></pre>
+
+                    <p>Online serving — the same engine behind an OpenAI-compatible API. The quickstart's example serves a 1.5B model, which is the SLM-served-by-vLLM case in one line [2]:</p>
+
+                    <pre><code>
+vllm serve Qwen/Qwen2.5-1.5B-Instruct
+                    </code></pre>
+
+                    <p>By default the server starts at <code>http://localhost:8000</code>, hosts one model at a time, and implements the OpenAI list-models, completions, and chat-completions endpoints, so existing OpenAI clients work against it by pointing at the new base URL [2]:</p>
+
+                    <pre><code>
+curl http://localhost:8000/v1/models
+                    </code></pre>
+
+                    <p>Two details from the documentation worth knowing before you build on this: <code>llm.generate</code> does not apply the model's chat template automatically, so for an instruct or chat model, apply the template yourself or use <code>llm.chat</code> [2]; and by default vLLM applies the sampling parameters from the model's <code>generation_config.json</code> on Hugging Face when one exists, which is usually what you want [2].</p>
+
+                    <h2>When vLLM helps, and when it doesn't</h2>
+
+                    <p><strong>It helps when:</strong> you serve many concurrent requests or large batches of prompts; you run long outputs where KV-cache efficiency matters; you expose a chat or completions API and care about cost per token; you run on GPUs and want more throughput out of the hardware you already have. That is the shape of the problem PagedAttention and continuous batching were built for [5][6].</p>
+
+                    <p><strong>It helps less when:</strong> one request arrives at a time and nothing else shares the GPU — the batching machinery has nothing to batch; you are running a tiny job where the engine's setup outweighs the work; or your model is not in vLLM's supported list, in which case check the documented list before assuming it runs [1]. It also does not help with the model's quality: a bad answer served fast is still a bad answer, and no serving engine changes what the model knows. The Phi-3 paper's own limit is the reminder here — a small model served brilliantly still has a small model's factual capacity [4][7].</p>
+
+                    <p>vLLM is also not the only way to serve. HuggingFace Transformers runs the same models with a simpler setup, and the vLLM project's own launch post benchmarked against it openly [5]. The honest comparison is not "vLLM vs Transformers" in the abstract; it is throughput per GPU on your traffic shape, measured on your hardware.</p>
+
+                    <h2>How to pick a model size</h2>
+
+                    <ol>
+                        <li><strong>Start from the task, not the leaderboard.</strong> If the task is narrow, repeated, and well-specified — classification, extraction, a fixed-format agent step — a small model is the first thing to try. Microsoft's SLM guidance points at exactly these cases: resource-constrained, latency-bound, cost-constrained, simpler tasks [7]. NVIDIA's position paper makes the same point for agentic systems, where models perform a small number of specialized tasks repetitively [8].</li>
+                        <li><strong>Evaluate on your task.</strong> Phi-3-mini's 69% MMLU is a real result, but MMLU is not your task, and Microsoft's own note — weaker factual knowledge, less capacity to retain facts — is the reason to test on your own data [4][7].</li>
+                        <li><strong>Use the big model where generality is the requirement.</strong> When the task is open-ended conversation or reasoning across unfamiliar topics, NVIDIA's paper argues for heterogeneous systems: SLMs where they suffice, larger models where general-purpose conversational ability is essential [8].</li>
+                        <li><strong>Then pick the serving layer on traffic shape.</strong> Concurrent traffic or batch jobs on GPUs: a serving engine like vLLM earns its place. A single user, a laptop, or an offline device: the model can run in a simpler setup, and the engine is optional.</li>
+                    </ol>
+
+                    <p>The smallest model that passes your evaluation, served by the simplest setup that meets your traffic, is the right answer in most real deployments. The three terms stop being confusing once each one is assigned to its own decision: the model class decides capability, the size class decides cost, and the engine decides throughput.</p>
+
+                    <h2>References</h2>
+
+                    <ol>
+                        <li>vLLM Documentation, "Welcome to vLLM." <a href="https://docs.vllm.ai/en/latest/">https://docs.vllm.ai/en/latest/</a></li>
+                        <li>vLLM Documentation, "Quickstart." <a href="https://docs.vllm.ai/en/latest/getting_started/quickstart.html">https://docs.vllm.ai/en/latest/getting_started/quickstart.html</a></li>
+                        <li>Brown, T. et al., "Language Models are Few-Shot Learners," arXiv:2005.14165 (2020). <a href="https://arxiv.org/abs/2005.14165">https://arxiv.org/abs/2005.14165</a></li>
+                        <li>Abdin, M. et al., "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone," arXiv:2404.14219 (2024). <a href="https://arxiv.org/abs/2404.14219">https://arxiv.org/abs/2404.14219</a></li>
+                        <li>Kwon, W. and Li, Z., "vLLM: Easy, Fast, and Cheap LLM Serving with PagedAttention," vLLM Blog, June 20, 2023. <a href="https://blog.vllm.ai/2023/06/20/vllm.html">https://blog.vllm.ai/2023/06/20/vllm.html</a></li>
+                        <li>Kwon, W. et al., "Efficient Memory Management for Large Language Model Serving with PagedAttention," Proceedings of SOSP 2023, arXiv:2309.06180. <a href="https://arxiv.org/abs/2309.06180">https://arxiv.org/abs/2309.06180</a></li>
+                        <li>"Introducing Phi-3: Redefining what's possible with SLMs," Microsoft Azure Blog, April 23, 2024. <a href="https://azure.microsoft.com/en-us/blog/introducing-phi-3-redefining-whats-possible-with-slms/">https://azure.microsoft.com/en-us/blog/introducing-phi-3-redefining-whats-possible-with-slms/</a></li>
+                        <li>Belcak, P. et al., "Small Language Models are the Future of Agentic AI," arXiv:2506.02153 (2025). <a href="https://arxiv.org/abs/2506.02153">https://arxiv.org/abs/2506.02153</a></li>
+                        <li>vLLM Project, GitHub repository, vllm-project/vllm (Apache 2.0). <a href="https://github.com/vllm-project/vllm">https://github.com/vllm-project/vllm</a></li>
+                    </ol>
+                    <div class="share-container">
+                        <h3>Share this post</h3>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn twitter"
+                                onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + '&url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share
+                                on X</a>
+                            <a href="#" class="share-btn linkedin"
+                                onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href), '_blank', 'width=550,height=420'); return false;">Share
+                                on LinkedIn</a>
+                            <button
+                                onclick="navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied to clipboard!')).catch(() => alert('Failed to copy link')); return false;"
+                                class="share-btn">Copy Link</button>
+                        </div>
+                    </div>
+
+                    <div class="comments-container">
+                        <h3>Comments & Reactions</h3>
+                        <script src="https://giscus.app/client.js"
+                            data-repo="gtkrish85/krishnasblog"
+                            data-repo-id="R_kgDORIInsQ"
+                            data-category="General"
+                            data-category-id="DIC_kwDORIInsQ4CmYfw"
+                            data-mapping="pathname"
+                            data-strict="0"
+                            data-reactions-enabled="1"
+                            data-emit-metadata="0"
+                            data-input-position="bottom"
+                            data-theme="light"
+                            data-lang="en"
+                            crossorigin="anonymous"
+                            async>
+                            </script>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Krishna. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
