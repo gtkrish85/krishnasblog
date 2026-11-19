@@ -124,4 +124,10 @@
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
+    <url>
+        <loc>https://krishnamoorthy.site/blog/gemini-4-carbon-vs-hydrogen-vs-neon-vs-argon</loc>
+        <lastmod>2026-11-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
 </urlset>
